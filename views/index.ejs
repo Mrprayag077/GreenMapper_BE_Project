@@ -1,0 +1,89 @@
+<html>
+
+<head>
+    <title>Image Upload</title>
+
+</head>
+
+<body>
+
+
+    <form id="uploadForm" action="/form/data" method="post">
+        <input type="file" class="inputFile" id="inputFile" accept="image/png">
+        <button type="submit" id="submitButton" disabled>Upload Image</button>
+    </form>
+
+    <style nonce="<%= nonce %>">
+        #submitButton {
+            color: white;
+            background-color: red;
+        }
+    </style>
+    <script nonce="<%= nonce %>" src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+    <script nonce="<%= nonce %>" src="https://www.gstatic.com/firebasejs/6.0.2/firebase-storage.js"></script>
+
+    <script nonce="<%= nonce %>">
+        // Firebase configuration and initialization code...
+        const firebaseConfig = {
+            apiKey: "AIzaSyDa7kvj9JGl9vO4CzwCtIvXf_sjyCgk41Q",
+            authDomain: "greenmapper-da4bf.firebaseapp.com",
+            projectId: "greenmapper-da4bf",
+            storageBucket: "greenmapper-da4bf.appspot.com",
+            messagingSenderId: "729535270764",
+            appId: "1:729535270764:web:cc9987a3d1b9e84be8ad49",
+            measurementId: "G-9ZHQP5SXLL"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+
+
+        const uploadForm = document.getElementById('uploadForm');
+        const inputFile = document.getElementById('inputFile');
+        const submitButton = document.getElementById('submitButton');
+
+        inputFile.addEventListener('change', function (event) {
+            const file = event.target.files[0];
+            if (file) {
+                uploadimage(file);
+            }
+        });
+
+        function uploadimage(file) {
+            let storageRef = firebase.storage().ref("images/" + file.name);
+            let uploadTask = storageRef.put(file);
+
+            uploadTask.on("state_changed", (snapshot) => {
+                // Handle state changes (progress, etc.)
+                console.log("Upload is " + snapshot.state);
+                console.log("Progress: " + (snapshot.bytesTransferred / snapshot.totalBytes) * 100 + "%");
+            }, (error) => {
+                // Handle errors
+                console.error("Error:", error);
+                // Reset the form and enable the submit button
+                uploadForm.reset();
+                submitButton.disabled = false;
+
+
+
+
+            }, () => {
+                // Handle successful upload
+                uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+                    console.log("File available at", url);
+                    // Set the image URL to a hidden input field in the form
+                    const imageUrlInput = document.createElement("input");
+                    imageUrlInput.type = "hidden";
+                    imageUrlInput.name = "imageUrl";
+                    imageUrlInput.value = url;
+                    uploadForm.appendChild(imageUrlInput);
+                    // Enable the submit button after successful upload
+                    submitButton.disabled = false;
+                    submitButton.backgroundColor = 'green';
+                });
+            });
+        }
+    </script>
+</body>
+
+</html>

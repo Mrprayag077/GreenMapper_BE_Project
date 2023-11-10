@@ -1,0 +1,175 @@
+//SEPT 18 coded 19:24
+const { PDFDocument, rgb } = require("pdf-lib");
+const fs = require("fs").promises;
+
+async function addTextToPDF() {
+  const pdfData = await fs.readFile("./CoverPage.pdf"); // Load the existing PDF
+
+  const pdfDoc = await PDFDocument.load(pdfData);
+  const [page] = pdfDoc.getPages();
+
+  // First text element
+  const fontSize1 = 11;
+  const x1 = 174;
+  const y1 = 640;
+  const text1 = "DEMO: 13454455/9U594/302804";
+
+  page.drawText(text1, {
+    x: x1,
+    y: y1,
+    size: fontSize1,
+    color: rgb(0, 0, 0), // Black color
+    fontWeight: 900,
+  });
+
+  // Second text element
+  const fontSize2 = 10;
+  const x2 = 187;
+  const y2 = 615;
+  const text2 = "DEMO-TXT";
+
+  page.drawText(text2, {
+    x: x2,
+    y: y2,
+    size: fontSize2,
+    color: rgb(0, 0, 0), // Black color
+    fontWeight: 900,
+  });
+
+  // Add more text elements as needed
+  // THIRD text element
+  const fontSize3 = 11;
+  const x3 = 250;
+  const y3 = 590;
+  const text3 = "DEMO TEXT: 1356787/68575785";
+
+  page.drawText(text3, {
+    x: x3,
+    y: y3,
+    size: fontSize3,
+    color: rgb(0, 0, 0), // Black color
+    fontWeight: 900,
+  });
+
+  // 4TH text element
+  const fontSize4 = 8;
+  const x4 = 133;
+  const y4 = 565;
+  const text4 = "DEMO";
+
+  page.drawText(text4, {
+    x: x4,
+    y: y4,
+    size: fontSize4,
+    color: rgb(0, 0, 0), // Black color
+    fontWeight: 900,
+  });
+
+  // 5TH text element
+  const fontSize5 = 11;
+  const x5 = 185;
+  const y5 = 453;
+  const text5 = "Gram Panchayat (3)";
+
+  page.drawText(text5, {
+    x: x5,
+    y: y5,
+    size: fontSize5,
+    color: rgb(0, 0, 0), // Black color
+    fontWeight: 900,
+  });
+
+  // 6TH text element
+  const fontSize6 = 10;
+  const x6 = 165;
+  const y6 = 427;
+  const text6 = "DEMO-TXT";
+
+  page.drawText(text6, {
+    x: x6,
+    y: y6,
+    size: fontSize6,
+    color: rgb(0, 0, 0), // Black color
+    fontWeight: 900,
+  });
+
+  // 7TH text element
+  const fontSize7 = 9;
+  const x7 = 188;
+  const y7 = 403;
+  const text7 = "DEMO-TXT";
+
+  page.drawText(text7, {
+    x: x7,
+    y: y7,
+    size: fontSize7,
+    color: rgb(0, 0, 0), // Black color
+    fontWeight: 900,
+  });
+
+  // 9TH text element
+  const fontSize9 = 10;
+  const x9 = 218;
+  const y9 = 353;
+  const text9 = "DEMO-TXT";
+
+  page.drawText(text9, {
+    x: x9,
+    y: y9,
+    size: fontSize9,
+    color: rgb(0, 0, 0), // Black color
+    fontWeight: 900,
+  });
+
+  // 9.1TH text element
+  const fontSize91 = 10;
+  const x91 = 338;
+  const y91 = 353;
+  const text91 = "DEMO-T";
+
+  page.drawText(text91, {
+    x: x91,
+    y: y91,
+    size: fontSize91,
+    color: rgb(0, 0, 0), // Black color
+    fontWeight: 900,
+  });
+
+  // 9.2TH text element
+  const fontSize92 = 10;
+  const x92 = 438;
+  const y92 = 353;
+  const text92 = "DEMO-T";
+
+  page.drawText(text92, {
+    x: x92,
+    y: y92,
+    size: fontSize92,
+    color: rgb(0, 0, 0), // Black color
+    fontWeight: 900,
+  });
+
+
+
+  // 9.ATH text element
+  const fontSize9A = 10;
+  const x9A = 179;
+  const y9A = 330;
+  const text9A = "DEMO-T";
+
+  page.drawText(text9A, {
+    x: x9A,
+    y: y9A,
+    size: fontSize9A,
+    color: rgb(0, 0, 0), // Black color
+    fontWeight: 900,
+  });
+
+  const modifiedPdfData = await pdfDoc.save();
+
+  await fs.writeFile("modified.pdf", modifiedPdfData);
+}
+
+addTextToPDF().catch((error) => {
+  console.error("Error:", error);
+});

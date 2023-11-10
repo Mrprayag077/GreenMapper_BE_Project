@@ -1,0 +1,137 @@
+const Prayag1 = require("../server");
+const Prayag = require("../models/model");
+
+const { initializeApp } = require("firebase/app");
+const {
+  getStorage,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+} = require("firebase/storage");
+const config = require("../config/firebase.config");
+
+// exports.inputdata_form_post = (req, res) => {};
+const multer = require("multer");
+
+initializeApp(config.firebaseConfig);
+
+require("./config/firebase.config");
+
+const firebase = require("firebase");
+const { getStorage, ref } = require("firebase/storage");
+
+const storage = getStorage();
+
+// Setting up multer as a middleware to grab photo uploads
+const upload = multer({ storage: multer.memoryStorage() });
+
+firebase.initializeApp(firebaseConfig);
+
+const uploadToFirebase = async (file) => {
+  // const dateTime = giveCurrentDateTime();
+  const storageRef = ref(storage, `files/${file.originalname + "11"}`);
+
+  const metadata = {
+    contentType: file.mimetype,
+  };
+
+  const snapshot = await uploadBytesResumable(
+    storageRef,
+    file.buffer,
+    metadata
+  );
+  const downloadURL = await getDownloadURL(snapshot.ref);
+
+  return downloadURL;
+};
+
+module.exports = {
+  inputdata_form_post: async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file provided." });
+      }
+
+      const downloadURL = await uploadToFirebase(req.file);
+
+      const newPrayag = new Prayag({
+        lat: 100, // Number, not a string
+        long: 100, // Number, not a string
+        image: downloadURL, // Save the Firebase Storage URL to MongoDB
+      });
+
+      await newPrayag.save();
+
+      console.log("File uploaded and document inserted successfully.");
+      return res.status(200).json({
+        message:
+          "File uploaded to Firebase Storage and document inserted successfully.",
+        downloadURL: downloadURL,
+      });
+    } catch (error) {
+      console.error("Error uploading file and inserting document:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+};
+
+module.exports = {
+  inputdata_form_get: async (req, res) => {
+    res.send("hello");
+
+    try {
+      // Create a new Prayag document
+      const newPrayag = new Prayag({
+        lat: 100, // Number, not a string
+        long: 100, // Number, not a string
+        image: "BDJBJBK", // Assuming image is a URL or file path, modify this according to your use case
+      });
+
+      // Save the document to the database
+      await newPrayag.save();
+
+      // Respond with success message
+      //   res.status(200).json({ message: "Document inserted successfully!" });
+      console.log("Document inserted successfully!");
+    } catch (error) {
+      // Handle errors and respond with an error message
+      console.error(error);
+      //   res.status(500).json({ error: "Internal Server Error" });
+      console.log("error: " + error);
+    }
+  },
+};
+
+module.exports = {
+  inputdata_form_get: async (req, res) => {
+    res.render("form"); // Assuming your form view is named "form.ejs"
+  },
+
+  inputdata_form_post: async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file provided." });
+      }
+
+      const downloadURL = await uploadToFirebase(req.file);
+
+      const newPrayag = new Prayag({
+        lat: 100, // Number, not a string
+        long: 100, // Number, not a string
+        image: downloadURL, // Save the Firebase Storage URL to MongoDB
+      });
+
+      await newPrayag.save();
+
+      console.log("File uploaded and document inserted successfully.");
+      return res.status(200).json({
+        message:
+          "File uploaded to Firebase Storage and document inserted successfully.",
+        downloadURL: downloadURL,
+      });
+    } catch (error) {
+      console.error("Error uploading file and inserting document:", error);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+  },
+};
