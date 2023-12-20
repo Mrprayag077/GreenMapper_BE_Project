@@ -12,7 +12,9 @@ const nonce = crypto.randomBytes(16).toString("base64");
 
 module.exports = {
   main: async (req, res) => {
-    res.sendFile(path.join(__dirname + "/from.html")); // Assuming your form view is named "form.ejs"
+    res.send("<b>hello prayag :)</b>"); // Assuming your form view is named "form.ejs"
+
+    // res.sendFile(path.join(__dirname + "/from.html")); // Assuming your form view is named "form.ejs"
   },
 
   inputdata_form_get: async (req, res) => {
