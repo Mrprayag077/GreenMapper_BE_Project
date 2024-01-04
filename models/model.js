@@ -16,6 +16,11 @@ const prayagSchema = new mongoose.Schema(
       type: String,
       required: [true, "Plz upload image"],
     },
+
+    sat_img: {
+      type: Boolean,
+      required: [true, "Plz upload image"],
+    }
   },
   { collection: "prayagsp" }
 );

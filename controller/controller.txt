@@ -1,137 +1,23 @@
-const Prayag1 = require("../server");
-const Prayag = require("../models/model");
+🚀 Exciting News: Google Cloud Arcade Facilitator Program Success! 🚀
 
-const { initializeApp } = require("firebase/app");
-const {
-  getStorage,
-  ref,
-  getDownloadURL,
-  uploadBytesResumable,
-} = require("firebase/storage");
-const config = require("../config/firebase.config");
+Dear LinkedIn Community,
 
-// exports.inputdata_form_post = (req, res) => {};
-const multer = require("multer");
+I am thrilled to share a major milestone in my journey as a Google Cloud Arcade Facilitator! 🎮✨
 
-initializeApp(config.firebaseConfig);
+Successfully completing the program's Second Cohort with over 800+ students enrolled under my guidance and alongside my incredible facilitator partner is truly an honor. 🏆💻
 
-require("./config/firebase.config");
+🌟 Achievement Unlocked: Third Milestone (2700+ badges) with 800+ Students🌟
 
-const firebase = require("firebase");
-const { getStorage, ref } = require("firebase/storage");
+I'm proud to have contributed to the success of each participant, fostering a community of learners passionate about cloud computing, application development, big data, and AI/ML. Together, we've earned digital badges and points, paving the way for claiming awesome swag prizes and Google Cloud goodies. 🎁🔗
 
-const storage = getStorage();
+🙌 This appreciation certificate symbolizes the dedication, hard work, and collaboration of our vibrant community. It's not just a certificate; it's a testament to the power of continuous learning and skill-building. 🚀🔥
 
-// Setting up multer as a middleware to grab photo uploads
-const upload = multer({ storage: multer.memoryStorage() });
+Thank you to everyone who has been part of this incredible journey – the learners, my facilitator partner, and the entire Google Cloud Arcade team. Let's continue empowering each other with knowledge and pushing the boundaries of what we can achieve in the cloud!
 
-firebase.initializeApp(firebaseConfig);
+I am grateful to Google Cloud, Qwiklabs, Akshit Jain for this opportunity.✨
+I started my Google Cloud journey with the Google Cloud Arcade Facilitator 🎮 in which Abhishek kumar Prajapati Ayush Pandey Lavish Sheth mentored me, and helped me in these hashtag#googlecloud cool programs.
 
-const uploadToFirebase = async (file) => {
-  // const dateTime = giveCurrentDateTime();
-  const storageRef = ref(storage, `files/${file.originalname + "11"}`);
+Also speical thanks to: GDSC AISSMS IOIT Sona Philip Roshan Mathews Rohit Goyal Prakalp Pande 
 
-  const metadata = {
-    contentType: file.mimetype,
-  };
+hashtag#googlecloud hashtag#googlecloudplatform hashtag#googlecloudready hashtag#googlecloudarcade hashtag#qwiklabs hashtag#qwiklabsarcade hashtag#connectingcommunities hashtag#learningandgrowing hashtag#google hashtag#qwiklabs hashtag#goodies hashtag#swags🌐✨
 
-  const snapshot = await uploadBytesResumable(
-    storageRef,
-    file.buffer,
-    metadata
-  );
-  const downloadURL = await getDownloadURL(snapshot.ref);
-
-  return downloadURL;
-};
-
-module.exports = {
-  inputdata_form_post: async (req, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).json({ error: "No file provided." });
-      }
-
-      const downloadURL = await uploadToFirebase(req.file);
-
-      const newPrayag = new Prayag({
-        lat: 100, // Number, not a string
-        long: 100, // Number, not a string
-        image: downloadURL, // Save the Firebase Storage URL to MongoDB
-      });
-
-      await newPrayag.save();
-
-      console.log("File uploaded and document inserted successfully.");
-      return res.status(200).json({
-        message:
-          "File uploaded to Firebase Storage and document inserted successfully.",
-        downloadURL: downloadURL,
-      });
-    } catch (error) {
-      console.error("Error uploading file and inserting document:", error);
-      return res.status(500).json({ error: "Internal Server Error" });
-    }
-  },
-};
-
-module.exports = {
-  inputdata_form_get: async (req, res) => {
-    res.send("hello");
-
-    try {
-      // Create a new Prayag document
-      const newPrayag = new Prayag({
-        lat: 100, // Number, not a string
-        long: 100, // Number, not a string
-        image: "BDJBJBK", // Assuming image is a URL or file path, modify this according to your use case
-      });
-
-      // Save the document to the database
-      await newPrayag.save();
-
-      // Respond with success message
-      //   res.status(200).json({ message: "Document inserted successfully!" });
-      console.log("Document inserted successfully!");
-    } catch (error) {
-      // Handle errors and respond with an error message
-      console.error(error);
-      //   res.status(500).json({ error: "Internal Server Error" });
-      console.log("error: " + error);
-    }
-  },
-};
-
-module.exports = {
-  inputdata_form_get: async (req, res) => {
-    res.render("form"); // Assuming your form view is named "form.ejs"
-  },
-
-  inputdata_form_post: async (req, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).json({ error: "No file provided." });
-      }
-
-      const downloadURL = await uploadToFirebase(req.file);
-
-      const newPrayag = new Prayag({
-        lat: 100, // Number, not a string
-        long: 100, // Number, not a string
-        image: downloadURL, // Save the Firebase Storage URL to MongoDB
-      });
-
-      await newPrayag.save();
-
-      console.log("File uploaded and document inserted successfully.");
-      return res.status(200).json({
-        message:
-          "File uploaded to Firebase Storage and document inserted successfully.",
-        downloadURL: downloadURL,
-      });
-    } catch (error) {
-      console.error("Error uploading file and inserting document:", error);
-      return res.status(500).json({ error: "Internal Server Error" });
-    }
-  },
-};

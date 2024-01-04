@@ -18,7 +18,9 @@ module.exports = {
   },
 
   inputdata_form_get: async (req, res) => {
-    res.render("index", { nonce }); // Assuming your form view is named "form.ejs"
+    res.send("<center><b>hello prayag :)</b></center>"); // Assuming your form view is named "form.ejs"
+
+    // res.render("index", { nonce }); // Assuming your form view is named "form.ejs"
   },
 
   inputdata_form_post: async (req, res) => {

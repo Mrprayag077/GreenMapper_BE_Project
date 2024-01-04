@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="./assets/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>GreenMapper</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link href="./assets/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="./assets/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="./assets/demo/demo.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap">
+
+    <link href="https://cdn.jsdelivr.net/npm/apexcharts@3.41.0/dist/apexcharts.min.css" rel="stylesheet">
+    <style>
+        #map {
+            height: 780px;
+            width: 100%;
+        }
+    </style>
+
+
+</head>
+
+<body class="">
+
+
+
+    <div class="wrapper ">
+        <div class="sidebar" data-color="orange">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+            <div class="logo">
+                <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+                    CT
+                </a>
+                <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+                    Creative Tim
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li>
+                        <a href="../examples/dashboard.html">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../examples/icons.html">
+                            <i class="now-ui-icons education_atom"></i>
+                            <p>Icons</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="../examples/map.html">
+                            <i class="now-ui-icons location_map-big"></i>
+                            <p>Maps</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../examples/notifications.html">
+                            <i class="now-ui-icons ui-1_bell-53"></i>
+                            <p>Notifications</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../examples/user.html">
+                            <i class="now-ui-icons users_single-02"></i>
+                            <p>User Profile</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../tables.html">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>Table List</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../examples/typography.html">
+                            <i class="now-ui-icons text_caps-small"></i>
+                            <p>Typography</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a href="../examples/upgrade.html">
+                            <i class="now-ui-icons arrows-1_cloud-download-93"></i>
+                            <p>Upgrade to PRO</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-toggle">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="#pablo">Maps</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <form>
+                            <div class="input-group no-border">
+                                <input type="text" value="" class="form-control" placeholder="Search...">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </span>
+                            </div>
+                        </form>
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="#pablo">
+                                    <i class="now-ui-icons media-2_sound-wave"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Stats</span>
+                                    </p>
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="http://example.com"
+                                    id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="now-ui-icons location_world"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Some Actions</span>
+                                    </p>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#pablo">
+                                    <i class="now-ui-icons users_single-02"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Account</span>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+
+
+            <div class="panel-header panel-header-sm">
+            </div>
+
+
+
+            <style>
+                @import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300&display=swap");
+
+                /* latin-ext */
+
+
+                /* Base */
+
+                .section-tred {
+                    font-family: "Lato", sans-serif;
+                    font-size: 18px;
+                }
+
+                .section-tred1 {
+                    font-family: "Lato", sans-serif;
+                    font-size: 16px;
+                }
+
+
+                #section-tred {
+                    font-family: "Lato", sans-serif;
+                    font-size: 18px;
+                }
+
+
+                /* Media queries for different screen sizes */
+                @media only screen and (max-width: 480px) {
+
+                    /* Adjust font size for screens up to 480px wide (typical mobile phones) */
+                    .section-tred {
+                        font-size: 15px;
+                    }
+                }
+
+                @media only screen and (min-width: 481px) and (max-width: 768px) {
+
+                    /* Adjust font size for screens between 481px and 768px wide (larger mobile devices) */
+                    .section-tred {
+                        font-size: 12px;
+                    }
+                }
+
+
+                .dashboard1 {
+                    max-width: 1550px;
+                    min-height: 800px;
+                    /* background: #f2f2f2; */
+                    margin: 30px auto;
+                    display: flex;
+                    overflow: hidden;
+                    border-radius: 12px;
+                    /* box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.12); */
+                    overflow-x: hidden;
+                }
+
+                .flex {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .flex-c {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-direction: column;
+                }
+
+                .flex-sb {
+                    justify-content: space-between;
+                }
+
+                .icon {
+                    font-size: 30px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                }
+
+                /* End Base */
+
+                /* Dashboard */
+
+                /* =====Sidebar======= */
+                .sidebar {
+                    flex: 0 0 20%;
+                    font-size: 22px;
+                    padding: 25px;
+                    align-items: flex-start;
+                    /* background: #fff; */
+                    transition: background 0.5s ease-out;
+                }
+
+                .side-nav {
+                    flex: 0 0 75%;
+                }
+
+                .brand {
+                    font-size: 24px;
+                    font-weight: 700;
+                    letter-spacing: 5px;
+                    color: #1e1e2d;
+                    cursor: pointer;
+                }
+
+                .menu-item {
+                    margin: 30px auto;
+                    font-weight: 400;
+                    transition: 0.4s linear;
+                    cursor: pointer;
+                    justify-content: start;
+                }
+
+                .menu-item p {
+                    margin-left: 10px;
+                }
+
+                .menu-item:hover,
+                .menu-item.active {
+                    color: #1e1e2d;
+                }
+
+                .border {
+                    width: 100%;
+                    height: 3px;
+                    background: #f7f7f7;
+                    border-radius: 1px;
+                    box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.12);
+                    margin: 50px 0;
+                }
+
+                .log-out .menu-item {
+                    color: #fb6b63;
+                }
+
+                .log-out .menu-item:hover {
+                    color: #f2615a;
+                }
+
+                /* =====Dashboard Content======= */
+                .dashboard-content {
+                    flex: 1;
+                    padding: 25px;
+                    background: #f9f9f9;
+                    transition: 0.5s ease-out;
+                }
+
+                /* =====Topbar======= */
+                .search {
+                    flex: 1;
+                    padding: 5px 10px;
+                    background: #fff;
+                    border-radius: 20px;
+                }
+
+                .search input {
+                    width: 90%;
+                    height: 40px;
+                    border: none;
+                    outline: none;
+                    padding: 5px 10px;
+                    color: #a1a2af;
+                }
+
+                .search ::-webkit-input-placeholder {
+                    font-size: 18px;
+                    font-weight: 400;
+                    color: #a1a2af;
+                    font-family: inherit;
+                }
+
+                .theme {
+                    background: #fff;
+                    margin: 0 20px;
+                    border-radius: 20px;
+                    font-size: 25px;
+                    padding: 5px;
+                }
+
+                .dark,
+                .light {
+                    margin: 0 5px;
+                    cursor: pointer;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
+
+                .dark.active,
+                .light.active {
+                    background: #f9f9f9;
+                }
+
+                .light {
+                    color: #fdb600;
+                }
+
+                .user {
+                    background: #fff;
+                    padding: 5px 10px;
+                    color: #1e1e2d;
+                    border-radius: 20px;
+                    cursor: pointer;
+                }
+
+                .user img {
+                    width: 40px;
+                }
+
+                .user p {
+                    margin: 0 6px;
+                }
+
+                .notification {
+                    background: #fff;
+                    padding: 10px;
+                    border-radius: 20px;
+                    margin-right: 20px;
+                }
+
+                /* =====Section======= */
+
+                .section {
+                    margin: 30px 0;
+                }
+
+                /* =====Section Left======= */
+
+                .section-left {
+                    flex: 1;
+                    padding: 15px;
+                }
+
+                .banner {
+                    width: 100%;
+                    height: 210px;
+                    border-radius: 18px;
+                    background: #55c960 url(https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/bannerBG.svg);
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    transition: 0.3s ease;
+                    padding: 20px;
+                    position: relative;
+                    color: #fff;
+                }
+
+                .banner h2 {
+                    font-size: 28px;
+                    font-weight: 700;
+                }
+
+                .banner img {
+                    width: 420px;
+                    position: absolute;
+                    bottom: 0;
+                    right: -20px;
+                    pointer-events: none;
+                }
+
+                .btn {
+                    padding: 14px 16px;
+                    text-decoration: none;
+                    display: inline-block;
+                    background: #161622;
+                    color: #fff;
+                    border-radius: 25px;
+                    font-size: 18px;
+                    font-weight: 400;
+                    margin-top: 20px;
+                    transition: 0.4s linear;
+                }
+
+                .blinking-background {
+                    animation: blinkBackground 3s forwards;
+                    /* Play animation once and stay at the final keyframe */
+                    transition: background 1s linear;
+                }
+
+                @keyframes blinkBackground {
+                    0% {
+                        background: #161622;
+                    }
+
+                    100% {
+                        background: #ffd700;
+                        color: #161622;
+                        font-weight: 900;
+                        /* Change this to your desired blink color */
+                    }
+                }
+
+
+                .stay-red {
+                    padding: 14px 16px;
+                    text-decoration: none;
+                    display: inline-block;
+                    background: red;
+                    color: #fff;
+                    border-radius: 25px;
+                    font-size: 18px;
+                    font-weight: 400;
+                    margin-top: 20px;
+                    transition: 0.4s linear;
+
+                }
+
+                .nfts {
+                    padding: 0 8px;
+                    margin: 25px 0;
+                }
+
+                .nft:hover {
+                    background-color: #8cf196;
+                }
+
+                .heading h2 {
+                    font-size: 22px;
+                    font-weight: 600;
+                    color: #1e1e2d;
+                }
+
+                .heading p {
+                    font-size: 18px;
+                    color: #38c947;
+                    cursor: pointer;
+                }
+
+                /* =====Categories======= */
+
+                .categories {
+                    margin: 20px 0;
+                }
+
+                .category {
+                    background: #fff;
+                    padding: 6px 15px;
+                    border-radius: 25px;
+                    cursor: pointer;
+                    color: #161622;
+                    transition: 0.3s linear;
+                }
+
+                .category .icon {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    margin-right: 8px;
+                    font-size: 22px;
+                    background: #f2f2f2;
+                    transition: 0.3s linear;
+                }
+
+                /* =====Browse NFTs======= */
+
+                .browse {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                }
+
+                .nft {
+                    background: #fff;
+                    padding: 10px 20px 20px 20px;
+                    border-radius: 25px;
+                    transition: 0.4s linear;
+                    margin: 10px 5px;
+                }
+
+                .nft img {
+                    width: 80%;
+                    /* 100 */
+                    height: auto;
+                    /* 240px */
+                    border-radius: 20px;
+                    display: block;
+                    margin: 0 auto;
+                }
+
+                .author img {
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 10px;
+                }
+
+                .title {
+                    font-size: 18px;
+                    color: #161622;
+                    font-weight: 600;
+                    margin: 12px 0;
+                }
+
+                .author {
+                    font-size: 14px;
+                }
+
+                .price {
+                    background: rgba(124, 248, 136, 0.346);
+                    padding: 12px 15px;
+                    border-radius: 6px;
+                    cursor: pointer;
+                    color: #38c947;
+                    font-weight: 600;
+                }
+
+                .nft:hover .price {
+                    background: #129c20;
+                    color: gold;
+                }
+
+
+                /* =====Section Right======= */
+
+                .section-right {
+                    padding: 12px;
+                    flex: 0 0 30%;
+                    margin-top: -390px;
+                }
+
+                .graph {
+                    width: 100%;
+                    height: 200px;
+                    background: #fff;
+                    border-radius: 20px;
+                    padding-top: 30px;
+                    position: relative;
+                    transition: 0.3s linear;
+                }
+
+                .graph h2 {
+                    font-size: 26px;
+                    font-weight: 700;
+                    margin: 10px 0;
+                    color: #161622;
+                }
+
+                .graph img {
+                    width: 100%;
+                    pointer-events: none;
+                }
+
+                .top-creators {
+                    width: 100%;
+                    margin-top: 40px;
+                    padding: 15px;
+                    background: #fff;
+                    border-radius: 20px;
+                    transition: 0.3s linear;
+                }
+
+                .top-creators .heading {
+                    margin-bottom: 20px;
+                }
+
+                .top-creators .heading h2 {
+                    font-size: 18px;
+                }
+
+                .follow-creator img {
+                    width: 40px;
+                    height: 40px;
+                    margin-right: 10px;
+                }
+
+                .follow-creator h3 {
+                    font-size: 13px;
+                    color: #13131d;
+                }
+
+                .follow-creator p {
+                    font-size: 12px;
+                }
+
+                .following {
+                    font-size: 12px;
+                    font-weight: 400;
+                    padding: 8px 15px;
+                    margin-bottom: 18px;
+                }
+
+                .follow {
+                    background: #fdfdfd;
+                    color: #13131d;
+                    border: 1px solid rgba(161, 162, 175, 0.3);
+                }
+
+                /* End Dashboard */
+
+                /* Dark Mode */
+                .darkMode {
+                    background: #13131d;
+                }
+
+                .darkMode .dashboard1 {
+                    box-shadow: 0 0 3px 1px rgba(255, 255, 255, 0.22);
+                }
+
+                .darkMode .sidebar {
+                    background: #161622;
+                }
+
+                .darkMode .menu-item:hover,
+                .darkMode .menu-item.active,
+                .darkMode .brand {
+                    color: #fff;
+                }
+
+                .darkMode .log-out .menu-item:hover {
+                    color: #f2615a;
+                }
+
+                .darkMode .border {
+                    background: #262635;
+                }
+
+                .darkMode .dashboard-content {
+                    background: #1e1e2d;
+                }
+
+                .darkMode .search,
+                .darkMode .search input,
+                .darkMode .user,
+                .darkMode .theme,
+                .darkMode .notification {
+                    background: #161622;
+                }
+
+                .darkMode .user,
+                .darkMode .notification,
+                .darkMode .heading h2 {
+                    color: #fff;
+                }
+
+                .darkMode .dark.active,
+                .darkMode .light.active {
+                    background: #1e1e2d;
+                }
+
+                .darkMode .banner {
+                    background: #38c947 url(https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/bannerBG.svg);
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    color: #161622;
+                }
+
+                .darkMode .btn {
+                    background: #fff;
+                    color: #161622;
+                }
+
+                .darkMode .category {
+                    color: #fff;
+                    background: #161622;
+                }
+
+                .darkMode .category .icon {
+                    background: #262635;
+                }
+
+                .darkMode .nft {
+                    background: #161622;
+                }
+
+                .darkMode .title {
+                    color: #fff;
+                }
+
+                .darkMode .top-creators,
+                .darkMode .graph {
+                    background: #13131d;
+                    border: none;
+                }
+
+                .darkMode .follow {
+                    background: #13131d;
+                    color: #fff;
+                }
+
+                .darkMode .graph h2,
+                .darkMode .creator-details h3 {
+                    color: #fff;
+                }
+
+                /* End Dark Mode */
+
+                /* Responsive */
+                @media (max-width: 1250px) {
+                    .dashboard1 {
+                        width: 100%;
+                        margin: 0;
+                        border-radius: 0;
+                    }
+                }
+
+                @media (max-width: 1200px) {
+                    .sidebar {
+                        padding: 20px;
+                    }
+
+                    .dashboard-content {
+                        padding: 15px;
+                    }
+
+                    .category {
+                        padding: 4px 12px;
+                    }
+
+                    .creator {
+                        flex-direction: column;
+                        margin: 10px 0;
+                    }
+
+                    .following {
+                        margin: 5px 0;
+                    }
+
+                    .section-right {
+                        margin-top: -265px;
+                    }
+                }
+
+                @media (max-width: 1130px) {
+                    .dashboard-content {
+                        padding: 30px;
+                    }
+
+                    .section {
+                        flex-direction: column;
+                    }
+
+                    .section-left {
+                        width: 100%;
+                    }
+
+                    .section-right {
+                        margin-top: 0;
+                        width: 100%;
+                        display: flex;
+                    }
+
+                    .graph {
+                        width: 55%;
+                        height: auto;
+                        margin: 0 auto;
+                        border: 1px solid rgba(161, 162, 175, 0.3);
+                    }
+
+                    .top-creators {
+                        width: 40%;
+                        margin: 40px auto;
+                        border: 1px solid rgba(161, 162, 175, 0.3);
+                    }
+
+                    .creator {
+                        flex-direction: row;
+                    }
+
+                    .nft {
+                        margin: 15px;
+                    }
+
+                    .nft img {
+                        height: auto;
+                    }
+
+                    .sidebar {
+                        padding: 20px 10px;
+                        flex: 0 0 10%;
+                        align-items: center;
+                    }
+
+                    .brand {
+                        display: none;
+                    }
+
+                    .menu-item {
+                        margin: 40px auto;
+                    }
+
+                    .menu-item p {
+                        display: none;
+                    }
+                }
+
+                @media (max-width: 780px) {
+                    .dashboard-content {
+                        padding: 0;
+                    }
+
+                    .banner {
+                        text-align: center;
+                        margin: 0 auto;
+                    }
+
+                    .banner h2 {
+                        font-size: 35px;
+                    }
+
+                    .text {
+                        width: 100%;
+                    }
+
+                    .banner img {
+                        display: none;
+                    }
+
+                    .search {
+                        flex: 0 0 50px;
+                        height: 50px;
+                        width: 50px;
+                    }
+
+                    .search input {
+                        display: none;
+                    }
+
+                    .topbar {
+                        flex-direction: row-reverse;
+                        width: 80%;
+                        margin: 0 auto;
+                        margin-top: 30px;
+                    }
+
+                    .trending {
+                        padding: 0 20px;
+                    }
+
+                    .heading h2 {
+                        font-size: 20px;
+                    }
+
+                    .categories {
+                        display: grid;
+                        grid-template-columns: repeat(3, 1fr);
+                    }
+
+                    .category {
+                        margin: 10px auto;
+                    }
+
+                    .section-right {
+                        flex-direction: column-reverse;
+                    }
+
+                    .top-creators {
+                        width: 70%;
+                    }
+                }
+
+                @media (max-width: 640px) {
+                    .sidebar {
+                        display: none;
+                    }
+
+                    .user {
+                        margin-right: 10px;
+                    }
+
+                    .browse {
+                        grid-template-columns: 1fr;
+                    }
+
+                    .section-left,
+                    .section-right {
+                        padding: 0;
+                    }
+
+                    .graph,
+                    .top-creators,
+                    .banner {
+                        width: 90%;
+                    }
+
+                    .nft {
+                        margin: 10px 0;
+                    }
+                }
+
+                @media (max-width: 500px) {
+
+                    .notification,
+                    .search {
+                        display: none;
+                    }
+                }
+
+                @media (max-width: 380px) {
+
+                    .banner,
+                    .browse {
+                        width: 100%;
+                    }
+
+                    .graph,
+                    .top-creators {
+                        width: 95%;
+                    }
+
+                    .banner {
+                        border-radius: 0;
+                    }
+
+                    .categories {
+                        grid-template-columns: 1fr 1fr;
+                    }
+                }
+
+                @media (max-width: 300px) {
+                    .topbar {
+                        flex-direction: column-reverse;
+                        justify-content: center;
+                    }
+
+                    .user {
+                        margin-bottom: 10px;
+                    }
+
+                    .banner h2 {
+                        font-size: 30px;
+                    }
+
+                    .price {
+                        text-align: center;
+                        padding: 5px;
+                    }
+                }
+
+                /* End  Responsive */
+
+
+
+                /* YT LINK */
+
+
+                .youtube {
+                    position: fixed;
+                    bottom: 40px;
+                    right: 70px;
+                    text-decoration: none;
+                    padding: 8px 12px;
+                    background: rgba(0, 0, 0, 0.6);
+                    border-radius: 6px;
+                    box-shadow: 0 2px 2px 3px rgba(0, 0, 0, 0.2);
+                    color: #fff;
+                }
+
+                .youtube p {
+                    font-size: 22px;
+                }
+            </style>
+            <!-- Dashboard -->
+            <div class="dashboard1">
+
+                <div class="dashboard-content">
+                    <!-- ======Topbar======= -->
+
+                    <!-- ======End Topbar======= -->
+
+                    <!-- ======Section======= -->
+                    <div class="section flex flex-sb">
+                        <!-- Section Left -->
+                        <div class="section-left">
+                            <!-- ======Banner======= -->
+                            <div class="banner flex flex-sb">
+                                <div class="text" style="padding-top: 20px;">
+
+                                    <h2 id="slogan">
+                                        Discover Drive <br />
+                                        to make Better World
+                                    </h2>
+
+                                    <script>
+                                        // Array of alternative slogans
+                                        const slogans = [
+                                            "Drive for Change <br/> Plant for Tomorrow",
+                                            "Explore Drives <br/> Grow a Greener Future",
+                                            "Uncover Drives <br/> Nurture Our Earth",
+                                            "Discover <br/> Plant, Transform: Your Drive Matters",
+                                            "Drives for a Green Legacy <br/> Plant Today!"
+                                        ];
+
+                                        // Function to set a random slogan
+                                        function setRandomSlogan() {
+                                            const randomIndex = Math.floor(Math.random() * slogans.length);
+                                            document.getElementById("slogan").innerHTML = slogans[randomIndex];
+                                        }
+
+                                        // Call the function on page load
+                                        setRandomSlogan();
+                                    </script>
+
+
+
+                                    <a id="sloganBtn" href="#" class="btn blinking-background">Planting Hope, Growing
+                                        Change1</a>
+
+                                    <script>
+
+                                        // Add the "blinking-background" class after 1 second
+                                        setTimeout(function () {
+                                            var sloganBtn = document.getElementById('sloganBtn');
+                                            sloganBtn.classList.add('blinking-background');
+
+                                            // Remove the "blinking-background" class after the animation is completed
+                                            sloganBtn.addEventListener('animationend', function () {
+                                                sloganBtn.classList.remove('blinking-background');
+                                            }, { once: true }); // Use the "once" option to ensure the event listener is executed only once
+                                        }, 2000);
+
+
+                                        // Array of slogan
+                                        const slogans1 = [
+                                            "Planting Hope, Growing Change",
+                                        ];
+
+                                        // Function to set a random slogan
+                                        function setRandomSlogan1() {
+                                            const randomIndex1 = Math.floor(Math.random() * slogans1.length);
+                                            document.getElementById("sloganBtn").innerText = slogans1[randomIndex1];
+                                        }
+
+                                        // Call the function to set a random slogan when the page loads
+                                        setRandomSlogan1();
+                                    </script>
+
+
+
+                                </div>
+
+                                <!-- <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/banner.svg"
+                            alt="" /> -->
+
+                                <style>
+                                    /* Style to fit the image properly */
+                                    #img4 {
+                                        max-width: 300px;
+                                        height: auto;
+                                        display: block;
+                                        /* Remove any default inline styles on the image */
+                                        margin: 0 auto;
+                                        /* Center the image within its container */
+                                    }
+
+                                    /* Hide img4 for mobile devices */
+                                    @media only screen and (max-width: 767px) {
+                                        #img4 {
+                                            display: none;
+                                        }
+                                    }
+                                </style>
+
+                                <img src="../img4.png" id="img4">
+                            </div>
+
+                            <div class="nfts">
+                                <div class="trending heading flex flex-sb">
+                                    <h2>Find Latest Drives</h2>
+                                    <p>See all</p>
+                                </div>
+
+                                <!-- ======Categories======= -->
+
+                                <div class="categories flex flex-sb">
+                                    <div class="category flex">
+                                        <div class="icon">🌱</div>
+                                        <div class="section-tred">Green Initiatives</div>
+                                    </div>
+
+                                    <div class="category flex">
+                                        <div class="icon">🕹️</div>
+                                        <!-- <span class="section-tred">Creators</span> -->
+                                        <div class="section-tred">Creators</div>
+                                    </div>
+
+                                    <div class="category flex">
+                                        <div class="icon">🌳</div>
+                                        <!-- <p>Drives</p> -->
+                                        <div class="section-tred">Drives</div>
+
+                                    </div>
+
+
+                                    <div class="category flex">
+                                        <div class="icon">🌍</div>
+                                        <!-- <p>Environmental Awareness</p> -->
+                                        <div class="section-tred">Environmental Awareness</div>
+
+                                    </div>
+
+                                    <div class="category flex">
+                                        <div class="icon">🏅</div>
+                                        <!-- <p>Badges</p> -->
+                                        <div class="section-tred">Badges</div>
+
+                                    </div>
+                                </div>
+
+
+
+
+
+                                <!-- =====Browse NFT===== -->
+                                <div class="browse">
+                                    <div class="nft">
+                                        <img src="../assets/img/33.png" alt="" />
+                                        <div class="title">Harmony in the Hills</div>
+                                        <p>Embrace nature's melody! we calls nature enthusiasts to join hands in
+                                            preserving the serene beauty of our hills.</p>
+
+                                        <div class="details flex flex-sb">
+                                            <div class="author flex">
+                                                <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                                    alt="" />
+                                                <div class="section-tred1">EcoRevolution India</div>
+                                            </div>
+                                            <div class="price">10+ Hands</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="nft">
+                                        <img src="../assets/img/2.jpg" alt="" />
+
+                                        <div class="title">Riverside Reforestation Rally</div>
+                                        <p>Participate in tree plantation drive
+                                            along the banks of river bodies
+                                            promoting a sustainable environment.
+                                        </p>
+
+                                        <div class="details flex flex-sb">
+                                            <div class="author flex">
+                                                <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                                    alt="" />
+                                                <div class="section-tred1">GreenPulse India</div>
+                                            </div>
+                                            <div class="price">100+ Hands</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="nft">
+                                        <img src="../assets/img/6.jpg" alt="" />
+
+                                        <div class="title">Schools for Saplings</div>
+                                        <p>Educate, empower, and plant! partners with schools for unique tree
+                                            plantation
+                                            initiative, awareness among students.</p>
+                                        <div class="details flex flex-sb">
+                                            <div class="author flex">
+                                                <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                                    alt="" />
+                                                <div class="section-tred1">BreatheEasy India</div>
+                                            </div>
+                                            <div class="price">20+ Hands joined</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="nft">
+                                        <img src="../assets/img/4.jpg" alt="" />
+
+                                        <div class="title">Sacred Grove Restoration</div>
+                                        <p>Rediscover the sacredness of groves! Join us in reviving sacred
+                                            groves, preserving cultural and
+                                            ecological treasures.</p>
+                                        <div class="details flex flex-sb">
+                                            <div class="author flex">
+                                                <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                                    alt="" />
+                                                <div class="section-tred1">FutureGreens Foundation</div>
+                                            </div>
+                                            <div class="price">40+ Hands</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <!-- Section Right -->
+                        <div class="section-right">
+                            <div class="graph flex-c">
+                                <p>Region Rank</p>
+                                <h2>200</h2>
+
+
+                                <canvas id="treeChart" width="300" height="180"></canvas>
+
+                                <!-- <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/graph.svg"
+                            alt="" /> -->
+
+
+
+                                <script>
+                                    // Sample data for tree count over time
+                                    const treeData = [
+                                        { year: 2010, count: 100 },
+                                        { year: 2011, count: 105 },
+                                        { year: 2012, count: 90 },
+                                        { year: 2013, count: 110 },
+                                        { year: 2014, count: 130 },
+                                        { year: 2015, count: 133 },
+                                        { year: 2016, count: 128 },
+                                        { year: 2017, count: 115 },
+                                        { year: 2018, count: 90 },
+                                        { year: 2019, count: 120 }
+                                    ];
+
+                                    // Get the canvas element and context
+                                    const canvas = document.getElementById('treeChart');
+                                    const ctx = canvas.getContext('2d');
+
+                                    // Extract years and counts for labels and data points
+                                    const years = treeData.map(entry => entry.year);
+                                    const counts = treeData.map(entry => entry.count);
+
+                                    // Determine point colors based on count decrease
+                                    const pointColors = counts.map((count, index) => {
+                                        if (index > 0 && count < counts[index - 1]) {
+                                            return 'red'; // Mark points in red when count decreases
+                                        } else {
+                                            return '#5dcb67'; // Use green for other points
+                                        }
+                                    });
+
+                                    // Create an area chart
+                                    const treeChart = new Chart(ctx, {
+                                        type: 'line',
+                                        data: {
+                                            labels: years,
+                                            datasets: [{
+                                                data: counts,
+                                                borderColor: '#5dcb67',
+                                                backgroundColor: '#e6f7e8', // Light green fill color
+                                                fill: true, // Fill the area under the line
+                                                borderWidth: 2,
+                                                pointRadius: 4, // Adjust the radius of the points
+                                                pointBackgroundColor: pointColors, // Array of point colors
+                                                pointBorderWidth: 2, // Point border width
+                                            }]
+                                        },
+                                        options: {
+                                            responsive: true,
+                                            maintainAspectRatio: false,
+                                            animation: {
+                                                duration: 2000, // 2000 milliseconds (2 seconds) animation
+                                                easing: 'easeInOutQuart' // Easing function for smooth animation
+                                            },
+                                            scales: {
+                                                x: {
+                                                    display: false // Hide x-axis
+                                                },
+                                                y: {
+                                                    display: false // Hide y-axis
+                                                }
+                                            },
+                                            plugins: {
+                                                legend: {
+                                                    display: false // Hide legend
+                                                }
+                                            }
+                                        }
+                                    });
+                                </script>
+
+                            </div>
+
+                            <div class="top-creators">
+                                <div class="heading flex flex-sb">
+                                    <h2>Top Creators</h2>
+                                    <!-- <p>See all</p> -->
+                                </div>
+
+                                <div class="creator flex flex-sb">
+                                    <div class="follow-creator flex">
+                                        <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                            alt="" />
+                                        <div class="creator-details">
+                                            <div class="section-tred1">Hassnain Haider</div>
+                                            <div>@hassnain</div>
+                                        </div>
+                                    </div>
+
+                                    <a href="#" id="section-tred" class="btn following">Me</a>
+                                </div>
+
+                                <div class="creator flex flex-sb">
+                                    <div class="follow-creator flex">
+                                        <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                            alt="" />
+                                        <div class="creator-details">
+                                            <div class="section-tred1">Hassnain Haider</div>
+                                            <div>@hassnain</div>
+                                        </div>
+                                    </div>
+
+                                    <a href="#" class="btn follow following">View</a>
+                                </div>
+
+                                <div class="creator flex flex-sb">
+                                    <div class="follow-creator flex">
+                                        <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                            alt="" />
+                                        <div class="creator-details">
+                                            <div class="section-tred1">Hassnain Haider</div>
+                                            <div>@hassnain</div>
+                                        </div>
+                                    </div>
+
+                                    <a href="#" class="btn follow following">Must View</a>
+                                </div>
+
+                                <div class="creator flex flex-sb">
+                                    <div class="follow-creator flex">
+                                        <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                            alt="" />
+                                        <div class="creator-details">
+                                            <div class="section-tred1">Hassnain Haider</div>
+                                            <div>@hassnain</div>
+                                        </div>
+                                    </div>
+
+                                    <a href="#" class="btn follow following">View</a>
+                                </div>
+
+                                <div class="creator flex flex-sb">
+                                    <div class="follow-creator flex">
+                                        <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                            alt="" />
+                                        <div class="creator-details">
+                                            <div class="section-tred1">Hassnain Haider</div>
+                                            <div>@hassnain</div>
+                                        </div>
+                                    </div>
+
+                                    <a href="#" class="btn follow following">Must View</a>
+                                </div>
+
+                                <div class="creator flex flex-sb">
+                                    <div class="follow-creator flex">
+                                        <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                            alt="" />
+                                        <div class="creator-details">
+                                            <div class="section-tred1">Hassnain Haider</div>
+                                            <div>@hassnain</div>
+                                        </div>
+                                    </div>
+
+                                    <a href="#" class="btn follow following">View</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ======End Section======= -->
+                </div>
+                <!-- End Dashboard Content -->
+            </div>
+            <!-- End Dashboard -->
+
+
+            <!--   Youtube Turorial Link   -->
+            <!-- <a href="#" class="youtube" target="__blank">
+        <p>Near By 🪴</p>
+    </a> -->
+
+            <!-- Ion Icons Js -->
+            <script type="module" src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.esm.js"></script>
+            <script nomodule src="https://cdn.jsdelivr.net/npm/@ionic/core/dist/ionic/ionic.js"></script>
+
+            <!-- JS -->
+            <script src="js/script.js"></script>
+
+            <script>
+                const dark = document.querySelector(".dark");
+                const light = document.querySelector(".light");
+
+                dark.addEventListener("click", function () {
+                    document.querySelector("body").classList.add("darkMode");
+                    light.classList.remove("active");
+                    dark.classList.add("active");
+                });
+
+                light.addEventListener("click", function () {
+                    document.querySelector("body").classList.remove("darkMode");
+                    dark.classList.remove("active");
+                    light.classList.add("active");
+                });
+
+            </script>
+
+
+
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="https://www.creative-tim.com">
+                                    Creative Tim
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://presentation.creative-tim.com">
+                                    About Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://blog.creative-tim.com">
+                                    Blog
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="copyright">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>, Designed by
+                        <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
+                        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+</body>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    const apiKey = 'pk.eyJ1IjoiYWxmcmVkMjAxNiIsImEiOiJja2RoMHkyd2wwdnZjMnJ0MTJwbnVmeng5In0.E4QbAFjiWLY8k3AFhDtErA';
+
+    const mymap = L.map('map').setView([18.504055388697367, 73.80745747188948], 15);
+    // 13
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: apiKey
+    }).addTo(mymap);
+
+    // Adding Marker
+
+    const marker = L.marker([18.504055388697367, 73.80745747188948]).addTo(mymap);
+
+    // Add popup message
+    let template = `
+
+<h3>Government offcies</h3>
+<h3>Phone number: 9078674536</h3>
+<h3>officer name: xyz</h3>
+
+`
+    marker.bindPopup(template);
+
+
+
+    const marker1 = L.marker([18.509083307749208, 73.81921304312709]).addTo(mymap);
+
+    // Add popup message
+    let template1 = `
+
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
+
+`
+    marker1.bindPopup(template1);
+
+
+
+
+    const marker2 = L.marker([18.510132352468702, 73.7688936948145
+    ]).addTo(mymap);
+
+    // Add popup message
+    let template2 = `
+
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
+
+
+`
+    marker2.bindPopup(template2);
+
+
+
+    const marker3 = L.marker([18.49332945268911, 73.74829864575057
+
+
+    ]).addTo(mymap);
+
+    // Add popup message
+    let template3 = `
+
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
+
+
+`
+    marker3.bindPopup(template3);
+
+
+
+
+    const marker4 = L.marker([18.55713208390071, 73.82644820608257
+
+
+    ]).addTo(mymap);
+
+    // Add popup message
+    let template4 = `
+
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
+
+
+`
+    marker4.bindPopup(template4);
+
+    // Add circle 
+
+    const circle = L.circle([18.504055388697367, 73.80745747188948], {
+        radius: 700,
+        color: '#e4100b',
+        fillColor: '#c40f0b',
+        fillOpacity: 0.2
+    }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li><li>Visit NGO-PAGE: <a href="#">Link</a> </li> <li>Upcoming Drives: <a href="#">Link</a> </li></ul></div> ')
+
+
+
+
+
+    const circle1 = L.circle([18.55436104195708, 73.75045032634333
+    ], {
+        radius: 650,
+        color: '#006400',
+        fillColor: '#32cd32',
+        fillOpacity: 0.2
+    }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li</ul ></div> ')
+
+
+    const circle2 = L.circle([18.466638164979486, 73.75533241590381
+
+    ], {
+        radius: 600,
+        color: '#006400',
+        fillColor: '#32cd32',
+        fillOpacity: 0.2
+    }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li</ul ></div> ')
+
+
+
+
+    const circle3 = L.circle([18.458143364850073, 73.84696154127289
+
+    ], {
+        radius: 550,
+        color: '#006400',
+        fillColor: '#32cd32',
+        fillOpacity: 0.2
+    }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li</ul ></div> ')
+
+
+
+    // Add Polygon
+
+    //   const polygon = L.polygon([
+
+    //        [40.73618, -73.97545],
+    //        [40.731497, -73.974342],
+    //        [40.729324, -73.972234],
+    //        [40.732368, -73.981293],
+    //    ], {
+    //        color: 'blue',
+    //        fillColor: 'blue',
+    //        fillOpacity: 0.2
+    //    }).addTo(mymap).bindPopup(' I am a polygon')
+
+    // polygon.bindPopup(' I am a polygon')
+
+
+</script>
+
+</html>

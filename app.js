@@ -26,13 +26,13 @@ app.use((req, res, next) => {
   res.setHeader(
     "Content-Security-Policy",
     "default-src 'self'; " +
-      "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js https://www.gstatic.com/firebasejs/6.0.2/firebase-storage.js; " +
-      "style-src 'self' 'unsafe-inline'; " +
-      "img-src 'self' data:; " +
-      "font-src 'self'; " +
-      "connect-src *; " +
-      "worker-src 'self' blob:; " +
-      "frame-src 'self';"
+    "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js https://www.gstatic.com/firebasejs/6.0.2/firebase-storage.js; " +
+    "style-src 'self' 'unsafe-inline'; " +
+    "img-src 'self' data:; " +
+    "font-src 'self'; " +
+    "connect-src *; " +
+    "worker-src 'self' blob:; " +
+    "frame-src 'self';"
   );
   next();
 });
@@ -44,6 +44,9 @@ const Prayag = require("./models/model");
 require("./server");
 
 app.use(express.static(__dirname + "/views"));
+
+app.use("/assets", express.static("assets"));
+
 app.use(express.static(__dirname + "/from.html"));
 
 app.set("views", path.join(__dirname, "views"));
@@ -172,6 +175,7 @@ app.use("/api/", userRoutes);
 
     let ii = 1;
     for (let i = 1; i < 2; i++) {
+      
       await page.goto("https://crop-monitoring.eos.com/main-map/fields/all"); //crop-monitoring.eos.com/main-map/fields/all
 
       await new Promise((resolve) => setTimeout(resolve, 3000));
@@ -390,7 +394,7 @@ app.use("/api/", userRoutes);
   // Schedule AUTOMATE BOT every Sunday at 7:00 AM
   // schedule.scheduleJob("0 7 * * 0", () => {
   // console.log("Running the function on Sunday at 7:00 AM!");
-  // linkined();
+  linkined();
   // });
 
   // async function linkined1() {

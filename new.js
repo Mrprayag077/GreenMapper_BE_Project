@@ -4,10 +4,13 @@ const fs = require("fs");
 const prettier = require("prettier");
 const mongoose = require("mongoose");
 //const User = require("./users");
+const path = require("path");
+const bodyParser = require("body-parser");
 const { MongoClient } = require("mongodb");
 const axios = require("axios");
 require("dotenv").config();
 const sharp = require("sharp");
+const schedule = require("node-schedule");
 
 const { initializeApp } = require("firebase/app");
 const {
@@ -19,39 +22,75 @@ const {
 
 const app = express();
 
+const userRoutes = require("./routes/router");
+app.use(bodyParser.json());
+app.use(express.json());
+
+const Prayag = require("./models/model");
+// Require and run server.js
+require("./server");
+
+
+app.use(express.static(__dirname + "/views"));
+
+app.use("/assets", express.static("assets"));
+
+app.use(express.static(__dirname + "/from.html"));
+
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
+app.use("/api/", userRoutes);
+
 mongoose.set("strictQuery", false);
 
-// async function main() {
-const MONGO_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.tuna9.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
-mongoose.connect(MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+// // async function main() {
+// const MONGO_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.tuna9.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
+// mongoose.connect(MONGO_URL, {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true,
+// });
 
-const prayagSchema = new mongoose.Schema(
-  {
-    lat: {
-      type: Number,
-      required: [true, "Plz enter lat"],
-    },
+// const prayagSchema = new mongoose.Schema(
+//   {
+//     lat: {
+//       type: Number,
+//       required: [true, "Plz enter lat"],
+//     },
 
-    long: {
-      type: Number,
-      required: [true, "Plz enter long"],
-    },
+//     long: {
+//       type: Number,
+//       required: [true, "Plz enter long"],
+//     },
 
-    image: {
-      type: String,
-      required: [true, "Plz upload image"],
-    },
-  },
-  { collection: "prayagsp" }
-);
+//     image: {
+//       type: String,
+//       required: [true, "Plz upload image"],
+//     },
+//   },
+//   { collection: "prayagsp" }
+// );
 
-const Prayag = mongoose.model("Prayag", prayagSchema);
+// const Prayag = mongoose.model("Prayag", prayagSchema);
 
-var profileLinks = ["https://www.linkedin.com/in/gourav-grover-02a82a200/"];
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// bot logic =================================================================
 const firebaseConfig = {
   apiKey: "AIzaSyDa7kvj9JGl9vO4CzwCtIvXf_sjyCgk41Q",
   authDomain: "greenmapper-da4bf.firebaseapp.com",
@@ -65,13 +104,34 @@ const firebaseConfig = {
 const firebaseApp = initializeApp(firebaseConfig);
 const storage = getStorage(firebaseApp);
 
+
+
+
+
 async function linkined() {
-  //   const usersinfosp = await usersinfos.find({ request_send_trigger: "today" });
+  // const usersinfosp = await usersinfos.find({ request_send_trigger: "today" });
 
-  const lat = 18.553091;
-  const long = 73.918978;
 
-  //   console.log(profileLinkIds);
+
+  // const documents = await Prayag.find({ set_img: true }).toArray();
+
+
+
+  const documents = await Prayag.find({ sat_img: true }).exec();
+
+  if (documents.length === 0) {
+    console.log("No documents with sat_img set to true. Exiting function.");
+    return;
+  }
+
+  console.log(documents);
+
+
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+
+
 
   //   const browser = await puppeteer.launch({ headless: false });
   const browser = await puppeteer.launch({
@@ -87,18 +147,290 @@ async function linkined() {
   await page.addStyleTag({
     content: `
     body, html {
-      width: 100% !important;
-      height: 100% !important;
+      width: 10% !important;
+      height: 10% !important;
       margin: 0 !important;
       padding: 0 !important;
       overflow: hidden !important;
     }
-
+  
     .specific-container {
-      width: 100% !important;
-      height: 100% !important;
+      width: 50% !important;
+      height: 50% !important;
     }
   `,
+  });
+
+  await page.goto("https://crop-monitoring.eos.com/login");
+
+  // Fill in email input field
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  // Click on "Continue" button
+
+  // Wait for the button inside the second div to be present in the DOM
+  await page.waitForSelector(
+    '.button-wrap:nth-child(2) button[data-id="sign-in-button"]',
+    { visible: true }
+  );
+
+  // Click the button inside the second div
+  await page.click(
+    '.button-wrap:nth-child(2) button[data-id="sign-in-button"]'
+  );
+
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  // Fill in email input field
+  await page.waitForSelector(".mat-mdc-input-element", { visible: true });
+  await page.type(".mat-mdc-input-element", `${process.env.USEREMAIL}`);
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  await page.waitForSelector(".mat-mdc-input-element.password-input", {
+    visible: true,
+  });
+
+  // Type the password into the input field
+  await page.type(
+    ".mat-mdc-input-element.password-input",
+    `${process.env.PASSWORD}`
+  );
+
+
+  await new Promise((resolve) => setTimeout(resolve, 3000));
+
+  await page.waitForSelector(".content-wrp");
+
+  // Click on the element with class 'content-wrp'
+  await page.click(".content-wrp");
+
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+
+
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  for (const doc of documents) {
+    const lat = doc.lat;
+    const long = doc.long;
+
+    // Call your function with lat and long
+    // yourFunction_test(lat, long);
+
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    await page.goto("https://crop-monitoring.eos.com/main-map/fields/all");
+
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+
+
+
+
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+
+    await page.waitForSelector(".search-input", { visible: true });
+
+    const searchInput = await page.$(".search-input");
+    await searchInput.type(`${lat} , ${long}`);
+    //   await searchInput.press("Enter");
+
+    await new Promise((resolve) => setTimeout(resolve, 5000));
+
+    const buttons1 = await page.$$(".search-controls__button");
+    await buttons1[1].click();
+
+    await new Promise((resolve) => setTimeout(resolve, 8000));
+
+    const buttons = await page.$$(".mat-mdc-tooltip-trigger");
+    await buttons[0].click();
+
+    await new Promise((resolve) => setTimeout(resolve, 4000));
+
+    await page.waitForSelector(".column"); // Replace '.column' with the class selector of the element you want to remove
+
+    // Evaluate a function within the page context to remove the element
+    // await page.evaluate(() => {
+    //   const elementToRemove = document.querySelector(".column"); // Replace '.column' with the class selector of the element you want to remove
+    //   if (elementToRemove) {
+    //     elementToRemove.remove();
+    //   }
+    // });
+
+
+    console.log("above page ecalute----------------");
+
+
+    await page.evaluate(() => {
+
+      console.log("inside page ecalute----------------");
+
+      const elementToRemove = document.querySelector(".column");
+      if (elementToRemove) {
+        elementToRemove.remove();
+
+        console.log("Removed element column");
+      }
+
+      const elementToRemove1 = document.querySelector(".no-body-padding");
+      if (elementToRemove1) {
+        elementToRemove1.remove();
+
+        console.log("Removed element padding");
+
+      }
+
+      const elementToRemove2 = document.querySelector(".scenes-container");
+      if (elementToRemove2) {
+        elementToRemove2.remove();
+
+        console.log("Removed element scene-cont");
+      }
+
+      const elementToRemove3 = document.querySelector(".search-box");
+      if (elementToRemove3) {
+        elementToRemove3.remove();
+
+        console.log("Removed element serach box");
+      }
+
+      const elementToRemove4 = document.querySelector(".cm-filter");
+      if (elementToRemove4) {
+        elementToRemove4.remove();
+
+        console.log("Removed element cm-fliter");
+      }
+
+      const elementToRemove5 = document.querySelector(
+        ".controls-wrapper-ng-content"
+      );
+      if (elementToRemove5) {
+        elementToRemove5.remove();
+
+        console.log("Removed element ng-content");
+      }
+
+      const elementToRemove6 = document.querySelector(".zsiq_flt_rel");
+      if (elementToRemove6) {
+        elementToRemove6.remove();
+
+        console.log("Removed element zsiq-flq");
+      }
+
+    });
+
+
+    console.log("finiesged page ecalute----------------");
+
+
+
+
+    await new Promise((resolve) => setTimeout(resolve, 7000));
+
+    randomNumber = Math.floor(Math.random() * 1000); // You can adjust the range of random numbers as needed
+
+    // Take a screenshot with a random filename
+    const screenshotPath = `./image/screenshot_000000.png`;
+    await page.screenshot({ path: screenshotPath });
+
+    // const clip = { x: 0, y: 0, width: 1300, height: 550 };
+
+    // const clip1 = { x: 0, y: 0, width: 1400, height: 550 };
+
+    // await page.screenshot({
+    //   path: `./image/screenshot_clip00_${randomNumber}.png`,
+    //   clip: clip,
+    // });
+
+    // await page.screenshot({
+    //   path: `./image/screenshot_clip222_.png`,
+    //   clip: clip1,
+    // });
+
+    console.log("screenshot taken");
+
+    await new Promise((resolve) => setTimeout(resolve, 10000));
+
+    const inputPath = "./image/screenshot_000000.png"; // Path to the original screenshot
+    const outputPath = "./image/cropped.png"; // Path to save the cropped image
+    const cropPercentage = 0.34; // 20% of the width to be cropped
+
+    sharp(inputPath)
+      .metadata()
+      .then((metadata) => {
+        // Calculate the width of the cropped region
+        const cropWidth = Math.floor(metadata.width * (1 - cropPercentage));
+
+        // Crop the image from the right 20% of the width
+        sharp(inputPath)
+          .extract({ left: 0, top: 0, width: cropWidth, height: metadata.height })
+          .toFile(outputPath, (err, info) => {
+            if (err) {
+              console.error("Error cropping image:", err);
+            } else {
+              console.log("insdie 1st");
+
+              console.log("Image cropped and saved successfully.");
+
+              // Example usage
+              const inputPath1 = "./image/cropped.png"; // Path to the input image
+              const outputPath1 = "./image/crop2.png"; // Path to save the cropped image
+              const targetWidth1 = 640; // Width of the cropped image
+              const targetHeight1 = 640; // Height of the cropped image
+
+              cropImage(inputPath1, outputPath1, targetWidth1, targetHeight1, doc._id);
+            }
+          });
+      })
+      .catch((err) => {
+        console.error("Error reading image metadata:", err);
+      });
+
+    await new Promise((resolve) => setTimeout(resolve, 4000));
+    console.log(`Processing document with lat: ${lat}, long: ${long}`);
+
+
+    // Set set_img to false after processing
+  }
+
+}
+
+// Schedule AUTOMATE BOT every Sunday at 7:00 AM
+// schedule.scheduleJob("0 7 * * 0", () => {
+// console.log("Running the function on Sunday at 7:00 AM!");
+// linkined();
+// });
+
+
+async function yourFunction_real(lat, long) {
+
+
+  //   const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({
+    headless: false,
+    // args: ["--start-maximized"], // This argument will make the browser window fullscreen
+    defaultViewport: null,
+    permissions: ["notifications"], // Deny the notification permission
+    args: ["--disable-notifications"], // Disable notifications
+  });
+
+  const page = await browser.newPage();
+
+  await page.addStyleTag({
+    content: `
+  body, html {
+    width: 10% !important;
+    height: 10% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .specific-container {
+    width: 50% !important;
+    height: 50% !important;
+  }
+`,
   });
 
   await page.goto("https://crop-monitoring.eos.com/login");
@@ -146,15 +478,6 @@ async function linkined() {
 
   await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  //   await page.goto('https://www.linkedin.com/company/noveracion-global/');
-  // Open a new tab
-
-  //new browser
-  //   const newTab = await browser.newPage();
-
-  //   await newTab.goto("https://crop-monitoring.eos.com/main-map/fields/all");
-
-  await new Promise((resolve) => setTimeout(resolve, 5000));
 
   await page.waitForSelector(".search-input", { visible: true });
 
@@ -176,38 +499,50 @@ async function linkined() {
 
   await page.waitForSelector(".column"); // Replace '.column' with the class selector of the element you want to remove
 
-  // Evaluate a function within the page context to remove the element
-  // await page.evaluate(() => {
-  //   const elementToRemove = document.querySelector(".column"); // Replace '.column' with the class selector of the element you want to remove
-  //   if (elementToRemove) {
-  //     elementToRemove.remove();
-  //   }
-  // });
+  await new Promise((resolve) => setTimeout(resolve, 5000));
+
+
+  console.log("above page ecalute----------------");
+
 
   await page.evaluate(() => {
+
+    console.log("inside page ecalute----------------");
+
     const elementToRemove = document.querySelector(".column");
     if (elementToRemove) {
       elementToRemove.remove();
+
+      console.log("Removed element column");
     }
 
     const elementToRemove1 = document.querySelector(".no-body-padding");
     if (elementToRemove1) {
       elementToRemove1.remove();
+
+      console.log("Removed element padding");
+
     }
 
     const elementToRemove2 = document.querySelector(".scenes-container");
     if (elementToRemove2) {
       elementToRemove2.remove();
+
+      console.log("Removed element scene-cont");
     }
 
     const elementToRemove3 = document.querySelector(".search-box");
     if (elementToRemove3) {
       elementToRemove3.remove();
+
+      console.log("Removed element serach box");
     }
 
     const elementToRemove4 = document.querySelector(".cm-filter");
     if (elementToRemove4) {
       elementToRemove4.remove();
+
+      console.log("Removed element cm-fliter");
     }
 
     const elementToRemove5 = document.querySelector(
@@ -215,21 +550,22 @@ async function linkined() {
     );
     if (elementToRemove5) {
       elementToRemove5.remove();
+
+      console.log("Removed element ng-content");
     }
 
     const elementToRemove6 = document.querySelector(".zsiq_flt_rel");
     if (elementToRemove6) {
       elementToRemove6.remove();
+
+      console.log("Removed element zsiq-flq");
     }
 
-    // controls-wrapper - ng - content;
-
-    //   no-body-padding no-header-padding open ng-star-inserted
-    //   scenes-container ng-star-inserted
-    //   search-box ng-star-inserted
-    //   cm-filter ng-star-inserted
-    // zsiq_flt_rel
   });
+
+
+  console.log("finiesged page ecalute----------------");
+
 
   await new Promise((resolve) => setTimeout(resolve, 7000));
 
@@ -293,16 +629,16 @@ async function linkined() {
     });
 
   await new Promise((resolve) => setTimeout(resolve, 90000));
+  console.log(`Processing document with lat: ${lat}, long: ${long}`);
 }
 
-linkined();
 
 let URL_IMAGE;
 let filename;
 let fileitem;
 let randomNumber;
 
-async function uploadImageToFirebase(filename, fileitem) {
+async function uploadImageToFirebase(filename, fileitem, id_p) {
   try {
     const storageRef = ref(storage, "images/" + filename);
 
@@ -324,13 +660,17 @@ async function uploadImageToFirebase(filename, fileitem) {
 
     try {
       // Create a new Prayag document
-      const newPrayag = new Prayag({
-        lat: 101,
-        long: 101,
-        image: publicURL, // Assuming image is a URL or file path, modify this according to your use case
-      });
+      // const newPrayag = new Prayag({
+      //   lat: 2101,
+      //   long: 2101,
+      //   image: publicURL, // Assuming image is a URL or file path, modify this according to your use case
+      // });
 
-      await newPrayag.save();
+      // await newPrayag.save();
+
+      await Prayag.updateOne({ _id: id_p }, { $set: { sat_img: false, image: publicURL } });
+
+      console.log("updated for id = " + id_p);
 
       // Respond with success message
       console.log("IMAGE DATA SAVED ON DB: MONGO");
@@ -348,7 +688,7 @@ async function uploadImageToFirebase(filename, fileitem) {
 }
 
 //next flow
-async function cropImage(inputPath1, outputPath1, targetWidth1, targetHeight1) {
+async function cropImage(inputPath1, outputPath1, targetWidth1, targetHeight1, id_pp) {
   console.log("insdie cropimfage");
 
   try {
@@ -375,7 +715,7 @@ async function cropImage(inputPath1, outputPath1, targetWidth1, targetHeight1) {
     filename = `screenshot_clip00_${randomNumber}_5oct.png`;
     fileitem = fs.readFileSync(`./image/crop2.png`);
 
-    uploadImageToFirebase(filename, fileitem)
+    uploadImageToFirebase(filename, fileitem, id_pp)
       .then((publicURL) => {
         console.log("Public URL:", publicURL);
       })
@@ -388,3 +728,10 @@ async function cropImage(inputPath1, outputPath1, targetWidth1, targetHeight1) {
     throw error;
   }
 }
+
+
+app.listen(process.env.PORT, function (req, res) {
+  console.log(`MAIN UI: http://localhost:${process.env.PORT}/`);
+});
+
+
