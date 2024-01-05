@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="apple-touch-icon" sizes="76x76" href="../assests/img/apple-icon.png">
+    <link rel="icon" type="image/png" href="../assests/img/favicon.png">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>GreenMapper</title>
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+        name='viewport' />
+    <!--     Fonts and icons     -->
+    <link type="text/css" href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link type="text/css" href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link type="text/css" href="../assests/css/bootstrap.min.css" rel="stylesheet" />
+    <link type="text/css" href="../assests/css/now-ui-dashboard.css?v=1.0.1" rel="stylesheet" />
+    <!-- CSS Just for demo purpose, don't include it in your project -->
+    <link href="../assests/demo/demo.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link type="text/css" rel="stylesheet"
+        href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+
+    <!-- https://github.com/Mrprayag077/GreenMapper_BE_Project -->
+
+    <!-- https://github.com/themewagon/now-ui-dashboard/ -->
+
+
+    <style>
+        #map {
+            height: 780px;
+            width: 100%;
+        }
+    </style>
+
+</head>
+
+<body class="">
+    <div class="wrapper ">
+        <div class="sidebar" data-color="orange">
+            <!--
+        Tip 1: You can change the color of the sidebar using: data-color="blue | green | orange | red | yellow"
+    -->
+            <div class="logo">
+                <a href="http://www.creative-tim.com" class="simple-text logo-mini">
+                    CT
+                </a>
+                <a href="http://www.creative-tim.com" class="simple-text logo-normal">
+                    Creative Tim
+                </a>
+            </div>
+            <div class="sidebar-wrapper">
+                <ul class="nav">
+                    <li>
+                        <a href="../examples/dashboard.html">
+                            <i class="now-ui-icons design_app"></i>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../examples/icons.html">
+                            <i class="now-ui-icons education_atom"></i>
+                            <p>Icons</p>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a href="../examples/map.html">
+                            <i class="now-ui-icons location_map-big"></i>
+                            <p>Maps</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../examples/notifications.html">
+                            <i class="now-ui-icons ui-1_bell-53"></i>
+                            <p>Notifications</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../examples/user.html">
+                            <i class="now-ui-icons users_single-02"></i>
+                            <p>User Profile</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../tables.html">
+                            <i class="now-ui-icons design_bullet-list-67"></i>
+                            <p>Table List</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="../examples/typography.html">
+                            <i class="now-ui-icons text_caps-small"></i>
+                            <p>Typography</p>
+                        </a>
+                    </li>
+                    <li class="active-pro">
+                        <a href="../examples/upgrade.html">
+                            <i class="now-ui-icons arrows-1_cloud-download-93"></i>
+                            <p>Upgrade to PRO</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-panel">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
+                <div class="container-fluid">
+                    <div class="navbar-wrapper">
+                        <div class="navbar-toggle">
+                            <button type="button" class="navbar-toggler">
+                                <span class="navbar-toggler-bar bar1"></span>
+                                <span class="navbar-toggler-bar bar2"></span>
+                                <span class="navbar-toggler-bar bar3"></span>
+                            </button>
+                        </div>
+                        <a class="navbar-brand" href="#pablo">Maps</a>
+                    </div>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                        aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                        <span class="navbar-toggler-bar navbar-kebab"></span>
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-end" id="navigation">
+                        <form>
+                            <div class="input-group no-border">
+                                <input type="text" value="" class="form-control" placeholder="Search...">
+                                <span class="input-group-addon">
+                                    <i class="now-ui-icons ui-1_zoom-bold"></i>
+                                </span>
+                            </div>
+                        </form>
+
+
+                        <!-- <div class="dropdown">
+                            <button type="button"
+                                class="btn btn-round btn-default dropdown-toggle btn-simple btn-icon no-caret"
+                                data-toggle="dropdown">
+                                <i class="now-ui-icons loader_gear"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                                <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                            </div>
+                        </div> -->
+
+
+                        <ul class="navbar-nav" style="margin-right: 20px;">
+                            <!-- <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" href="#pablo" data-toggle="dropdown">
+                                    <i class="now-ui-icons media-2_sound-wave"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Stats</span>
+                                    </p>
+
+
+                                </a>
+
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                    <a class="dropdown-item text-danger" href="#">Remove Data</a>
+                                </div>
+                            </li> -->
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="http://example.com"
+                                    id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
+                                    <i class="now-ui-icons location_world"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Some Actions</span>
+                                    </p>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                                    <a onclick="set_title('Zones Nearby')" class="dropdown-item" href="#">Zones</a>
+                                    <a onclick="set_title(`NGO's Nearby`)" class="dropdown-item" href="#">NGO's</a>
+                                    <a onclick="set_title('Upcoming Drives')" class="dropdown-item" href="#">Upcoming
+                                        Drives</a>
+                                </div>
+
+                                <style>
+                                    .dropdown-item:hover {
+                                        font-weight: 900;
+                                        font-size: 20px;
+
+                                    }
+                                </style>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#pablo">
+                                    <i class="now-ui-icons users_single-02"></i>
+                                    <p>
+                                        <span class="d-lg-none d-md-block">Account</span>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- End Navbar -->
+            <div class="panel-header panel-header-sm">
+            </div>
+            <div class="content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card ">
+                            <div class="card-header" id="title_head">
+                                Zones Nearby
+                            </div>
+                            <div class="card-body ">
+                                <!-- <div id="map" class="map"></div> -->
+                                <div id="map"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-category">All Regions </h5>
+                                <h4 class="card-title"> Regions List</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th>
+                                                Rank
+                                            </th>
+                                            <th>
+                                                Region
+                                            </th>
+                                            <!-- <th>
+                                                                    City
+                                                                </th>
+                                                                <th class="text-right">
+                                                                    Salary
+                                                                </th> -->
+                                        </thead>
+                                        <tbody>
+                                            <tr class="row_tb1" id="row_tb1_0" onclick=" ll1(0)">
+                                                <td>
+                                                    1
+                                                </td>
+                                                <td>
+                                                    Viman Nagar
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr class="row_tb1" id="row_tb1_1" onclick=" ll1(1)">
+                                                <td>
+                                                    2
+                                                </td>
+                                                <td>
+                                                    Wadgoasheri
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr class="row_tb1" id="row_tb1_2" onclick=" ll1(2)">
+                                                <td>
+                                                    3
+                                                </td>
+                                                <td>
+                                                    Goa
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr class="row_tb1" id="row_tb1_3" onclick=" ll1(3)">
+                                                <td>
+                                                    4
+                                                </td>
+                                                <td>
+                                                    Pund gaon
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr class="row_tb1" id="row_tb1_3" onclick=" ll1(3)">
+                                                <td>
+                                                    5
+                                                </td>
+                                                <td>
+                                                    NA gaon
+                                                </td>
+
+                                            </tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <style>
+                        .row_tb1:hover {
+                            background-color: gold;
+                            font-size: 15px;
+                            font-weight: 900;
+                            color: black;
+                            cursor: pointer;
+                        }
+                    </style>
+                    <script>
+                        function ll1() {
+                            console.log('njenjnen')
+                        }
+                    </script>
+
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-category">All NGOs</h5>
+                                <h4 class="card-title"> NGOs List</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th>
+                                                NGO
+                                            </th>
+                                            <th>
+                                                Drives
+                                            </th>
+                                            <!-- <th>
+                                                City
+                                            </th>
+                                            <th class="text-right">
+                                                Salary
+                                            </th> -->
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    GreenPulse India
+                                                </td>
+                                                <td>
+                                                    10
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>
+                                                    GreenHands India
+                                                </td>
+                                                <td>
+                                                    3
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-category">All Activities</h5>
+                                <h4 class="card-title">Activities</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead class=" text-primary">
+                                            <th>
+                                                Name
+                                            </th>
+                                            <th>
+                                                Hands Joined
+                                            </th>
+                                            <!-- <th>
+                                                                    City
+                                                                </th>
+                                                                <th class="text-right">
+                                                                    Salary
+                                                                </th> -->
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>
+                                                    Green India Initiative
+                                                </td>
+                                                <td>
+                                                    10+
+                                                </td>
+
+                                            </tr>
+
+
+                                            <tr>
+                                                <td>
+                                                    Green India Initiative
+
+                                                </td>
+                                                <td>
+                                                    20+
+                                                </td>
+
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+
+            <footer class="footer">
+                <div class="container-fluid">
+                    <nav>
+                        <ul>
+                            <li>
+                                <a href="https://www.creative-tim.com">
+                                    Creative Tim
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://presentation.creative-tim.com">
+                                    About Us
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://blog.creative-tim.com">
+                                    Blog
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="copyright">
+                        &copy;
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script>, Designed by
+                        <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
+                        <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <!--   Core JS Files   -->
+    <script type="application/javascript" src="../assests/js/core/jquery.min.js"></script>
+
+    <script type="application/javascript" src="../assests/js/core/jquery.min.js"></script>
+
+
+    <script type="application/javascript" src="../assests/js/core/popper.min.js"></script>
+    <script type="application/javascript" src="../assests/js/core/bootstrap.min.js"></script>
+    <script type="application/javascript" src="../assests/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+    <!--  Google Maps Plugin    -->
+    <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+    <!-- Chart JS -->
+
+
+
+</body>
+
+
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+    const apiKey = 'pk.eyJ1IjoiYWxmcmVkMjAxNiIsImEiOiJja2RoMHkyd2wwdnZjMnJ0MTJwbnVmeng5In0.E4QbAFjiWLY8k3AFhDtErA';
+
+    const mymap = L.map('map').setView([18.504055388697367, 73.80745747188948], 17);
+    // 13
+
+    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: apiKey
+    }).addTo(mymap);
+
+    // Adding Marker
+
+    const marker = L.marker([18.504055388697367, 73.80745747188948]).addTo(mymap);
+
+    // Add popup message
+    let template = `
+
+<h3>Government offcies</h3>
+<h3>Phone number: 9078674536</h3>
+<h3>officer name: xyz</h3>
+
+`
+    marker.bindPopup(template);
+
+
+
+    const marker1 = L.marker([18.509083307749208, 73.81921304312709]).addTo(mymap);
+
+    // Add popup message
+    let template1 = `
+
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
+
+`
+    marker1.bindPopup(template1);
+
+
+
+
+    const marker2 = L.marker([18.510132352468702, 73.7688936948145
+    ]).addTo(mymap);
+
+    // Add popup message
+    let template2 = `
+
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
+
+
+`
+    marker2.bindPopup(template2);
+
+
+
+    const marker3 = L.marker([18.49332945268911, 73.74829864575057
+
+
+    ]).addTo(mymap);
+
+    // Add popup message
+    let template3 = `
+
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
+
+
+`
+    marker3.bindPopup(template3);
+
+
+
+
+    const marker4 = L.marker([18.55713208390071, 73.82644820608257]).addTo(mymap);
+
+    // Add popup message
+    let template4 = `
+
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
+
+
+`
+    marker4.bindPopup(template4);
+
+    // // Add circle 
+
+    // const circle = L.circle([18.504055388697367, 73.80745747188948], {
+    //     radius: 220,
+    //     color: '#e4100b',
+    //     fillColor: '#c40f0b',
+    //     fillOpacity: 0.2
+    // }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li><li>Visit NGO-PAGE: <a href="#">Link</a> </li> <li>Upcoming Drives: <a href="#">Link</a> </li></ul></div> ')
+
+
+
+    const circle1 = L.circle([18.55436104195708, 73.75045032634333
+    ], {
+        radius: 650,
+        color: '#006400',
+        fillColor: '#32cd32',
+        fillOpacity: 0.2
+    }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li</ul ></div> ')
+
+
+    const circle2 = L.circle([18.466638164979486, 73.75533241590381
+
+    ], {
+        radius: 600,
+        color: '#006400',
+        fillColor: '#32cd32',
+        fillOpacity: 0.2
+    }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li</ul ></div> ')
+
+
+
+
+    const circle3 = L.circle([18.458143364850073, 73.84696154127289
+
+    ], {
+        radius: 550,
+        color: '#006400',
+        fillColor: '#32cd32',
+        fillOpacity: 0.2
+    }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li</ul ></div> ')
+
+
+
+
+
+
+    function set_title(title) {
+        const title_head = document.getElementById('title_head');
+        title_head.innerHTML = title;
+
+        title_head.style.fontSize = '20px';
+        title_head.style.color = 'orange';
+
+
+        setTimeout(() => {
+            title_head.style.fontSize = '14px';
+            title_head.style.color = '#2C2C2C';
+
+
+        }, 2000);
+    }
+
+    const circles = []; // Array to store circles
+
+    const regions = [
+        {
+            region_id: 'R123',
+            reg_name: 'viman nagar',
+            reg_rank: '1',
+            reg_lang: 18.504055388697367,
+            reg_lat: 73.80745747188948,
+            color: '#e4100b',
+            fillColor: '#c40f0b',
+            popup_details_r: ' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li</ul ></div> ',
+            allngo: ['N123', 'N124']
+        },
+
+        {
+            region_id: 'R124',
+            reg_name: 'Wadgoansheri',
+            reg_rank: '2',
+            reg_lang: 18.509055388697367,
+            reg_lat: 73.8099947188948,
+            color: '#e4100b',
+            fillColor: '#c40f0b',
+            popup_details_r: '<p>hiiii</p>',
+            allngo: ['N123', 'N124']
+        },
+
+        {
+            region_id: 'R124',
+            reg_name: 'Wadgoansheri',
+            reg_rank: '2',
+            reg_lang: 18.609055388697367,
+            reg_lat: 73.8199947188948,
+            color: '#006400',
+            fillColor: '#c40f0b',
+            popup_details_r: '<p>hiiii jbdbbwn dibw wdiwiwb</p>',
+            allngo: ['N123', 'N124']
+        },
+
+        {
+            region_id: 'R124',
+            reg_name: 'Wadgoansheri11111',
+            reg_rank: '4',
+            reg_lang: 18.609055388697367,
+            reg_lat: 73.8199947188948,
+            color: '#006400',
+            fillColor: '#c40f0b',
+            popup_details_r: '<p>hiiii jbdbbwn dibw wdiwiwb</p>',
+            allngo: ['N123', 'N124']
+        },
+
+    ];
+
+
+    regions.forEach((region, index) => {
+        const circle = L.circle([region.reg_lang, region.reg_lat], {
+            radius: 220,
+            color: region.color,
+            fillColor: region.fillColor,
+            fillOpacity: 0.2
+        }).addTo(mymap).bindPopup(region.popup_details_r);
+
+        circles.push(circle);
+
+        const row = document.getElementById(`row_tb1_${index}`);
+        console.log(row);
+        row.addEventListener('click', () => handleRowClick(index));
+
+    });
+
+
+
+
+    let selectedRowIndex = 0;
+
+    function handleRowClick(index) {
+        // Reset style for previously clicked row
+        if (selectedRowIndex !== null) {
+            const prevRow = document.getElementById(`row_tb1_${selectedRowIndex}`);
+            resetRowStyle(prevRow);
+        }
+
+        // Set style for the clicked row
+        const clickedRow = document.getElementById(`row_tb1_${index}`);
+        setRowStyle(clickedRow);
+
+        // Update the map and circle
+        const region = regions[index];
+        mymap.setView([region.reg_lang, region.reg_lat], 16);
+        const circle = circles[index];
+        circle.setLatLng([region.reg_lang, region.reg_lat]);
+        circle.setRadius(220);
+        circle.setStyle({ color: region.color, fillColor: region.fillColor });
+        circle.bindPopup(region.popup_details_r).openPopup();
+
+        // Update the selected row index
+        selectedRowIndex = index;
+
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // You can also use 'auto' or 'instant'
+        });
+
+
+        // const element = document.getElementById('map');
+
+        // if (element) {
+        //     // Scroll to the top of the element
+        //     element.scrollIntoView({
+        //         behavior: 'smooth'
+        //     });
+        // }
+    }
+
+    function setRowStyle(element) {
+        element.style.backgroundColor = 'gold';
+        element.style.fontWeight = 900;
+        element.style.fontSize = '15px';
+        element.style.color = 'black';
+        element.style.cursor = 'pointer';
+    }
+
+    function resetRowStyle(element) {
+        element.style.backgroundColor = '';
+        element.style.fontWeight = '';
+        element.style.fontSize = '';
+        element.style.color = '';
+        element.style.cursor = '';
+    }
+
+
+    // function ll1(index) {
+    //     console.log('index = ' + index + ';' + regions[index].reg_name);
+    //     const region = regions[index];
+    //     mymap.setView([region.reg_lang, region.reg_lat], 16);
+    //     circle.setLatLng([region.reg_lang, region.reg_lat]);
+    //     circle.setRadius(220); // Set radius to 220 for consistency
+    //     circle.setStyle({ color: region.color, fillColor: region.fillColor });
+    //     circle.bindPopup(region.popup_details_r).openPopup();
+    // }
+
+    // ll1(0);
+
+</script>
+
+</html>
+
+
+<!-- 
+const regions = [
+
+{
+region_id: R123,
+reg_name: 'viman nagar',
+reg_rank: '1',
+zone_status: 'red',
+tree_count: 100,
+reg_lang: 1111,
+reg_lat: 111,
+color: '#e4100b',
+fillColor: '#c40f0b',
+popup_details_r: '<p>hiiii</p>'
+allngo: [N123,N124]
+}
+
+]
+
+
+const ngos = [
+
+{
+ngo_id: 123,
+ngo_name: 'viman nagar',
+ngo_lang: 1111,
+ngo_lat: 111,
+color: '#e4100b',
+fillColor: '#c40f0b',
+popup_details_n: '<p>hiiii</p>',
+region_id: R123,
+drives: [D12,D13,D14,D15,D16],
+
+}
+
+]
+
+
+
+const drives = [
+
+{
+drive_id: 123,
+drive_name: 'viman nagar',
+drive_lang: 1111,
+drive_lat: 111,
+color: '#e4100b',
+fillColor: '#c40f0b',
+popup_details_d: '<p>hiiii</p>',
+region_id: R123,
+ngo_id: N123,
+hands_joined: '10+'
+}
+
+] -->

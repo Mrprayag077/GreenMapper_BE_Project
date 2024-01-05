@@ -11,11 +11,22 @@ const nonce = crypto.randomBytes(16).toString("base64");
 // Add the nonce to your CSP header
 
 module.exports = {
-  main: async (req, res) => {
-    res.send("<b>hello prayag :)</b>"); // Assuming your form view is named "form.ejs"
-
-    // res.sendFile(path.join(__dirname + "/from.html")); // Assuming your form view is named "form.ejs"
+  home_p: async (req, res) => {
+    res.render("home");
   },
+
+  map_p: async (req, res) => {
+    // res.send("<b>hello prayag :)</b>"); // Assuming your form view is named "form.ejs"
+    // res.render("map");
+    res.render("map"); // Assuming your form view is named "form.ejs"
+  },
+
+
+
+  // map: async (req, res) => {
+  //   res.render("map"); // Assuming your form view is named "form.ejs"
+  //   // res.sendFile(path.join(__dirname + "/from.html")); // Assuming your form view is named "form.ejs"
+  // },
 
   inputdata_form_get: async (req, res) => {
     res.send("<center><b>hello prayag :)</b></center>"); // Assuming your form view is named "form.ejs"

@@ -31,11 +31,33 @@ const Prayag = require("./models/model");
 require("./server");
 
 
+// app.use(express.static(__dirname + "/assests", {
+//   setHeaders: (res, path) => {
+//     if (path.endsWith(".css")) {
+//       res.setHeader("Content-Type", "text/css");
+//     } else if (path.endsWith(".js")) {
+//       res.setHeader("Content-Type", "application/javascript");
+//     }
+//   }
+// }));
+
+
+
+app.use(express.static(__dirname + '/assests'));
+
+app.use("/assests", express.static(path.join(__dirname, "assests")));
+app.use("/assests/css", express.static(path.join(__dirname, "css")));
+app.use("/assests/demo", express.static(path.join(__dirname, "demo")));
+app.use("/assests/images", express.static(path.join(__dirname, "images")));
+app.use("/assests/img", express.static(path.join(__dirname, "img")));
+app.use("/assests/js", express.static(path.join(__dirname, "js")));
+app.use("/assests/scss", express.static(path.join(__dirname, "scss")));
+
+
+
+app.use(express.static(__dirname + "/map.html"));
+
 app.use(express.static(__dirname + "/views"));
-
-app.use("/assets", express.static("assets"));
-
-app.use(express.static(__dirname + "/from.html"));
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
@@ -44,690 +66,647 @@ app.use("/api/", userRoutes);
 
 mongoose.set("strictQuery", false);
 
-// // async function main() {
-// const MONGO_URL = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.tuna9.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`;
-// mongoose.connect(MONGO_URL, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-// });
 
-// const prayagSchema = new mongoose.Schema(
-//   {
-//     lat: {
-//       type: Number,
-//       required: [true, "Plz enter lat"],
-//     },
 
-//     long: {
-//       type: Number,
-//       required: [true, "Plz enter long"],
-//     },
 
-//     image: {
-//       type: String,
-//       required: [true, "Plz upload image"],
-//     },
-//   },
-//   { collection: "prayagsp" }
-// );
 
-// const Prayag = mongoose.model("Prayag", prayagSchema);
 
 
+// // bot logic =================================================================
+// const firebaseConfig = {
+//   apiKey: "AIzaSyDa7kvj9JGl9vO4CzwCtIvXf_sjyCgk41Q",
+//   authDomain: "greenmapper-da4bf.firebaseapp.com",
+//   projectId: "greenmapper-da4bf",
+//   storageBucket: "greenmapper-da4bf.appspot.com",
+//   messagingSenderId: "729535270764",
+//   appId: "1:729535270764:web:cc9987a3d1b9e84be8ad49",
+//   measurementId: "G-9ZHQP5SXLL",
+// };
 
+// const firebaseApp = initializeApp(firebaseConfig);
+// const storage = getStorage(firebaseApp);
 
 
 
 
 
+// async function linkined() {
+//   // const usersinfosp = await usersinfos.find({ request_send_trigger: "today" });
 
 
 
+//   // const documents = await Prayag.find({ set_img: true }).toArray();
 
 
 
+//   const documents = await Prayag.find({ sat_img: true }).exec();
 
+//   if (documents.length === 0) {
+//     console.log("No documents with sat_img set to true. Exiting function.");
+//     return;
+//   }
 
+//   console.log(documents);
 
 
-// bot logic =================================================================
-const firebaseConfig = {
-  apiKey: "AIzaSyDa7kvj9JGl9vO4CzwCtIvXf_sjyCgk41Q",
-  authDomain: "greenmapper-da4bf.firebaseapp.com",
-  projectId: "greenmapper-da4bf",
-  storageBucket: "greenmapper-da4bf.appspot.com",
-  messagingSenderId: "729535270764",
-  appId: "1:729535270764:web:cc9987a3d1b9e84be8ad49",
-  measurementId: "G-9ZHQP5SXLL",
-};
 
-const firebaseApp = initializeApp(firebaseConfig);
-const storage = getStorage(firebaseApp);
+//   await new Promise((resolve) => setTimeout(resolve, 3000));
 
 
 
 
+//   //   const browser = await puppeteer.launch({ headless: false });
+//   const browser = await puppeteer.launch({
+//     headless: false,
+//     // args: ["--start-maximized"], // This argument will make the browser window fullscreen
+//     defaultViewport: null,
+//     permissions: ["notifications"], // Deny the notification permission
+//     args: ["--disable-notifications"], // Disable notifications
+//   });
 
-async function linkined() {
-  // const usersinfosp = await usersinfos.find({ request_send_trigger: "today" });
+//   const page = await browser.newPage();
 
+//   await page.addStyleTag({
+//     content: `
+//     body, html {
+//       width: 10% !important;
+//       height: 10% !important;
+//       margin: 0 !important;
+//       padding: 0 !important;
+//       overflow: hidden !important;
+//     }
 
+//     .specific-container {
+//       width: 50% !important;
+//       height: 50% !important;
+//     }
+//   `,
+//   });
 
-  // const documents = await Prayag.find({ set_img: true }).toArray();
+//   await page.goto("https://crop-monitoring.eos.com/login");
 
+//   // Fill in email input field
 
+//   await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  const documents = await Prayag.find({ sat_img: true }).exec();
+//   // Click on "Continue" button
 
-  if (documents.length === 0) {
-    console.log("No documents with sat_img set to true. Exiting function.");
-    return;
-  }
+//   // Wait for the button inside the second div to be present in the DOM
+//   await page.waitForSelector(
+//     '.button-wrap:nth-child(2) button[data-id="sign-in-button"]',
+//     { visible: true }
+//   );
 
-  console.log(documents);
+//   // Click the button inside the second div
+//   await page.click(
+//     '.button-wrap:nth-child(2) button[data-id="sign-in-button"]'
+//   );
 
+//   await new Promise((resolve) => setTimeout(resolve, 1000));
 
+//   // Fill in email input field
+//   await page.waitForSelector(".mat-mdc-input-element", { visible: true });
+//   await page.type(".mat-mdc-input-element", `${process.env.USEREMAIL}`);
+//   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+//   await page.waitForSelector(".mat-mdc-input-element.password-input", {
+//     visible: true,
+//   });
 
+//   // Type the password into the input field
+//   await page.type(
+//     ".mat-mdc-input-element.password-input",
+//     `${process.env.PASSWORD}`
+//   );
 
 
+//   await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  //   const browser = await puppeteer.launch({ headless: false });
-  const browser = await puppeteer.launch({
-    headless: false,
-    // args: ["--start-maximized"], // This argument will make the browser window fullscreen
-    defaultViewport: null,
-    permissions: ["notifications"], // Deny the notification permission
-    args: ["--disable-notifications"], // Disable notifications
-  });
+//   await page.waitForSelector(".content-wrp");
 
-  const page = await browser.newPage();
+//   // Click on the element with class 'content-wrp'
+//   await page.click(".content-wrp");
 
-  await page.addStyleTag({
-    content: `
-    body, html {
-      width: 10% !important;
-      height: 10% !important;
-      margin: 0 !important;
-      padding: 0 !important;
-      overflow: hidden !important;
-    }
-  
-    .specific-container {
-      width: 50% !important;
-      height: 50% !important;
-    }
-  `,
-  });
+//   await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  await page.goto("https://crop-monitoring.eos.com/login");
 
-  // Fill in email input field
+//   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+//   for (const doc of documents) {
+//     const lat = doc.lat;
+//     const long = doc.long;
 
-  // Click on "Continue" button
+//     // Call your function with lat and long
+//     // yourFunction_test(lat, long);
 
-  // Wait for the button inside the second div to be present in the DOM
-  await page.waitForSelector(
-    '.button-wrap:nth-child(2) button[data-id="sign-in-button"]',
-    { visible: true }
-  );
+//     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  // Click the button inside the second div
-  await page.click(
-    '.button-wrap:nth-child(2) button[data-id="sign-in-button"]'
-  );
+//     await page.goto("https://crop-monitoring.eos.com/main-map/fields/all");
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+//     await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  // Fill in email input field
-  await page.waitForSelector(".mat-mdc-input-element", { visible: true });
-  await page.type(".mat-mdc-input-element", `${process.env.USEREMAIL}`);
-  await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  await page.waitForSelector(".mat-mdc-input-element.password-input", {
-    visible: true,
-  });
 
-  // Type the password into the input field
-  await page.type(
-    ".mat-mdc-input-element.password-input",
-    `${process.env.PASSWORD}`
-  );
 
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+//     await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  await page.waitForSelector(".content-wrp");
+//     await page.waitForSelector(".search-input", { visible: true });
 
-  // Click on the element with class 'content-wrp'
-  await page.click(".content-wrp");
+//     const searchInput = await page.$(".search-input");
+//     await searchInput.type(`${lat} , ${long}`);
+//     //   await searchInput.press("Enter");
 
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+//     await new Promise((resolve) => setTimeout(resolve, 5000));
 
+//     const buttons1 = await page.$$(".search-controls__button");
+//     await buttons1[1].click();
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+//     await new Promise((resolve) => setTimeout(resolve, 8000));
 
-  for (const doc of documents) {
-    const lat = doc.lat;
-    const long = doc.long;
+//     const buttons = await page.$$(".mat-mdc-tooltip-trigger");
+//     await buttons[0].click();
 
-    // Call your function with lat and long
-    // yourFunction_test(lat, long);
+//     await new Promise((resolve) => setTimeout(resolve, 4000));
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+//     await page.waitForSelector(".column"); // Replace '.column' with the class selector of the element you want to remove
 
-    await page.goto("https://crop-monitoring.eos.com/main-map/fields/all");
+//     // Evaluate a function within the page context to remove the element
+//     // await page.evaluate(() => {
+//     //   const elementToRemove = document.querySelector(".column"); // Replace '.column' with the class selector of the element you want to remove
+//     //   if (elementToRemove) {
+//     //     elementToRemove.remove();
+//     //   }
+//     // });
 
-    await new Promise((resolve) => setTimeout(resolve, 3000));
 
+//     console.log("above page ecalute----------------");
 
 
+//     await page.evaluate(() => {
 
+//       console.log("inside page ecalute----------------");
 
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+//       const elementToRemove = document.querySelector(".column");
+//       if (elementToRemove) {
+//         elementToRemove.remove();
 
-    await page.waitForSelector(".search-input", { visible: true });
+//         console.log("Removed element column");
+//       }
 
-    const searchInput = await page.$(".search-input");
-    await searchInput.type(`${lat} , ${long}`);
-    //   await searchInput.press("Enter");
+//       const elementToRemove1 = document.querySelector(".no-body-padding");
+//       if (elementToRemove1) {
+//         elementToRemove1.remove();
 
-    await new Promise((resolve) => setTimeout(resolve, 5000));
+//         console.log("Removed element padding");
 
-    const buttons1 = await page.$$(".search-controls__button");
-    await buttons1[1].click();
+//       }
 
-    await new Promise((resolve) => setTimeout(resolve, 8000));
+//       const elementToRemove2 = document.querySelector(".scenes-container");
+//       if (elementToRemove2) {
+//         elementToRemove2.remove();
 
-    const buttons = await page.$$(".mat-mdc-tooltip-trigger");
-    await buttons[0].click();
+//         console.log("Removed element scene-cont");
+//       }
 
-    await new Promise((resolve) => setTimeout(resolve, 4000));
+//       const elementToRemove3 = document.querySelector(".search-box");
+//       if (elementToRemove3) {
+//         elementToRemove3.remove();
 
-    await page.waitForSelector(".column"); // Replace '.column' with the class selector of the element you want to remove
+//         console.log("Removed element serach box");
+//       }
 
-    // Evaluate a function within the page context to remove the element
-    // await page.evaluate(() => {
-    //   const elementToRemove = document.querySelector(".column"); // Replace '.column' with the class selector of the element you want to remove
-    //   if (elementToRemove) {
-    //     elementToRemove.remove();
-    //   }
-    // });
+//       const elementToRemove4 = document.querySelector(".cm-filter");
+//       if (elementToRemove4) {
+//         elementToRemove4.remove();
 
+//         console.log("Removed element cm-fliter");
+//       }
 
-    console.log("above page ecalute----------------");
+//       const elementToRemove5 = document.querySelector(
+//         ".controls-wrapper-ng-content"
+//       );
+//       if (elementToRemove5) {
+//         elementToRemove5.remove();
 
+//         console.log("Removed element ng-content");
+//       }
 
-    await page.evaluate(() => {
+//       const elementToRemove6 = document.querySelector(".zsiq_flt_rel");
+//       if (elementToRemove6) {
+//         elementToRemove6.remove();
 
-      console.log("inside page ecalute----------------");
+//         console.log("Removed element zsiq-flq");
+//       }
 
-      const elementToRemove = document.querySelector(".column");
-      if (elementToRemove) {
-        elementToRemove.remove();
+//     });
 
-        console.log("Removed element column");
-      }
 
-      const elementToRemove1 = document.querySelector(".no-body-padding");
-      if (elementToRemove1) {
-        elementToRemove1.remove();
+//     console.log("finiesged page ecalute----------------");
 
-        console.log("Removed element padding");
 
-      }
 
-      const elementToRemove2 = document.querySelector(".scenes-container");
-      if (elementToRemove2) {
-        elementToRemove2.remove();
 
-        console.log("Removed element scene-cont");
-      }
+//     await new Promise((resolve) => setTimeout(resolve, 7000));
 
-      const elementToRemove3 = document.querySelector(".search-box");
-      if (elementToRemove3) {
-        elementToRemove3.remove();
+//     randomNumber = Math.floor(Math.random() * 1000); // You can adjust the range of random numbers as needed
 
-        console.log("Removed element serach box");
-      }
+//     // Take a screenshot with a random filename
+//     const screenshotPath = `./image/screenshot_000000.png`;
+//     await page.screenshot({ path: screenshotPath });
 
-      const elementToRemove4 = document.querySelector(".cm-filter");
-      if (elementToRemove4) {
-        elementToRemove4.remove();
+//     // const clip = { x: 0, y: 0, width: 1300, height: 550 };
 
-        console.log("Removed element cm-fliter");
-      }
+//     // const clip1 = { x: 0, y: 0, width: 1400, height: 550 };
 
-      const elementToRemove5 = document.querySelector(
-        ".controls-wrapper-ng-content"
-      );
-      if (elementToRemove5) {
-        elementToRemove5.remove();
+//     // await page.screenshot({
+//     //   path: `./image/screenshot_clip00_${randomNumber}.png`,
+//     //   clip: clip,
+//     // });
 
-        console.log("Removed element ng-content");
-      }
+//     // await page.screenshot({
+//     //   path: `./image/screenshot_clip222_.png`,
+//     //   clip: clip1,
+//     // });
 
-      const elementToRemove6 = document.querySelector(".zsiq_flt_rel");
-      if (elementToRemove6) {
-        elementToRemove6.remove();
+//     console.log("screenshot taken");
 
-        console.log("Removed element zsiq-flq");
-      }
+//     await new Promise((resolve) => setTimeout(resolve, 10000));
 
-    });
+//     const inputPath = "./image/screenshot_000000.png"; // Path to the original screenshot
+//     const outputPath = "./image/cropped.png"; // Path to save the cropped image
+//     const cropPercentage = 0.34; // 20% of the width to be cropped
 
+//     sharp(inputPath)
+//       .metadata()
+//       .then((metadata) => {
+//         // Calculate the width of the cropped region
+//         const cropWidth = Math.floor(metadata.width * (1 - cropPercentage));
 
-    console.log("finiesged page ecalute----------------");
+//         // Crop the image from the right 20% of the width
+//         sharp(inputPath)
+//           .extract({ left: 0, top: 0, width: cropWidth, height: metadata.height })
+//           .toFile(outputPath, (err, info) => {
+//             if (err) {
+//               console.error("Error cropping image:", err);
+//             } else {
+//               console.log("insdie 1st");
 
+//               console.log("Image cropped and saved successfully.");
 
+//               // Example usage
+//               const inputPath1 = "./image/cropped.png"; // Path to the input image
+//               const outputPath1 = "./image/crop2.png"; // Path to save the cropped image
+//               const targetWidth1 = 640; // Width of the cropped image
+//               const targetHeight1 = 640; // Height of the cropped image
 
+//               cropImage(inputPath1, outputPath1, targetWidth1, targetHeight1, doc._id);
+//             }
+//           });
+//       })
+//       .catch((err) => {
+//         console.error("Error reading image metadata:", err);
+//       });
 
-    await new Promise((resolve) => setTimeout(resolve, 7000));
+//     await new Promise((resolve) => setTimeout(resolve, 4000));
+//     console.log(`Processing document with lat: ${lat}, long: ${long}`);
 
-    randomNumber = Math.floor(Math.random() * 1000); // You can adjust the range of random numbers as needed
 
-    // Take a screenshot with a random filename
-    const screenshotPath = `./image/screenshot_000000.png`;
-    await page.screenshot({ path: screenshotPath });
+//     // Set set_img to false after processing
+//   }
 
-    // const clip = { x: 0, y: 0, width: 1300, height: 550 };
+// }
 
-    // const clip1 = { x: 0, y: 0, width: 1400, height: 550 };
+// // linkined();
 
-    // await page.screenshot({
-    //   path: `./image/screenshot_clip00_${randomNumber}.png`,
-    //   clip: clip,
-    // });
 
-    // await page.screenshot({
-    //   path: `./image/screenshot_clip222_.png`,
-    //   clip: clip1,
-    // });
 
-    console.log("screenshot taken");
+// async function yourFunction_real(lat, long) {
 
-    await new Promise((resolve) => setTimeout(resolve, 10000));
 
-    const inputPath = "./image/screenshot_000000.png"; // Path to the original screenshot
-    const outputPath = "./image/cropped.png"; // Path to save the cropped image
-    const cropPercentage = 0.34; // 20% of the width to be cropped
+//   //   const browser = await puppeteer.launch({ headless: false });
+//   const browser = await puppeteer.launch({
+//     headless: false,
+//     // args: ["--start-maximized"], // This argument will make the browser window fullscreen
+//     defaultViewport: null,
+//     permissions: ["notifications"], // Deny the notification permission
+//     args: ["--disable-notifications"], // Disable notifications
+//   });
 
-    sharp(inputPath)
-      .metadata()
-      .then((metadata) => {
-        // Calculate the width of the cropped region
-        const cropWidth = Math.floor(metadata.width * (1 - cropPercentage));
+//   const page = await browser.newPage();
 
-        // Crop the image from the right 20% of the width
-        sharp(inputPath)
-          .extract({ left: 0, top: 0, width: cropWidth, height: metadata.height })
-          .toFile(outputPath, (err, info) => {
-            if (err) {
-              console.error("Error cropping image:", err);
-            } else {
-              console.log("insdie 1st");
+//   await page.addStyleTag({
+//     content: `
+//   body, html {
+//     width: 10% !important;
+//     height: 10% !important;
+//     margin: 0 !important;
+//     padding: 0 !important;
+//     overflow: hidden !important;
+//   }
 
-              console.log("Image cropped and saved successfully.");
+//   .specific-container {
+//     width: 50% !important;
+//     height: 50% !important;
+//   }
+// `,
+//   });
 
-              // Example usage
-              const inputPath1 = "./image/cropped.png"; // Path to the input image
-              const outputPath1 = "./image/crop2.png"; // Path to save the cropped image
-              const targetWidth1 = 640; // Width of the cropped image
-              const targetHeight1 = 640; // Height of the cropped image
+//   await page.goto("https://crop-monitoring.eos.com/login");
 
-              cropImage(inputPath1, outputPath1, targetWidth1, targetHeight1, doc._id);
-            }
-          });
-      })
-      .catch((err) => {
-        console.error("Error reading image metadata:", err);
-      });
+//   // Fill in email input field
 
-    await new Promise((resolve) => setTimeout(resolve, 4000));
-    console.log(`Processing document with lat: ${lat}, long: ${long}`);
+//   await new Promise((resolve) => setTimeout(resolve, 3000));
 
+//   // Click on "Continue" button
 
-    // Set set_img to false after processing
-  }
+//   // Wait for the button inside the second div to be present in the DOM
+//   await page.waitForSelector(
+//     '.button-wrap:nth-child(2) button[data-id="sign-in-button"]',
+//     { visible: true }
+//   );
 
-}
+//   // Click the button inside the second div
+//   await page.click(
+//     '.button-wrap:nth-child(2) button[data-id="sign-in-button"]'
+//   );
 
-// Schedule AUTOMATE BOT every Sunday at 7:00 AM
-// schedule.scheduleJob("0 7 * * 0", () => {
-// console.log("Running the function on Sunday at 7:00 AM!");
-// linkined();
-// });
+//   await new Promise((resolve) => setTimeout(resolve, 1000));
 
+//   // Fill in email input field
+//   await page.waitForSelector(".mat-mdc-input-element", { visible: true });
+//   await page.type(".mat-mdc-input-element", `${process.env.USEREMAIL}`);
+//   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-async function yourFunction_real(lat, long) {
+//   await page.waitForSelector(".mat-mdc-input-element.password-input", {
+//     visible: true,
+//   });
 
+//   // Type the password into the input field
+//   await page.type(
+//     ".mat-mdc-input-element.password-input",
+//     `${process.env.PASSWORD}`
+//   );
 
-  //   const browser = await puppeteer.launch({ headless: false });
-  const browser = await puppeteer.launch({
-    headless: false,
-    // args: ["--start-maximized"], // This argument will make the browser window fullscreen
-    defaultViewport: null,
-    permissions: ["notifications"], // Deny the notification permission
-    args: ["--disable-notifications"], // Disable notifications
-  });
+//   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const page = await browser.newPage();
+//   await page.waitForSelector(".content-wrp");
 
-  await page.addStyleTag({
-    content: `
-  body, html {
-    width: 10% !important;
-    height: 10% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    overflow: hidden !important;
-  }
+//   // Click on the element with class 'content-wrp'
+//   await page.click(".content-wrp");
 
-  .specific-container {
-    width: 50% !important;
-    height: 50% !important;
-  }
-`,
-  });
+//   await new Promise((resolve) => setTimeout(resolve, 3000));
 
-  await page.goto("https://crop-monitoring.eos.com/login");
 
-  // Fill in email input field
+//   await page.waitForSelector(".search-input", { visible: true });
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+//   const searchInput = await page.$(".search-input");
+//   await searchInput.type(`${lat} , ${long}`);
+//   //   await searchInput.press("Enter");
 
-  // Click on "Continue" button
+//   await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  // Wait for the button inside the second div to be present in the DOM
-  await page.waitForSelector(
-    '.button-wrap:nth-child(2) button[data-id="sign-in-button"]',
-    { visible: true }
-  );
+//   const buttons1 = await page.$$(".search-controls__button");
+//   await buttons1[1].click();
 
-  // Click the button inside the second div
-  await page.click(
-    '.button-wrap:nth-child(2) button[data-id="sign-in-button"]'
-  );
+//   await new Promise((resolve) => setTimeout(resolve, 8000));
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+//   const buttons = await page.$$(".mat-mdc-tooltip-trigger");
+//   await buttons[0].click();
 
-  // Fill in email input field
-  await page.waitForSelector(".mat-mdc-input-element", { visible: true });
-  await page.type(".mat-mdc-input-element", `${process.env.USEREMAIL}`);
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+//   await new Promise((resolve) => setTimeout(resolve, 4000));
 
-  await page.waitForSelector(".mat-mdc-input-element.password-input", {
-    visible: true,
-  });
+//   await page.waitForSelector(".column"); // Replace '.column' with the class selector of the element you want to remove
 
-  // Type the password into the input field
-  await page.type(
-    ".mat-mdc-input-element.password-input",
-    `${process.env.PASSWORD}`
-  );
+//   await new Promise((resolve) => setTimeout(resolve, 5000));
 
-  await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  await page.waitForSelector(".content-wrp");
+//   console.log("above page ecalute----------------");
 
-  // Click on the element with class 'content-wrp'
-  await page.click(".content-wrp");
 
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+//   await page.evaluate(() => {
 
+//     console.log("inside page ecalute----------------");
 
-  await page.waitForSelector(".search-input", { visible: true });
+//     const elementToRemove = document.querySelector(".column");
+//     if (elementToRemove) {
+//       elementToRemove.remove();
 
-  const searchInput = await page.$(".search-input");
-  await searchInput.type(`${lat} , ${long}`);
-  //   await searchInput.press("Enter");
+//       console.log("Removed element column");
+//     }
 
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+//     const elementToRemove1 = document.querySelector(".no-body-padding");
+//     if (elementToRemove1) {
+//       elementToRemove1.remove();
 
-  const buttons1 = await page.$$(".search-controls__button");
-  await buttons1[1].click();
+//       console.log("Removed element padding");
 
-  await new Promise((resolve) => setTimeout(resolve, 8000));
+//     }
 
-  const buttons = await page.$$(".mat-mdc-tooltip-trigger");
-  await buttons[0].click();
+//     const elementToRemove2 = document.querySelector(".scenes-container");
+//     if (elementToRemove2) {
+//       elementToRemove2.remove();
 
-  await new Promise((resolve) => setTimeout(resolve, 4000));
+//       console.log("Removed element scene-cont");
+//     }
 
-  await page.waitForSelector(".column"); // Replace '.column' with the class selector of the element you want to remove
+//     const elementToRemove3 = document.querySelector(".search-box");
+//     if (elementToRemove3) {
+//       elementToRemove3.remove();
 
-  await new Promise((resolve) => setTimeout(resolve, 5000));
+//       console.log("Removed element serach box");
+//     }
 
+//     const elementToRemove4 = document.querySelector(".cm-filter");
+//     if (elementToRemove4) {
+//       elementToRemove4.remove();
 
-  console.log("above page ecalute----------------");
+//       console.log("Removed element cm-fliter");
+//     }
 
+//     const elementToRemove5 = document.querySelector(
+//       ".controls-wrapper-ng-content"
+//     );
+//     if (elementToRemove5) {
+//       elementToRemove5.remove();
 
-  await page.evaluate(() => {
+//       console.log("Removed element ng-content");
+//     }
 
-    console.log("inside page ecalute----------------");
+//     const elementToRemove6 = document.querySelector(".zsiq_flt_rel");
+//     if (elementToRemove6) {
+//       elementToRemove6.remove();
 
-    const elementToRemove = document.querySelector(".column");
-    if (elementToRemove) {
-      elementToRemove.remove();
+//       console.log("Removed element zsiq-flq");
+//     }
 
-      console.log("Removed element column");
-    }
+//   });
 
-    const elementToRemove1 = document.querySelector(".no-body-padding");
-    if (elementToRemove1) {
-      elementToRemove1.remove();
 
-      console.log("Removed element padding");
+//   console.log("finiesged page ecalute----------------");
 
-    }
 
-    const elementToRemove2 = document.querySelector(".scenes-container");
-    if (elementToRemove2) {
-      elementToRemove2.remove();
+//   await new Promise((resolve) => setTimeout(resolve, 7000));
 
-      console.log("Removed element scene-cont");
-    }
+//   randomNumber = Math.floor(Math.random() * 1000); // You can adjust the range of random numbers as needed
 
-    const elementToRemove3 = document.querySelector(".search-box");
-    if (elementToRemove3) {
-      elementToRemove3.remove();
+//   // Take a screenshot with a random filename
+//   const screenshotPath = `./image/screenshot_000000.png`;
+//   await page.screenshot({ path: screenshotPath });
 
-      console.log("Removed element serach box");
-    }
+//   // const clip = { x: 0, y: 0, width: 1300, height: 550 };
 
-    const elementToRemove4 = document.querySelector(".cm-filter");
-    if (elementToRemove4) {
-      elementToRemove4.remove();
+//   // const clip1 = { x: 0, y: 0, width: 1400, height: 550 };
 
-      console.log("Removed element cm-fliter");
-    }
+//   // await page.screenshot({
+//   //   path: `./image/screenshot_clip00_${randomNumber}.png`,
+//   //   clip: clip,
+//   // });
 
-    const elementToRemove5 = document.querySelector(
-      ".controls-wrapper-ng-content"
-    );
-    if (elementToRemove5) {
-      elementToRemove5.remove();
+//   // await page.screenshot({
+//   //   path: `./image/screenshot_clip222_.png`,
+//   //   clip: clip1,
+//   // });
 
-      console.log("Removed element ng-content");
-    }
+//   console.log("screenshot taken");
 
-    const elementToRemove6 = document.querySelector(".zsiq_flt_rel");
-    if (elementToRemove6) {
-      elementToRemove6.remove();
+//   await new Promise((resolve) => setTimeout(resolve, 10000));
 
-      console.log("Removed element zsiq-flq");
-    }
+//   const inputPath = "./image/screenshot_000000.png"; // Path to the original screenshot
+//   const outputPath = "./image/cropped.png"; // Path to save the cropped image
+//   const cropPercentage = 0.34; // 20% of the width to be cropped
 
-  });
+//   sharp(inputPath)
+//     .metadata()
+//     .then((metadata) => {
+//       // Calculate the width of the cropped region
+//       const cropWidth = Math.floor(metadata.width * (1 - cropPercentage));
 
+//       // Crop the image from the right 20% of the width
+//       sharp(inputPath)
+//         .extract({ left: 0, top: 0, width: cropWidth, height: metadata.height })
+//         .toFile(outputPath, (err, info) => {
+//           if (err) {
+//             console.error("Error cropping image:", err);
+//           } else {
+//             console.log("insdie 1st");
 
-  console.log("finiesged page ecalute----------------");
+//             console.log("Image cropped and saved successfully.");
 
+//             // Example usage
+//             const inputPath1 = "./image/cropped.png"; // Path to the input image
+//             const outputPath1 = "./image/crop2.png"; // Path to save the cropped image
+//             const targetWidth1 = 640; // Width of the cropped image
+//             const targetHeight1 = 640; // Height of the cropped image
 
-  await new Promise((resolve) => setTimeout(resolve, 7000));
+//             cropImage(inputPath1, outputPath1, targetWidth1, targetHeight1);
+//           }
+//         });
+//     })
+//     .catch((err) => {
+//       console.error("Error reading image metadata:", err);
+//     });
 
-  randomNumber = Math.floor(Math.random() * 1000); // You can adjust the range of random numbers as needed
+//   await new Promise((resolve) => setTimeout(resolve, 90000));
+//   console.log(`Processing document with lat: ${lat}, long: ${long}`);
+// }
 
-  // Take a screenshot with a random filename
-  const screenshotPath = `./image/screenshot_000000.png`;
-  await page.screenshot({ path: screenshotPath });
 
-  // const clip = { x: 0, y: 0, width: 1300, height: 550 };
+// let URL_IMAGE;
+// let filename;
+// let fileitem;
+// let randomNumber;
 
-  // const clip1 = { x: 0, y: 0, width: 1400, height: 550 };
+// async function uploadImageToFirebase(filename, fileitem, id_p) {
+//   try {
+//     const storageRef = ref(storage, "images/" + filename);
 
-  // await page.screenshot({
-  //   path: `./image/screenshot_clip00_${randomNumber}.png`,
-  //   clip: clip,
-  // });
+//     // Set the content type as image/png
+//     const metadata = {
+//       contentType: "image/png",
+//     };
 
-  // await page.screenshot({
-  //   path: `./image/screenshot_clip222_.png`,
-  //   clip: clip1,
-  // });
+//     // Upload the file with metadata
+//     await uploadBytes(storageRef, fileitem, metadata);
 
-  console.log("screenshot taken");
+//     // Get the public download URL
+//     const publicURL = await getDownloadURL(storageRef);
 
-  await new Promise((resolve) => setTimeout(resolve, 10000));
+//     console.log("File uploaded successfully!");
+//     console.log("Public URL:", publicURL);
 
-  const inputPath = "./image/screenshot_000000.png"; // Path to the original screenshot
-  const outputPath = "./image/cropped.png"; // Path to save the cropped image
-  const cropPercentage = 0.34; // 20% of the width to be cropped
+//     URL_IMAGE = publicURL;
 
-  sharp(inputPath)
-    .metadata()
-    .then((metadata) => {
-      // Calculate the width of the cropped region
-      const cropWidth = Math.floor(metadata.width * (1 - cropPercentage));
+//     try {
+//       // Create a new Prayag document
+//       // const newPrayag = new Prayag({
+//       //   lat: 2101,
+//       //   long: 2101,
+//       //   image: publicURL, // Assuming image is a URL or file path, modify this according to your use case
+//       // });
 
-      // Crop the image from the right 20% of the width
-      sharp(inputPath)
-        .extract({ left: 0, top: 0, width: cropWidth, height: metadata.height })
-        .toFile(outputPath, (err, info) => {
-          if (err) {
-            console.error("Error cropping image:", err);
-          } else {
-            console.log("insdie 1st");
+//       // await newPrayag.save();
 
-            console.log("Image cropped and saved successfully.");
+//       await Prayag.updateOne({ _id: id_p }, { $set: { sat_img: false, image: publicURL } });
 
-            // Example usage
-            const inputPath1 = "./image/cropped.png"; // Path to the input image
-            const outputPath1 = "./image/crop2.png"; // Path to save the cropped image
-            const targetWidth1 = 640; // Width of the cropped image
-            const targetHeight1 = 640; // Height of the cropped image
+//       console.log("updated for id = " + id_p);
 
-            cropImage(inputPath1, outputPath1, targetWidth1, targetHeight1);
-          }
-        });
-    })
-    .catch((err) => {
-      console.error("Error reading image metadata:", err);
-    });
+//       // Respond with success message
+//       console.log("IMAGE DATA SAVED ON DB: MONGO");
+//     } catch (error) {
+//       // Handle errors and respond with an error message
+//       console.error(error);
+//       console.log("DB ERROR NOT SAVED");
+//     }
 
-  await new Promise((resolve) => setTimeout(resolve, 90000));
-  console.log(`Processing document with lat: ${lat}, long: ${long}`);
-}
+//     return publicURL;
+//   } catch (error) {
+//     console.error("Error uploading image:", error);
+//     throw error; // Re-throw the error to handle it in the calling function if needed
+//   }
+// }
 
+// //next flow
+// async function cropImage(inputPath1, outputPath1, targetWidth1, targetHeight1, id_pp) {
+//   console.log("insdie cropimfage");
 
-let URL_IMAGE;
-let filename;
-let fileitem;
-let randomNumber;
+//   try {
+//     // Read the input image metadata
+//     const metadata = await sharp(inputPath1).metadata();
 
-async function uploadImageToFirebase(filename, fileitem, id_p) {
-  try {
-    const storageRef = ref(storage, "images/" + filename);
+//     // Calculate crop dimensions
+//     const cropWidth = Math.min(targetWidth1, metadata.width);
+//     const cropHeight = Math.min(targetHeight1, metadata.height);
 
-    // Set the content type as image/png
-    const metadata = {
-      contentType: "image/png",
-    };
+//     // Calculate crop position
+//     const left = Math.floor((metadata.width - cropWidth) / 2);
+//     const top = Math.floor((metadata.height - cropHeight) / 2);
 
-    // Upload the file with metadata
-    await uploadBytes(storageRef, fileitem, metadata);
+//     // Crop and resize the image
+//     await sharp(inputPath1)
+//       .extract({ left, top, width: cropWidth, height: cropHeight })
+//       .resize(targetWidth1, targetHeight1)
+//       .toFile(outputPath1);
 
-    // Get the public download URL
-    const publicURL = await getDownloadURL(storageRef);
+//     console.log("Image cropped and saved successfully.");
 
-    console.log("File uploaded successfully!");
-    console.log("Public URL:", publicURL);
+//     // Example usage:
+//     filename = `screenshot_clip00_${randomNumber}_5oct.png`;
+//     fileitem = fs.readFileSync(`./image/crop2.png`);
 
-    URL_IMAGE = publicURL;
-
-    try {
-      // Create a new Prayag document
-      // const newPrayag = new Prayag({
-      //   lat: 2101,
-      //   long: 2101,
-      //   image: publicURL, // Assuming image is a URL or file path, modify this according to your use case
-      // });
-
-      // await newPrayag.save();
-
-      await Prayag.updateOne({ _id: id_p }, { $set: { sat_img: false, image: publicURL } });
-
-      console.log("updated for id = " + id_p);
-
-      // Respond with success message
-      console.log("IMAGE DATA SAVED ON DB: MONGO");
-    } catch (error) {
-      // Handle errors and respond with an error message
-      console.error(error);
-      console.log("DB ERROR NOT SAVED");
-    }
-
-    return publicURL;
-  } catch (error) {
-    console.error("Error uploading image:", error);
-    throw error; // Re-throw the error to handle it in the calling function if needed
-  }
-}
-
-//next flow
-async function cropImage(inputPath1, outputPath1, targetWidth1, targetHeight1, id_pp) {
-  console.log("insdie cropimfage");
-
-  try {
-    // Read the input image metadata
-    const metadata = await sharp(inputPath1).metadata();
-
-    // Calculate crop dimensions
-    const cropWidth = Math.min(targetWidth1, metadata.width);
-    const cropHeight = Math.min(targetHeight1, metadata.height);
-
-    // Calculate crop position
-    const left = Math.floor((metadata.width - cropWidth) / 2);
-    const top = Math.floor((metadata.height - cropHeight) / 2);
-
-    // Crop and resize the image
-    await sharp(inputPath1)
-      .extract({ left, top, width: cropWidth, height: cropHeight })
-      .resize(targetWidth1, targetHeight1)
-      .toFile(outputPath1);
-
-    console.log("Image cropped and saved successfully.");
-
-    // Example usage:
-    filename = `screenshot_clip00_${randomNumber}_5oct.png`;
-    fileitem = fs.readFileSync(`./image/crop2.png`);
-
-    uploadImageToFirebase(filename, fileitem, id_pp)
-      .then((publicURL) => {
-        console.log("Public URL:", publicURL);
-      })
-      .catch((error) => {
-        // Handle error if the upload fails
-        console.error("Error in uploadImageToFirebase:", error);
-      });
-  } catch (error) {
-    console.error("Error cropping image:", error);
-    throw error;
-  }
-}
+//     uploadImageToFirebase(filename, fileitem, id_pp)
+//       .then((publicURL) => {
+//         console.log("Public URL:", publicURL);
+//       })
+//       .catch((error) => {
+//         // Handle error if the upload fails
+//         console.error("Error in uploadImageToFirebase:", error);
+//       });
+//   } catch (error) {
+//     console.error("Error cropping image:", error);
+//     throw error;
+//   }
+// }
 
 
 app.listen(process.env.PORT, function (req, res) {
