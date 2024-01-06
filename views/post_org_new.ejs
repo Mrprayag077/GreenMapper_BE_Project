@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>New Planation Drive</title>
+</head>
+
+<body class="bg-gray-200 p-8">
+
+    <div class="max-w-md mx-auto bg-white p-8 rounded shadow">
+
+        <h1 class="text-2xl font-bold mb-6">Drive-ID: <span id="drive-id"></span></h1>
+
+        <!-- Form -->
+
+        <form id="driveForm" action="/api/post-new" method="post">
+            <div class="mb-6">
+                <h2 class="text-lg font-bold mb-2">Information</h2>
+                <!-- Example fields -->
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block mb-2" for="firstName">Drive Name:</label>
+                        <input type="text" id="driveName" name="driveName" class="w-full p-2 border rounded">
+                    </div>
+                    <div>
+                        <label class="block mb-2" for="lastName">Location:</label>
+                        <input type="text" id="location" name="location" class="w-full p-2 border rounded">
+                    </div>
+                </div>
+
+                <!-- More fields go here... -->
+
+            </div>
+
+            <!-- Contact Information Section -->
+            <div class="mb-6">
+                <h2 class="text-lg font-bold mb-2">Contact Information</h2>
+                <!-- Example fields -->
+                <label class="block mb-2" for="email">Phone:</label>
+                <input type="phone" id="phone" name="phone" class="w-full p-2 border rounded">
+
+                <!-- More fields go here... -->
+
+            </div>
+
+            <!-- Resume Upload -->
+            <div class="mb-6">
+                <label class="block mb-2" for="resume">Upload Poster:</label>
+                <input type="file" id="resume" name="resume" class="p-2 border rounded">
+            </div>
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" id="submit-btn" class="bg-blue-500 text-white py-2 px-4 rounded"
+                    style="font-weight: 600;">Take
+                    Drive Live ✅</button>
+            </div>
+
+            <style>
+                #submit-btn:hover {
+                    background-color: #0342a8;
+                }
+            </style>
+
+
+        </form>
+
+
+        <!-- <script>
+            document.getElementById('driveForm').addEventListener('submit', async function (event) {
+                // Prevent the form from submitting immediately
+                event.preventDefault();
+
+                // Show an alert
+                console.log('Saving drive...');
+
+                try {
+                    console.log('isnide try');
+                    // Use fetch or another method to make an asynchronous request to save data
+                    const response = await fetch('/api/post-new', {
+                        method: 'POST',
+                        body: new FormData(this), // Assumes the form contains file inputs
+                    });
+                    
+
+                    if (response.ok) {
+                        // If the response is successful, show success alert
+                        alert('Drive saved successfully!');
+
+                        // Automatically redirect after 3 seconds
+                        setTimeout(function () {
+                            window.location.href = "/api/";
+                        }, 3000);
+                    } else {
+                        // If the response is not successful, show an error alert
+                        alert('Error: Unable to save drive. Please try again.');
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alert('Error: Something went wrong. Please try again.');
+                }
+            });
+
+
+        </script> -->
+
+    </div>
+
+</body>
+
+</html>

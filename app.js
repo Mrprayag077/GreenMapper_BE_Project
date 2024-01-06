@@ -24,24 +24,13 @@ const app = express();
 
 const userRoutes = require("./routes/router");
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 const Prayag = require("./models/model");
 // Require and run server.js
 require("./server");
-
-
-// app.use(express.static(__dirname + "/assests", {
-//   setHeaders: (res, path) => {
-//     if (path.endsWith(".css")) {
-//       res.setHeader("Content-Type", "text/css");
-//     } else if (path.endsWith(".js")) {
-//       res.setHeader("Content-Type", "application/javascript");
-//     }
-//   }
-// }));
-
-
 
 app.use(express.static(__dirname + '/assests'));
 
@@ -61,6 +50,8 @@ app.use(express.static(__dirname + "/views"));
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
+
+
 
 app.use("/api/", userRoutes);
 
