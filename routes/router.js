@@ -31,6 +31,8 @@ router.post("/posts-update", controller.post_org_update_post);
 
 router.get("/success", controller.success_get);
 
+router.get("/dashboard", controller.dashboard_get);
+
 
 
 //UNKOWNED :( SECTION------------------------------------------------

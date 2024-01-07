@@ -48,7 +48,17 @@ const prayagSchema = new mongoose.Schema(
 
     Poster_Link: {
       type: String,
-    }
+    },
+    pp: { type: [Number] },
+    label_1: { type: [String] },
+    label_2: { type: [String] },
+    label_3: { type: [String] },
+    label_4: { type: [String] },
+
+    data_1: { type: [Number] },
+    data_2: { type: [Number] },
+    data_3: { type: [Number] },
+    data_4: { type: [Number] },
 
   },
   { collection: "prayagsp" }

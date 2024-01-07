@@ -179,6 +179,22 @@ module.exports = {
     res.render("success");
   },
 
+  dashboard_get: async (req, res) => {
+
+    const result = await Prayag.find({ Docx_type: "charts" });
+
+    const label1 = result[0].label_1;
+    const label2 = result[0].label_2;
+    const label3 = result[0].label_3;
+    const label4 = result[0].label_4;
+
+    const data1 = result[0].data_1;
+    const data2 = result[0].data_2;
+    const data3 = result[0].data_3;
+    const data4 = result[0].data_4;
+
+    res.render("dashboard", { label1, label2, label3, label4, data1, data2, data3, data4 });
+  },
 
   inputdata_form_get: async (req, res) => {
     res.send("<center><b>hello prayag :)</b></center>"); // Assuming your form view is named "form.ejs"
