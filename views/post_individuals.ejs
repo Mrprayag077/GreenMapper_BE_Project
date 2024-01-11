@@ -281,16 +281,16 @@
                 </style>
 
                 <div class="tooltip-container">
-                    <label for="email" style="font-size: 15px;">Location</label>
+                    <label for="email" id="loc_symbol" style="font-size: 15px;">Location 🌍</label>
                     <input id="location_input" type="text" placeholder="Enter Email" name="email"
-                        value="Embrace nature's melody! we call nature enthusiasts to join hands in preserving the serene beauty"
+                        value="<%= post_details.Location %>"
                         required readonly />
                     <span id="location_span" class="tooltip"> </span>
                 </div>
 
 
                 <div class="tooltip-container">
-                    <label for="email" style="font-size: 15px;">Description</label>
+                    <label for="email" style="font-size: 15px;">Description 📖</label>
                     <input id="Description_input" type="text" placeholder="Enter Email" name="email"
                         value="Embrace nature's melody! ddddddddwe call nature enthusiasts to join hands in preserving the serene beauty"
                         required readonly />
@@ -299,7 +299,7 @@
 
 
                 <div class="tooltip-container">
-                    <label for="email" style="font-size: 15px;">Contact</label>
+                    <label for="email" style="font-size: 15px;">Contact 📱</label>
                     <input id="Contact_input" type="text" placeholder="Enter Email" name="email"
                         value="Embrace nature's melody! we call nature enthusiasts to join hands in preserving the serene beauty"
                         required readonly />
@@ -308,15 +308,15 @@
 
                 <script>
                     var location_data = document.getElementById("location_input").value;
-                    document.getElementById("location_span").innerHTML = location_data;
+                                                        document.getElementById("location_span").innerHTML = "<b>Location 🌍: </b>" + location_data;
 
 
                     var Description_data = document.getElementById("Description_input").value;
-                    document.getElementById("Description_span").innerHTML = Description_data;
+                                                document.getElementById("Description_span").innerHTML = "<b>Description 📖: </b>" + Description_data;
 
 
                     var Contact_data = document.getElementById("Contact_input").value;
-                    document.getElementById("Contact_span").innerHTML = Contact_data;
+                                document.getElementById("Contact_span").innerHTML = "<b>Contact 📱: </b>" + Contact_data;
                 </script>
 
 
@@ -326,7 +326,13 @@
 
                 <!-- <input type="password" placeholder="Enter Password" name="password" required /> -->
 
-                <button type="submit" class="login-btn">Post</button>
+<button type="submit" class="login-btn" onclick="hands()">Join Hands</button>
+
+<script>
+    function hands() {
+
+    }
+</script>
                 <!-- <div class="links">
                     <a href="#">Forgot password?</a>
                     <a href="#">Do not have an account?</a>

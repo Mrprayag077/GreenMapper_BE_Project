@@ -15,14 +15,14 @@ router.get("/", controller.home_p);
 router.get("/map", controller.map_p); //localhost:800/p/
 
 
-
 //NEW POST SECTION------------------------------------------------
 router.get("/post-new", controller.post_org_new_get);
 router.post("/post-new", controller.post_org_new_post);
 
 
 //NORMAL POSTS -------------------------------------------------------
-router.get("/posts", controller.post_individuals);
+router.get("/posts", controller.post_individuals_get);
+router.post("/posts", controller.post_individuals_post);
 
 
 //UPDATE POSTS -------------------------------------------------------

@@ -28,9 +28,75 @@ module.exports = {
 
 
   //NORMAL POST
-  post_individuals: async (req, res) => {
-    res.render("post_individuals");
+  post_individuals_get: async (req, res) => {
+    // res.render("post_individuals");
+
+    try {
+
+      const post_id = req.query.post_id;
+
+      console.log("post_id: " + post_id);
+
+      // Check if post_id is provided
+      if (!post_id) {
+        return res.status(400).send('Bad Request: Missing post_id in the query parameters.');
+      }
+
+      // Retrieve the document from the database based on post_id
+      const post_details = await Prayag.findOne({ Post_id: post_id });
+
+      // Check if the document is found
+      if (!post_details) {
+        return res.status(404).send('Not Found: No document found for the provided post_id.');
+      }
+
+
+      console.log(post_details);
+
+      res.render("post_individuals", { post_details });
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+    }
   },
+
+
+  post_individuals_post: async (req, res) => {
+    // res.render("post_individuals");
+
+    try {
+
+      const post_id = req.query.post_id;
+
+      console.log("post_id: " + post_id);
+
+      // Check if post_id is provided
+      if (!post_id) {
+        return res.status(400).send('Bad Request: Missing post_id in the query parameters.');
+      }
+
+      // Retrieve the document from the database based on post_id
+      const post_details = await Prayag.findOne({ Post_id: post_id });
+
+      // Check if the document is found
+      if (!post_details) {
+        return res.status(404).send('Not Found: No document found for the provided post_id.');
+      }
+
+
+      console.log(post_details);
+
+      res.redirect('/success');
+
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+    }
+  },
+
+
+
 
   //NEW POST 
   post_org_new_get: async (req, res) => {
@@ -38,33 +104,19 @@ module.exports = {
   },
 
   post_org_new_post: async (req, res) => {
-
     try {
-
       console.log("post_org_new_post");
 
-      const MAX_RETRY_ATTEMPTS = 10;  // Adjust this value based on your requirements
-      const RETRY_DELAY_MS = 200;  // Adjust this value based on your requirements
+      const MAX_RETRY_ATTEMPTS = 10;
+      const RETRY_DELAY_MS = 200;
 
-      // Generate a unique 6-digit drive ID
       const driveId = generateUniqueDriveId();
       console.log(driveId);
 
-      // for (let attempt = 1; attempt <= MAX_RETRY_ATTEMPTS; attempt++) {
-      //   const existingDrive = await Prayag.findOne({ Post_id: driveId });
-      //   if (existingDrive) {
-      //     console.log("caught");
-      //     // No collision, proceed with saving the new drive
-      //     break;
-      //   }
-      //   // If there's a collision, wait for a short delay before the next attempt
-      //   await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
-      // }
-
-      // Create a new Drive document in MongoDB
+      // Create a new Drive document in MongoDB without label_1 and data_1
       const newDrive = new Prayag({
         Docx_type: 'post',
-        Ngo_id: 1234232, // Make sure to include NGO ID in the form
+        Ngo_id: 1234232,
         Post_id: driveId,
         Drive_Name: req.body.driveName,
         Location: req.body.location,
@@ -72,29 +124,79 @@ module.exports = {
         Poster_Link: "djjdnjnjdnj",
       });
 
-
       console.log(newDrive);
 
       await newDrive.save();
 
-      // Send the generated drive ID to the client
       console.log(driveId);
 
-      // res.render("post_org_new");
-
-
-
-      // await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
-
       res.redirect("/api/");
-      // res.status(200).json({ status: 'success', message: 'Drive saved successfully!' });
-
-
     } catch (error) {
       console.error(error);
       res.status(500).send('Server Error');
     }
   },
+
+
+
+  // post_org_new_post: async (req, res) => {
+
+  //   try {
+
+  //     console.log("post_org_new_post");
+
+  //     const MAX_RETRY_ATTEMPTS = 10;  // Adjust this value based on your requirements
+  //     const RETRY_DELAY_MS = 200;  // Adjust this value based on your requirements
+
+  //     // Generate a unique 6-digit drive ID
+  //     const driveId = generateUniqueDriveId();
+  //     console.log(driveId);
+
+  //     // for (let attempt = 1; attempt <= MAX_RETRY_ATTEMPTS; attempt++) {
+  //     //   const existingDrive = await Prayag.findOne({ Post_id: driveId });
+  //     //   if (existingDrive) {
+  //     //     console.log("caught");
+  //     //     // No collision, proceed with saving the new drive
+  //     //     break;
+  //     //   }
+  //     //   // If there's a collision, wait for a short delay before the next attempt
+  //     //   await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
+  //     // }
+
+  //     // Create a new Drive document in MongoDB
+  //     const newDrive = new Prayag({
+  //       Docx_type: 'post',
+  //       Ngo_id: 1234232, // Make sure to include NGO ID in the form
+  //       Post_id: driveId,
+  //       Drive_Name: req.body.driveName,
+  //       Location: req.body.location,
+  //       Phone: req.body.phone,
+  //       Poster_Link: "djjdnjnjdnj",
+  //     });
+
+
+  //     console.log(newDrive);
+
+  //     await newDrive.save();
+
+  //     // Send the generated drive ID to the client
+  //     console.log(driveId);
+
+  //     // res.render("post_org_new");
+
+
+
+  //     // await new Promise(resolve => setTimeout(resolve, RETRY_DELAY_MS));
+
+  //     res.redirect("/api/");
+  //     // res.status(200).json({ status: 'success', message: 'Drive saved successfully!' });
+
+
+  //   } catch (error) {
+  //     console.error(error);
+  //     res.status(500).send('Server Error');
+  //   }
+  // },
 
 
   //UPDATE POST
@@ -135,6 +237,7 @@ module.exports = {
 
       const ngo_id = req.query.ngo_id;
       const post_id = req.query.post_id;
+      const hands = req.query.hands;
 
       const drive_name = req.body.drive_name;
       const location = req.body.location;
@@ -157,6 +260,7 @@ module.exports = {
       existingDrive.Location = location;
       existingDrive.Phone = phone;
       existingDrive.Poster_Link = poster_link;
+      existingDrive.Hands = hands;
 
 
       // Save the updated document
