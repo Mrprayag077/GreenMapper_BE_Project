@@ -121,7 +121,7 @@ module.exports = {
         Drive_Name: req.body.driveName,
         Location: req.body.location,
         Phone: req.body.phone,
-        Poster_Link: "djjdnjnjdnj",
+        Poster_Link: req.body.imageURL,
       });
 
       console.log(newDrive);
@@ -285,7 +285,18 @@ module.exports = {
 
   dashboard_get: async (req, res) => {
 
-    const result = await Prayag.find({ Docx_type: "charts" });
+    const result = await Prayag.find({ Docx_type: "charts" }).select({
+      label_1: 1,
+      label_2: 1,
+      label_3: 1,
+      label_4: 1,
+      data_1: 1,
+      data_2: 1,
+      data_3: 1,
+      data_4: 1,
+    });
+
+    console.log(result);
 
     const label1 = result[0].label_1;
     const label2 = result[0].label_2;
