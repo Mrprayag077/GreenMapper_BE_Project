@@ -6,9 +6,218 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <title>Online Job Application Form</title>
+
+        <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
 </head>
 
 <body class="bg-gray-200 p-8">
+
+
+       
+    <div class="toast">
+      <div class="toast-content">
+        <i class="fas fa-solid fa-check check"></i>
+
+        <div class="message">
+          <span class="text text-1">Success</span>
+          <span class="text text-2" id="text2"
+            >Image Uploaded successfully!</span
+          >
+        </div>
+      </div>
+      <i class="fa-solid fa-xmark close"></i>
+
+      <div class="progress"></div>
+    </div>
+
+    <!-- <button>Show Toast</button> -->
+    <style>
+      .toast {
+        position: absolute;
+        top: 25px;
+        right: 30px;
+        border-radius: 12px;
+        background: #fff;
+        padding: 20px 35px 20px 25px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        border-left: 6px solid #4070f4;
+        overflow: hidden;
+        transform: translateX(calc(100% + 30px));
+        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+      }
+
+      .toast.active {
+        transform: translateX(0%);
+      }
+
+      .toast .toast-content {
+        display: flex;
+        align-items: center;
+      }
+
+      .toast-content .check {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 35px;
+        width: 35px;
+        background-color: #27bd72;
+        color: #fff;
+        font-size: 20px;
+        border-radius: 50%;
+      }
+
+      .toast-content .message {
+        display: flex;
+        flex-direction: column;
+        margin: 0 20px;
+      }
+
+      .message .text {
+        font-size: 20px;
+        font-weight: 400;
+        color: #666666;
+      }
+
+      .message .text.text-1 {
+        font-weight: 600;
+        color: #333;
+      }
+
+      .toast .close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        padding: 5px;
+        cursor: pointer;
+        opacity: 0.7;
+      }
+
+      .toast .close:hover {
+        opacity: 1;
+      }
+
+      .toast .progress {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 3px;
+        width: 100%;
+        background: #ddd;
+      }
+
+      .toast .progress:before {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        height: 100%;
+        width: 100%;
+        background-color: #4070f4;
+      }
+
+      .progress.active:before {
+        animation: progress 5s linear forwards;
+      }
+
+      @keyframes progress {
+        100% {
+          right: 100%;
+        }
+      }
+
+      button {
+        padding: 12px 20px;
+        font-size: 20px;
+        outline: none;
+        border: none;
+        background-color: #4070f4;
+        color: #fff;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+
+      button:hover {
+        background-color: #0e4bf1;
+      }
+
+      .toast.active ~ button {
+        pointer-events: none;
+      }
+
+      .max-w-md {
+        margin-top: 50px;
+      }
+    </style>
+
+    <script>
+      const button = document.querySelector("button"),
+        toast = document.querySelector(".toast");
+      toast.style.display = "none";
+
+      (closeIcon = document.querySelector(".close")),
+        (progress = document.querySelector(".progress"));
+
+      let timer1, timer2;
+
+    //   button.addEventListener("click", () => {
+    //     toast.style.display = "block";
+
+    //     toast.classList.add("active");
+    //     progress.classList.add("active");
+
+    //     timer1 = setTimeout(() => {
+    //       toast.classList.remove("active");
+    //       toast.style.display = "none";
+    //     }, 5000); //1s = 1000 milliseconds
+
+    //     timer2 = setTimeout(() => {
+    //       progress.classList.remove("active");
+    //       toast.style.display = "none";
+    //     }, 5300);
+    //   });
+
+      function toast1(valuee) {
+        toast.style.display = "block";
+
+        document.getElementById("text2").innerHTML = valuee;
+        toast.classList.add("active");
+        progress.classList.add("active");
+
+        timer1 = setTimeout(() => {
+          toast.classList.remove("active");
+          toast.style.display = "none";
+        }, 5000); //1s = 1000 milliseconds
+
+        timer2 = setTimeout(() => {
+          progress.classList.remove("active");
+          toast.style.display = "none";
+        }, 5300);
+      }
+
+      closeIcon.addEventListener("click", () => {
+        toast.classList.remove("active");
+        toast.style.display = "none";
+
+        setTimeout(() => {
+          progress.classList.remove("active");
+        }, 300);
+
+        clearTimeout(timer1);
+        clearTimeout(timer2);
+      });
+    </script>
+
+
 
     <div class="max-w-md mx-auto bg-white p-8 rounded shadow">
 
@@ -54,34 +263,139 @@
 
             </div>
 
+ <div class="mb-6">
+
+             <label class="block mb-2" for="email">Description:</label>
+             <input
+             type="text"
+             id="Description"
+             name="Description"
+             value="<%= postDocument.Description %>"
+             class="w-full p-2 border rounded"
+             required
+             />
+            </div>  
+
             <!-- Resume Upload -->
             <div class="mb-6">
                 <label class="block mb-2" for="resume">Upload Poster:</label>
                 <input type="file" id="resume" name="resume" class="p-2 border rounded">
             </div>
 
-            <input type="file" id="poster_link" name="poster_link" class="p-2 border rounded"
-                style="visibility: hidden;" value="<%= postDocument.Poster_Link %>">
+            <!-- <input type="file" id="poster_link" name="poster_link" class="p-2 border rounded"
+                style="visibility: hidden;" value=""> -->
 
 
 
             <!-- Submit Button -->
             <div>
-                <button type="submit" id="submit-btn" class="bg-blue-500 text-white py-2 px-4 rounded"
+                <button type="submit" id="submit-btn" onclick="check()" class="bg-blue-500 text-white py-2 px-4 rounded"
                     style="font-weight: 600;">Take
                     Drive Live ✅</button>
             </div>
+            <input type="hidden" id="imageURL" name="imageURL" value="<%= postDocument.Poster_Link %>" />
 
             <style>
                 #submit-btn:hover {
                     background-color: #0342a8;
                 }
             </style>
-            <!-- <p class="my-4">If you prefer to contact us by email. <a class="text-blue-500 hover:underline"
+
+            
+                <!-- <p class="my-4">If you prefer to contact us by email. <a class="text-blue-500 hover:underline"
                     href="https://veilmail.io/e/FkKh7o">https://veilmail.io/e/FkKh7o</a></p>
             <p class="mt-4">Powered by <a href="https://fabform.io" target="_blank"
                     class="text-blue-500 hover:underline">fabform.io</a></p> -->
         </form>
+
+
+        
+      <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-storage.js"></script>
+
+      <script>
+        // Firebase configuration and initialization code...
+        const firebaseConfig = {
+          apiKey: "AIzaSyDa7kvj9JGl9vO4CzwCtIvXf_sjyCgk41Q",
+          authDomain: "greenmapper-da4bf.firebaseapp.com",
+          projectId: "greenmapper-da4bf",
+          storageBucket: "greenmapper-da4bf.appspot.com",
+          messagingSenderId: "729535270764",
+          appId: "1:729535270764:web:cc9987a3d1b9e84be8ad49",
+          measurementId: "G-9ZHQP5SXLL",
+        };
+
+        firebase.initializeApp(firebaseConfig);
+
+        let image_upload = "<%= postDocument.Poster_Link %>";
+        let imgupload = 0;
+        const inputFile = document.getElementById("resume");
+        const submitButton = document.getElementById("submit-btn");
+        // submitButton.disabled = true;
+
+        const drivename1 = document.getElementById("driveName");
+        const phone1 = document.getElementById("phone");
+        const location1 = document.getElementById("location");
+
+        function check() {
+          if (
+            drivename1.innerHTML == "" &&
+            phone1.innerHTML == "" &&
+            location1.innerHTML == ""
+          ) {
+            toast1("Please Fill out the Fieds!!");
+          } else if (imgupload === 0) {
+            toast1("Please Upload Image");
+          }
+        }
+
+        inputFile.addEventListener("change", function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            uploadimage(file);
+          }
+        });
+
+        function uploadimage(file) {
+          let storageRef = firebase.storage().ref("images/" + file.name);
+          let uploadTask = storageRef.put(file);
+
+          uploadTask.on(
+            "state_changed",
+            (snapshot) => {
+              // Handle state changes (progress, etc.)
+              console.log("Upload is " + snapshot.state);
+              console.log(
+                "Progress: " +
+                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100 +
+                  "%"
+              );
+            },
+            (error) => {
+              // Handle errors
+              console.error("Error:", error);
+              // Reset the form and enable the submit button
+              uploadForm.reset();
+              submitButton.disabled = false;
+            },
+            () => {
+              // Handle successful upload
+              uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+                console.log("File available at", url);
+                image_upload = url;
+                submitButton.disabled = false;
+                imgupload = 1;
+                document.getElementById("imageURL").value = image_upload;
+
+                toast1("File uploaded successfully!");
+
+                // Submit the form
+                // document.getElementById("driveForm").submit();
+              });
+            }
+          );
+        }
+      </script>
 
     </div>
 

@@ -16,6 +16,7 @@
   </head>
 
   <body class="bg-gray-200 p-8">
+   
     <div class="toast">
       <div class="toast-content">
         <i class="fas fa-solid fa-check check"></i>
@@ -264,6 +265,22 @@
           <!-- More fields go here... -->
         </div>
 
+       
+         <div class="mb-6">
+
+             <label class="block mb-2" for="email">Description:</label>
+             <input
+             type="text"
+             id="Description"
+             name="Description"
+             class="w-full p-2 border rounded"
+             required
+             />
+            </div>  
+
+          <!-- More fields go here... -->
+        
+
         <!-- Resume Upload -->
         <div class="mb-6">
           <label class="block mb-2" for="resume">Upload Poster:</label>
@@ -293,7 +310,7 @@
           </button>
         </div>
 
-        <input type="hidden" id="imageURL" name="imageURL" value="ppppp" />
+        <input type="hidden" id="imageURL" name="imageURL" value="" />
         <style>
           #submit-btn:hover {
             background-color: #0342a8;

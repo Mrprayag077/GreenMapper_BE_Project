@@ -42,6 +42,11 @@ const prayagSchema = new mongoose.Schema(
       type: String,
     },
 
+
+    Description: {
+      type: String,
+    },
+
     Location: {
       type: String,
     },

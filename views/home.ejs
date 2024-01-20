@@ -533,7 +533,8 @@
                         padding: 12px;
                         flex: 0 0 30%;
                         /* margin-top: -390px; */
-                        margin-top: -890px;
+                        /* margin-top: -890px; */
+                        margin-top: -390px;
                     }
 
                     .graph {
@@ -1118,12 +1119,100 @@
 
 
 
-                                    <div class="browse" id="dynamic-cards-container"></div>
+                                    <!-- Assuming cardDataArray is an array of objects from MongoDB -->
 
+                                    <div id="dynamic-cards-container" class="browse">
+                                        <% cardDataArray.forEach((cardData)=> { %>
+                                            <div class="nft">
+                                                <img src="<%= cardData.Poster_Link %>" alt="" />
+                                                <div class="title">
+                                                    <%= cardData.Drive_Name %>
+                                                </div>
+                                                <p>
+                                                    <!-- <%= cardData.Description %> -->
+                                                     <%= cardData.Description %>
+                                                </p>
+                                                <div class="details flex flex-sb">
+                                                    <div class="author flex">
+                                                        <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                                            alt="" />
+                                                        <div class="section-tred1">EcoRevolution India</div>
+                                                    </div>
+                                                    <div class="price">
+                                                        <%= cardData.Hands %>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <% }); %>
+                                    </div>
 
                                     <script>
+                                       
+                                         function truncateWords(str, num) {
+        const words = str.split(' ');
+        if (words.length > num) {
+            return words.slice(0, num).join(' ') + '...';
+        }
+        return str;
+    }
+                                    </script>
+
+                                    <!-- <div class="browse" id="dynamic-cards-container"> -->
+
+
+
+                                    <!-- 
+                                        cardDataArray.forEach((cardData) => {
+                                            // Create a new card element
+                                            const cardElement = document.createElement("div");
+                                            cardElement.classList.add("nft");
+
+                                            // Set the inner HTML for the card using the data
+                                            cardElement.innerHTML = `
+                                        <img class="nft-image" src="${cardData.imageSrc}" alt="" />
+                                        <div class="title">${cardData.title}</div>
+                                        <p>${truncateWords(cardData.description, 15)}</p>
+                                        <div class="details flex flex-sb">
+                                            <div class="author flex">
+                                                <img src="${cardData.userSrc}" alt="" />
+                                                <div class="section-tred1">${cardData.sectionTred1}</div>
+                                            </div>
+                                            <div class="price">${cardData.price}</div>
+                                        </div> -->
+
+                                    <!-- <% cardDataArray.forEach((card)=> { %>
+                                            <div class="nft">
+                                                <img class="nft-image" src="<%= card.Poster_Link %>" alt="">
+                                                <div class="title">
+                                                    <%= card.Drive_Name %>
+                                                </div>
+                                                <p>
+                                                    <%= card.description %>
+                                                </p>
+                                                
+                                                <div class="author flex">
+                                                    <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                                        alt="" />
+                                                    <div class="section-tred1">Harmany in Hills</div>
+                                                </div>
+                                                <div class="price">
+                                                    <%= card.Hands %>
+                                                </div>
+                                            </div>
+
+                                            <% }); %> -->
+
+
+
+                                    <!-- </div> -->
+
+
+                                    <!-- <script>
                                         // Sample data array with card information
+
                                         const cardDataArray = [
+
+
                                             {
                                                 imageSrc: "../assests/images/poster-8.jpg",
                                                 title: "Harmony in the Hills",
@@ -1157,7 +1246,7 @@
                                                 sectionTred1: "FutureGreens Foundation",
                                                 price: "500+ Hands"
                                             }
-                                            // Add more card data as needed
+                                        //     // Add more card data as needed
                                         ];
 
                                         // Get the container where dynamic cards will be added
@@ -1183,6 +1272,9 @@
                                         </div>
                                       `;
 
+
+
+
                                             // Append the generated card to the container
                                             dynamicCardsContainer.appendChild(cardElement);
 
@@ -1201,7 +1293,8 @@
 
 
 
-                                    </script>
+                                    </script> -->
+
 
 
 
