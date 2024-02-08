@@ -13,20 +13,20 @@ Tip 1: You can change the color of the sidebar using: data-color="blue | green |
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li>
-                <a href="../examples/dashboard.html">
-                    <i class="now-ui-icons design_app"></i>
+            <li class="<%= currentPage === 'dashboard' ? 'active' : '' %>">
+                <a href="/api/dashboard">
+                    <i class="now-ui-icons business_chart-pie-36"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
-            <li>
-                <a href="../examples/icons.html">
-                    <i class="now-ui-icons education_atom"></i>
-                    <p>Icons</p>
+            <li class="<%= currentPage === 'home' ? 'active' : '' %>">
+                <a href="/api/">
+                    <i class="now-ui-icons location_world"></i>
+                    <p>Drives</p>
                 </a>
             </li>
-            <li class="active">
-                <a href="../examples/map.html">
+            <li class="<%= currentPage === 'map' ? 'active' : '' %>">
+                <a href="/api/map">
                     <i class="now-ui-icons location_map-big"></i>
                     <p>Maps</p>
                 </a>

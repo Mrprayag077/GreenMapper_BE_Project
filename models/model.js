@@ -21,6 +21,9 @@ const prayagSchema = new mongoose.Schema(
       type: Boolean,
       // required: [true, "Plz upload image"],
     },
+    tree_count: {
+      type: Number,
+    },
 
     Ngo_id: {
       type: Number,
@@ -42,6 +45,9 @@ const prayagSchema = new mongoose.Schema(
       type: String,
     },
 
+    region_name: {
+      type: String,
+    },
 
     Description: {
       type: String,

@@ -997,7 +997,12 @@
                                                 "Explore Drives <br/> Grow a Greener Future",
                                                 "Uncover Drives <br/> Nurture Our Earth",
                                                 "Discover <br/> Plant, Transform: Your Drive Matters",
-                                                "Drives for a Green Legacy <br/> Plant Today!"
+                                                "Drives  for a Green Legacy <br/> Plant Today!",
+                                                "Gas Up? Plant Up!: <br/> Fuel Your Fun, Grow the Green One",
+                                                "Connect the Journey: <br/> Every Mile, a Seed for the Earth",
+                                                "Growing a Greener World: <br/> Discover Nature, Plant with Every Turn",
+                                                "Unwind Your Mind <br/> Plant for What You Leave Behind",
+                                                "Feel the Thrill <br/> Plant for the Still.",
                                             ];
 
                                             // Function to set a random slogan
@@ -1055,7 +1060,8 @@
                                     <style>
                                         /* Style to fit the image properly */
                                         #img4 {
-                                            max-width: 300px;
+                                            max-width: 370px;
+                                            /* 300px */
                                             height: auto;
                                             display: block;
                                             /* Remove any default inline styles on the image */
@@ -1071,7 +1077,39 @@
                                         }
                                     </style>
 
-                                    <img src="../img4.png" alt="sleeping-g-cannva-pra" id="img4">
+                                    <img src="" alt="sleeping-g-cannva-pra" id="img4">
+                                    
+                                    
+                                    <script>
+                                        // Array of images with full paths (remove "../" if they're already absolute)
+                                        const images = [
+                                            "/assests/images/PP/1.png",
+                                            "/assests/images/PP/2.png",
+                                            "/assests/images/PP/4.png",
+                                            "/assests/images/PP/5.png",
+                                            "/assests/images/PP/6.png",
+                                            "/assests/images/PP/7.png",
+                                            "/assests/images/PP/8.png",
+                                            "/assests/images/PP/10.png",
+                                        ];
+
+                                        // Generate a random index
+                                        const randomIndex = Math.floor(Math.random() * images.length);
+
+                                        // Get the randomly chosen image path
+                                        const randomImage = images[randomIndex];
+
+                                        // Set the randomly chosen image for the "img4" tag
+                                        document.getElementById("img4").src = randomImage;
+
+                                        // Log the selected image for debugging (optional)
+                                        console.log(`Random image selected: ${randomImage}`);
+                                    </script>
+                                    
+                                    <!-- <img src="../img4.png" alt="sleeping-g-cannva-pra" id="img4"> -->
+                                    <!-- <img src="../assests/images/33.png" alt="sleeping-g-cannva-pra" id="img4"> 170px-->
+                                    <!-- <img src="../assests/images/3333.png" alt="sleeping-g-cannva-pra" id="img4"> 170px-->
+                                    <!-- <img src=`${randomImage}` alt="sleeping-g-cannva-pra" id="img4"> -->
                                 </div>
 
                                 <div class="nfts">
@@ -1130,7 +1168,7 @@
                                                 </div>
                                                 <p>
                                                     <!-- <%= cardData.Description %> -->
-                                                     <%= cardData.Description %>
+                                                    <%= cardData.Description %>
                                                 </p>
                                                 <div class="details flex flex-sb">
                                                     <div class="author flex">
@@ -1140,7 +1178,7 @@
                                                     </div>
                                                     <div class="price">
                                                         <!-- <%= cardData.Hands %> -->
-                                                        <%= cardData.Hands %>
+                                                        <%= cardData.Hands %> +
                                                     </div>
                                                 </div>
                                             </div>
@@ -1148,8 +1186,8 @@
                                     </div>
 
                                     <script>
-                                       
-                                         function truncateWords(str, num) {
+
+    function truncateWords(str, num) {
         const words = str.split(' ');
         if (words.length > num) {
             return words.slice(0, num).join(' ') + '...';

@@ -24,7 +24,7 @@ module.exports = {
       const cardDataArray = await Prayag.find({ Docx_type: "post" }); // Retrieve all documents from the 'cards' collection
 
       console.log(cardDataArray);
-      res.render('home', { cardDataArray }); // Render EJS template with the data
+      res.render('home', { cardDataArray, currentPage: 'home' }); // Render EJS template with the data
     } catch (error) {
       console.error(error);
       res.status(500).send('Server Error');
@@ -33,7 +33,7 @@ module.exports = {
   },
 
   map_p: async (req, res) => {
-    res.render("map");
+    res.render("map", { currentPage: 'map' });
   },
 
 
@@ -295,7 +295,7 @@ module.exports = {
     const data3 = result[0].data_3;
     const data4 = result[0].data_4;
 
-    res.render("dashboard", { label1, label2, label3, label4, data1, data2, data3, data4 });
+    res.render("dashboard", { label1, label2, label3, label4, data1, data2, data3, data4, currentPage: 'dashboard'  });
   },
 
   inputdata_form_get: async (req, res) => {
