@@ -6,7 +6,7 @@
     <link rel="apple-touch-icon" sizes="76x76" href="../assests/img/apple-icon.png">
     <link rel="icon" type="image/png" href="../assests/img/favicon.png">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <title>GreenMapper | MAP Region</title>
+    <title>GreenMapper</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
     <!--     Fonts and icons     -->
@@ -54,7 +54,7 @@
                                 </button>
                             </div>
                             <a class="navbar-brand" style="padding-top: 26px;font-size: 30px;font-weight: 600"
-                                href="/api/map">Map Interface</a>
+                                href="#pablo">Maps</a>
                         </div>
                         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
                             aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
@@ -188,8 +188,7 @@
                                                                 </th> -->
                                             </thead>
                                             <tbody>
-                                                <tr class="row_tb1" id="row_tb1_0">
-                                                    <!-- onclick="ll1(0)" -->
+                                                <tr class="row_tb1" id="row_tb1_0" onclick=" ll1(0)">
                                                     <td>
                                                         1
                                                     </td>
@@ -216,7 +215,7 @@
                                                         3
                                                     </td>
                                                     <td>
-                                                        Anand Park
+                                                        Goa
                                                     </td>
 
                                                 </tr>
@@ -233,7 +232,7 @@
                                                 </tr>
 
 
-                                                <!-- <tr class="row_tb1" id="row_tb1_3" onclick=" ll1(3)">
+                                                <tr class="row_tb1" id="row_tb1_3" onclick=" ll1(3)">
                                                     <td>
                                                         5
                                                     </td>
@@ -241,7 +240,7 @@
                                                         NA gaon
                                                     </td>
 
-                                                </tr> -->
+                                                </tr>
 
 
                                             </tbody>
@@ -432,8 +431,7 @@
 <script>
     const apiKey = 'pk.eyJ1IjoiYWxmcmVkMjAxNiIsImEiOiJja2RoMHkyd2wwdnZjMnJ0MTJwbnVmeng5In0.E4QbAFjiWLY8k3AFhDtErA';
 
-        const mymap = L.map('map').setView([18.565102673608465, 73.91508154754621,], 17)
-        // [18.504055388697367, 73.80745747188948], 17);
+    const mymap = L.map('map').setView([18.504055388697367, 73.80745747188948], 17);
     // 13
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -446,7 +444,7 @@
 
     // Adding Marker
 
-        const marker = L.marker([18.565102673608465, 73.91508154754621]).addTo(mymap);
+    const marker = L.marker([18.504055388697367, 73.80745747188948]).addTo(mymap);
 
     // Add popup message
     let template = `
@@ -460,35 +458,72 @@
 
 
 
+    const marker1 = L.marker([18.509083307749208, 73.81921304312709]).addTo(mymap);
 
-            const marker11 = L.marker([18.565792673608465, 73.91508154754621]).addTo(mymap);
+    // Add popup message
+    let template1 = `
 
-                // Add popup message
-                let template11 = `
-
-<h3>PRAYAGGovernment offcies</h3>
-<h3>Phone number: 9078674536</h3>
-<h3>officer name: xyz</h3>
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
 
 `
-                marker11.bindPopup(template11);
+    marker1.bindPopup(template1);
 
 
 
 
+    const marker2 = L.marker([18.510132352468702, 73.7688936948145
+    ]).addTo(mymap);
+
+    // Add popup message
+    let template2 = `
+
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
+
+
+`
+    marker2.bindPopup(template2);
+
+
+
+    const marker3 = L.marker([18.49332945268911, 73.74829864575057
+
+
+    ]).addTo(mymap);
+
+    // Add popup message
+    let template3 = `
+
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
+
+
+`
+    marker3.bindPopup(template3);
 
 
 
 
+    const marker4 = L.marker([18.55713208390071, 73.82644820608257]).addTo(mymap);
+
+    // Add popup message
+    let template4 = `
+
+<h3>NGO-AATMARAM</h3>
+<h3>Phone number: 9089765434</h3>
+<h3>pics.json</h3>
+<h3>reviews.json</h3>
 
 
-
-
-
-
-
-
-
+`
+    marker4.bindPopup(template4);
 
     // // Add circle 
 
@@ -498,6 +533,38 @@
     //     fillColor: '#c40f0b',
     //     fillOpacity: 0.2
     // }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li><li>Visit NGO-PAGE: <a href="#">Link</a> </li> <li>Upcoming Drives: <a href="#">Link</a> </li></ul></div> ')
+
+
+
+    const circle1 = L.circle([18.55436104195708, 73.75045032634333
+    ], {
+        radius: 650,
+        color: '#006400',
+        fillColor: '#32cd32',
+        fillOpacity: 0.2
+    }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li</ul ></div> ')
+
+
+    const circle2 = L.circle([18.466638164979486, 73.75533241590381
+
+    ], {
+        radius: 600,
+        color: '#006400',
+        fillColor: '#32cd32',
+        fillOpacity: 0.2
+    }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li</ul ></div> ')
+
+
+
+
+    const circle3 = L.circle([18.458143364850073, 73.84696154127289
+
+    ], {
+        radius: 550,
+        color: '#006400',
+        fillColor: '#32cd32',
+        fillOpacity: 0.2
+    }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li</ul ></div> ')
 
 
 
@@ -524,32 +591,14 @@
 
     const regions = [
         {
-            region_id: 'R124',
-            reg_name: 'Viman Nagar',
-            reg_rank: '2',
-            reg_lang: 18.565102673608465,
-            reg_lat: 73.91508154754621,
-            // color: '#e4100b',
-            // fillColor: '#c40f0b',
-                color: '#228b22',
-            fillColor: '#3cb371',
-            popup_details_r: `<div class="popup-details">
-                <h2> Viman Nagar</h2>
-                <div class="details-content">
-         <ul style="font-size: 15px;">
-            <li><strong>Greenery Count:</strong> 300+ Trees</li>
-            <li><strong>Coordinates of Regions</strong> <span style="opacity:1;">73.915081</span> </li>
-            <li><strong>Lat:</strong> 73.91955989532252</li>
-            <li><strong>Long:</strong> 18.555992416940583</li>
-            <li><strong>Number of NGO's:</strong> 2+</li>
-            <li><strong>Number of Hands:</strong> 200+</li>
-            <li><strong>Number of Drives:</strong> 20+</li>
-
-        </ul>
-    </div>
-    <button class="show-image-button">Show Region Image</button>
-</div >
-`,
+            region_id: 'R123',
+            reg_name: 'viman nagar',
+            reg_rank: '1',
+            reg_lang: 18.504055388697367,
+            reg_lat: 73.80745747188948,
+            color: '#e4100b',
+            fillColor: '#c40f0b',
+            popup_details_r: ' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li</ul ></div> ',
             allngo: ['N123', 'N124']
         },
 
@@ -557,111 +606,35 @@
             region_id: 'R124',
             reg_name: 'Wadgoansheri',
             reg_rank: '2',
-            reg_lang: 18.555992416940583,
-            reg_lat: 73.91955989532252,
-            color: '#228b22',
-            fillColor: '#3cb371',
-            popup_details_r: `<div class="popup-details">
-                <h2>Wadgoansheri</h2>
-                <div class="details-content">
-        <ul style="font-size: 15px;">
-            <li><strong>Greenery Count:</strong> 300+ Trees</li>
-            <li><strong>Coordinates of Regions</strong> <span style="opacity:0;">73.915081 73.915</span> </li>
-            <li><strong>Lat:</strong> 73.91955989532252</li>
-            <li><strong>Long:</strong> 18.555992416940583</li>
-            <li><strong>Number of NGO's:</strong> 2+</li>
-            <li><strong>Number of Hands:</strong> 200+</li>
-            <li><strong>Number of Drives:</strong> 20+</li>
-            
-        </ul>
-    </div>
-    <button class="show-image-button">Show Region Image</button>
-</div >
-`,
-            allngo: ['N123', 'N124']
-        },
-
-        {
-            region_id: 'R124',
-            reg_name: 'Anand Park',
-            reg_rank: '4',
-            reg_lang: 18.558050641150217,
-            reg_lat: 73.92554499029845,
-          color: '#e4100b',
-            fillColor: '#c40f0b',
-             popup_details_r: `<div class="popup-details">
-                <h2>Anand Park</h2>
-                <div class="details-content">
-        <ul style="font-size: 15px;">
-            <li><strong>Greenery Count:</strong> 300+ Trees</li>
-            <li><strong>Coordinates of Regions</strong> <span style="opacity:0;">73.915081 73.915</span> </li>
-            <li><strong>Lat:</strong> 73.92554499029845</li>
-            <li><strong>Long:</strong> 18.558050641150217</li>
-            <li><strong>Number of NGO's:</strong> 1+</li>
-            <li><strong>Number of Hands:</strong> 50+</li>
-            <li><strong>Number of Drives:</strong> 10+</li>
-            
-        </ul>
-    </div>
-    <button class="show-image-button">Show Region Image</button>
-</div >
-`,      
-            allngo: ['N123', 'N124']
-        },
-
-        {
-            region_id: 'R124',
-            reg_name: 'Nagar Road',
-            reg_rank: '4',
-            reg_lang: 18.562808538138384,
-            reg_lat: 73.92239542047287,
-            color: '#228b22',
-            fillColor: '#3cb371',
-            popup_details_r: `<div class="popup-details">
-                <h2>Nagar Road</h2>
-                <div class="details-content">
-        <ul style="font-size: 15px;">
-            <li><strong>Greenery Count:</strong> 300+ Trees</li>
-            <li><strong>Coordinates of Regions</strong> <span style="opacity:0;">73.915081 73.915</span> </li>
-            <li><strong>Lat:</strong>  73.92239542047287</li>
-            <li><strong>Long:</strong> 18.562808538138384</li>
-            <li><strong>Number of NGO's:</strong> 3+</li>
-            <li><strong>Number of Hands:</strong> 31+</li>
-            <li><strong>Number of Drives:</strong> 56+</li>
-            
-        </ul>
-    </div>
-    <button class="show-image-button">Show Region Image</button>
-</div >
-`,    
- allngo: ['N123', 'N124']
-        },
-
-        {
-            region_id: 'R124',
-            reg_name: 'Ramwadi',
-            reg_rank: '4',
-              reg_lang: 18.55944505150447,
-              reg_lat: 73.91278374687391,
+            reg_lang: 18.509055388697367,
+            reg_lat: 73.8099947188948,
             color: '#e4100b',
             fillColor: '#c40f0b',
-             popup_details_r: `<div class="popup-details">
-                <h2>Ramwadi</h2>
-                <div class="details-content">
-        <ul style="font-size: 15px;">
-            <li><strong>Greenery Count:</strong> 300+ Trees</li>
-            <li><strong>Coordinates of Regions</strong> <span style="opacity:0;">73.9150</span> </li>
-            <li><strong>Lat:</strong>  73.91278374687391</li>
-            <li><strong>Long:</strong> 18.55944505150447</li>
-            <li><strong>Number of NGO's:</strong> 3+</li>
-            <li><strong>Number of Hands:</strong> 31+</li>
-            <li><strong>Number of Drives:</strong> 56+</li>
-            
-        </ul>
-    </div>
-    <button class="show-image-button">Show Region Image</button>
-</div >
-`,          
+            popup_details_r: '<p>hiiii</p>',
+            allngo: ['N123', 'N124']
+        },
+
+        {
+            region_id: 'R124',
+            reg_name: 'Wadgoansheri',
+            reg_rank: '2',
+            reg_lang: 18.609055388697367,
+            reg_lat: 73.8199947188948,
+            color: '#006400',
+            fillColor: '#c40f0b',
+            popup_details_r: '<p>hiiii jbdbbwn dibw wdiwiwb</p>',
+            allngo: ['N123', 'N124']
+        },
+
+        {
+            region_id: 'R124',
+            reg_name: 'Wadgoansheri11111',
+            reg_rank: '4',
+            reg_lang: 18.609055388697367,
+            reg_lat: 73.8199947188948,
+            color: '#006400',
+            fillColor: '#c40f0b',
+            popup_details_r: '<p>hiiii jbdbbwn dibw wdiwiwb</p>',
             allngo: ['N123', 'N124']
         },
 
@@ -760,51 +733,6 @@
     // ll1(0);
 
 </script>
-
-<style>
-    .popup-details {
-    text-align: left;
-    max-width: 400px; /* Adjust width as needed */
-    margin: 0 auto; /* Center horizontally */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.popup-details h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.details-content ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.details-content ul li {
-    margin-bottom: 10px;
-}
-
-.show-image-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.show-image-button:hover {
-    background-color: #0056b3;
-}
-
-</style>
 
 </html>
 

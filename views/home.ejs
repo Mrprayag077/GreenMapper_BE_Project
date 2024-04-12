@@ -534,7 +534,7 @@
                         flex: 0 0 30%;
                         /* margin-top: -390px; */
                         /* margin-top: -890px; */
-                        margin-top: -390px;
+                        /* margin-top: 10px; */
                     }
 
                     .graph {
@@ -1159,33 +1159,71 @@
 
                                     <!-- Assuming cardDataArray is an array of objects from MongoDB -->
 
-                                    <div id="dynamic-cards-container" class="browse">
-                                        <% cardDataArray.forEach((cardData)=> { %>
-                                            <div class="nft">
-                                                <img src="<%= cardData.Poster_Link %>" alt="" />
-                                                <div class="title">
-                                                    <%= cardData.Drive_Name %>
+                                <!-- HTML code -->
+                                <!-- <div id="dynamic-cards-container" class="browse">
+                                    <% cardDataArray.forEach((cardData)=> { %>
+                                        <div class="nft" onclick="openPost('<%= cardData.Post_id %>')">
+                                            <img src="<%= cardData.Poster_Link %>" alt="" />
+                                            <div class="title">
+                                                <%= cardData.Drive_Name %>
+                                            </div>
+                                            <p>
+                                                <%= cardData.Description %>
+                                            </p>
+                                            <div class="details flex flex-sb">
+                                                <div class="author flex">
+                                                    <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                                        alt="" />
+                                                    <div class="section-tred1">EcoRevolution India</div>
                                                 </div>
-                                                <p>
-                                                    <!-- <%= cardData.Description %> -->
-                                                    <%= cardData.Description %>
-                                                </p>
-                                                <div class="details flex flex-sb">
-                                                    <div class="author flex">
-                                                        <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
-                                                            alt="" />
-                                                        <div class="section-tred1">EcoRevolution India</div>
-                                                    </div>
-                                                    <div class="price">
-                                                        <!-- <%= cardData.Hands %> -->
-                                                        <%= cardData.Hands %> +
-                                                    </div>
+                                                <div class="price">
+                                                    <%= cardData.Hands %> +
                                                 </div>
                                             </div>
-                                            <% }); %>
-                                    </div>
+                                        </div>
+                                        <% }); %>
+                                </div> -->
+
+
+                                <!-- HTML code -->
+                                <div id="dynamic-cards-container" class="browse" style="cursor: pointer;">
+                                    <% cardDataArray.forEach((cardData)=> { %>
+                                        <div class="nft" onclick="openPost('<%= cardData.Post_id %>')">
+                                            <img src="<%= cardData.Poster_Link %>" alt="" />
+                                            <div class="title">
+                                                <%= cardData.Drive_Name %>
+                                            </div>
+                                            <p>
+                                                <%= cardData.Description %>
+                                            </p>
+                                            <div class="details flex flex-sb">
+                                                <div class="author flex">
+                                                    <img src="https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png"
+                                                        alt="" />
+                                                    <div class="section-tred1">EcoRevolution India</div>
+                                                </div>
+                                                <div class="price">
+                                                    <%= cardData.Hands %> +
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% }); %>
+                                </div>
+
+
+
 
                                     <script>
+
+
+    // JavaScript code
+    function openPost(postId) {
+        // Construct the URL with the post_id parameter
+        var url = '/api/posts?post_id=' + postId;
+        // Open the URL in the current window
+        window.location.href = url;
+    }
+
 
     function truncateWords(str, num) {
         const words = str.split(' ');

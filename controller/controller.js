@@ -33,8 +33,23 @@ module.exports = {
   },
 
   map_p: async (req, res) => {
-    res.render("map", { currentPage: 'map' });
+    console.log("MAP PAGE [START]");
+
+    try {
+      const RegionDataArray = await Prayag.find({ Docx_type: "region" });
+
+      console.log(RegionDataArray);
+
+      res.render("map", { RegionDataArray, currentPage: 'map' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Server Error');
+    }
+
+    console.log("MAP PAGE [END]");
   },
+
+
 
 
   //NORMAL POST
@@ -76,10 +91,14 @@ module.exports = {
 
     try {
 
+
       const post_id = req.query.post_id;
       const ngo_id = req.query.ngo_id;
       let hands = (req.query.hands);
       hands = Number(hands) + 1;
+
+      console.log("hands", req.query.hands + "and" + hands);
+
       const doctype = "post";
       const drive_name = req.query.drive_name;
       const location = req.body.location;

@@ -79,7 +79,7 @@ const storage = getStorage(firebaseApp);
 
 
 
-async function linkined() {
+async function WebHarvest() {
   // const usersinfosp = await usersinfos.find({ request_send_trigger: "today" });
 
 
@@ -389,7 +389,7 @@ async function linkined() {
 
 }
 
-linkined();
+// WebHarvest();
 
 
 

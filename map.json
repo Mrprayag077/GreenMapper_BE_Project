@@ -1,0 +1,54 @@
+[
+    {
+        "_id": "65c353aed9983f1539bdfe43",
+        "lat": 18.53826626748753,
+        "long": 73.79511934564337,
+        "image": "https://firebasestorage.googleapis.com/v0/b/greenmapper-da4bf.appspot.…",
+        "__v": 0,
+        "sat_img": true,
+        "region_name": "pashan",
+        "Docx_type": "region"
+    },
+    {
+        "_id": "65c353c5d9983f1539bdfe44",
+        "lat": 18.54437247398316,
+        "long": 73.8783573417295,
+        "image": "https://firebasestorage.googleapis.com/v0/b/greenmapper-da4bf.appspot.…",
+        "__v": 0,
+        "sat_img": true,
+        "region_name": "yerwada",
+        "Docx_type": "region"
+    },
+    {
+        "_id": "65c353ddd9983f1539bdfe45",
+        "lat": 18.51654690141197,
+        "long": 73.92640816508853,
+        "image": "https://firebasestorage.googleapis.com/v0/b/greenmapper-da4bf.appspot.…",
+        "__v": 0,
+        "sat_img": true,
+        "region_name": "magarpatta city",
+        "Docx_type": "region"
+    },
+    {
+        "_id": "651daafd8d9daf9e4d7fbc12",
+        "lat": 18.565102405590494,
+        "long": 73.9148033199582,
+        "image": "https://firebasestorage.googleapis.com/v0/b/greenmapper-da4bf.appspot.…",
+        "__v": 0,
+        "sat_img": true,
+        "region_name": "viman nagar",
+        "Docx_type": "region",
+        "tree_count": 0
+    },
+    {
+        "_id": "651e33c14eda7e8d5a3bfc6f",
+        "lat": 18.550344923699114,
+        "long": 73.94279244402568,
+        "image": "https://firebasestorage.googleapis.com/v0/b/greenmapper-da4bf.appspot.…",
+        "__v": 0,
+        "sat_img": false,
+        "region_name": "kharadi",
+        "Docx_type": "region",
+        "tree_count": 0
+    }
+]
