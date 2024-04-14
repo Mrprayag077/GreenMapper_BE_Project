@@ -188,8 +188,7 @@
                                                                 </th> -->
                                             </thead>
                                             <tbody>
-                                                <tr class="row_tb1" id="row_tb1_0">
-                                                    <!-- onclick="ll1(0)" -->
+                                                <tr class="row_tb1" id="row_tb1_0" onclick="ll1(0)">
                                                     <td>
                                                         1
                                                     </td>
@@ -227,9 +226,20 @@
                                                         4
                                                     </td>
                                                     <td>
-                                                        Pund gaon
+                                                        Nagar Road
+                                                        </td>
+                                                        
+                                                        </tr>
+                                                        
+                                                        
+                                                        <tr class="row_tb1" id="row_tb1_4" onclick=" ll1(4)">
+                                                            <td>
+                                                                5
+                                                            </td>
+                                                            <td>
+                                                                Ramwadi
                                                     </td>
-
+                                                
                                                 </tr>
 
 
@@ -424,14 +434,14 @@
 
 
 
-</body>
+
 
 
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script>
     const apiKey = 'pk.eyJ1IjoiYWxmcmVkMjAxNiIsImEiOiJja2RoMHkyd2wwdnZjMnJ0MTJwbnVmeng5In0.E4QbAFjiWLY8k3AFhDtErA';
-
+            let selectedRowIndex = 0;
         const mymap = L.map('map').setView([18.565102673608465, 73.91508154754621,], 17)
         // [18.504055388697367, 73.80745747188948], 17);
     // 13
@@ -466,9 +476,19 @@
                 // Add popup message
                 let template11 = `
 
-<h3>PRAYAGGovernment offcies</h3>
-<h3>Phone number: 9078674536</h3>
-<h3>officer name: xyz</h3>
+<div class="popup-details">
+    <h2>Viman Nagar</h2>
+    <div class="details-content"       <ul>
+            <li><strong>Greenery Count:</strong> 30    </li>
+            <li><strong>Coordinates of Regions:</strong></li>
+            <li>Lat: <span>73.91955989532252</span></li>
+        <li>Long: <span>18.555992416940583</span></li>
+            <l    mber of NGO's:</strong> 2+</li>
+            <li><strong>Number     trong> 2          <li><strong>Numb    trong> 20+</li>
+        </ul>
+    </div>
+      "show-image-button">Sh    /button>
+</div>
 
 `
                 marker11.bindPopup(template11);
@@ -687,7 +707,7 @@
 
 
 
-    let selectedRowIndex = 0;
+
 
     function handleRowClick(index) {
         // Reset style for previously clicked row
@@ -702,7 +722,7 @@
 
         // Update the map and circle
         const region = regions[index];
-        mymap.setView([region.reg_lang, region.reg_lat], 16);
+        mymap.setView([region.reg_lang, region.reg_lat], 17);
         const circle = circles[index];
         circle.setLatLng([region.reg_lang, region.reg_lat]);
         circle.setRadius(220);
@@ -805,7 +825,7 @@
 }
 
 </style>
-
+</body>
 </html>
 
 

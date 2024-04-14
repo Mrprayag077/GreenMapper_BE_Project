@@ -387,6 +387,11 @@ async function WebHarvest() {
     // Set set_img to false after processing
   }
 
+
+  console.log("================================================");
+  console.log("ALL REGIONS DATA UPDATION COMPLETED ");
+  console.log("================================================");
+
 }
 
 // WebHarvest();
