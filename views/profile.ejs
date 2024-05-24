@@ -6,6 +6,7 @@
     <title>Document</title>
 </head>
 <body>
+
    <style>
     /* -
 -*-~*~-*-*-~*~-*-*-~*~* |
@@ -102,7 +103,7 @@ html, body {
 .uh-image-inner {
   width: 10.5rem;
   height: 10.5rem;
-  border: .3em solid var(--grey);
+  /*border: .3em solid var(--grey);*/
   object-fit: cover;
   border-radius: 50%;
   z-index: 2;
@@ -188,7 +189,7 @@ html, body {
   align-items: center;
 }
 .story-wrapper h2 {
-  margin: .25em;
+  /* margin: .25em; */
   font-size: 1.1em;
   font-weight: 400;
 }
@@ -227,7 +228,7 @@ html, body {
   display: grid;
   align-items: center;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  /* grid-template-rows: 1fr 1fr 1fr; */
   grid-column-gap: 2em;
   grid-row-gap: 2em;
 }
@@ -289,7 +290,7 @@ html, body {
   z-index: 20;
 }
 .block {
-  width: 60%;
+  width: 50%;
   height: 50%;
   position: relative;
   display: flex;
@@ -451,11 +452,124 @@ html, body {
 <!-- 
 Enjoy the code <3
 -->
+<nav class="navbar">
+  <div class="navbar-brand">GreenMapper</div>
+  <ul class="navbar-nav">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">Map</a></li>
+    <!-- <li><a href="#">Services</a></li> -->
+    <!-- <li><a href="#">Contact</a></li> -->
+  </ul>
+  <!-- <button class="mode-toggle-container" id="mode-toggle">
+    <i class="sun-icon" id="sun-icon">&#9728;</i>
+  </button> -->
+  <!-- <button class="navbar-toggler" style="z-index:99;">&#9776;</button> -->
+</nav>
+
+
+<style>
+  :root {
+    --primary-color: #333;
+    --secondary-color: #fff;
+    --bg-color: #f9f9f9;
+    --link-color: #333;
+  }
+
+
+
+  /* body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+} */
+
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .navbar-brand {
+    font-size: 1.5rem;
+    font-weight: semibold;
+  }
+
+  .navbar-nav {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .navbar-nav li {
+    margin: 0 1rem;
+    font-weight: 600;
+  }
+
+  .navbar-nav a {
+    text-decoration: none;
+    color: var(--link-color);
+    transition: color 0.3s;
+  }
+
+  .navbar-nav a:hover {
+    color: var(--primary-color);
+  }
+
+  .navbar-toggler {
+    display: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+  }
+
+  .mode-toggle-container {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+  }
+
+  @media (max-width: 768px) {
+    .navbar-nav {
+      position: fixed;
+      top: 0;
+      right: -100%;
+      height: 100%;
+      width: 250px;
+      background-color: var(--secondary-color);
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: right 0.3s ease-in-out;
+    }
+
+    .navbar-nav.active {
+      right: 0;
+    }
+
+    .navbar-nav li {
+      margin: 1rem 0;
+    }
+
+    .navbar-toggler {
+      display: block;
+    }
+  }
+</style>
+
 <div class="user-header-wrapper">
 <div class="user-header-inner">
   <div class="uh-left">
     <div class="uh-image">
-      <img class="uh-image-inner" src="https://i.imgur.com/Qv1WDJq.jpg" alt="">
+      <img class="uh-image-inner" src="https://th.bing.com/th/id/R.c11b6f38dffc24a4508217513b0e50bd?rik=Pt%2bkITlukiMkWg&riu=http%3a%2f%2fwww.emmegi.co.uk%2fwp-content%2fuploads%2f2019%2f01%2fUser-Icon.jpg&ehk=zjS04fF4nxx%2bpkvRPsSezyic3Z7Yfu%2fuoT75KnbNv1Y%3d&risl=&pid=ImgRaw&r=0" alt="">
       <div class="gradient"></div>
     </div>
   </div>
@@ -464,7 +578,18 @@ Enjoy the code <3
       <h3>
         areal_alien
         <svg class="uname-verified" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1350.03 1326.16">
-                            <defs><style>.cls-11{fill:var(--blue);}.cls-12{fill:#ffffff;}</style></defs><title>verified</title>
+                            <defs>
+                              <style>
+                                .cls-11 {
+                                  fill: var(--green);
+                                }
+                            
+                                .cls-12 {
+                                  fill: #ffffff;
+                                }
+                              </style>
+                            </defs>
+                            <title>verified</title>
                             <g id="Layer_3" data-name="Layer 3">
                                 <polygon class="cls-11" points="0 747.37 120.83 569.85 70.11 355.04 283.43 292.38 307.3 107.41 554.93 107.41 693.66 0 862.23 120.83 1072.57 126.8 1112.84 319.23 1293.35 399.79 1256.05 614.6 1350.03 793.61 1197.87 941.29 1202.35 1147.15 969.64 1178.48 868.2 1326.16 675.02 1235.17 493.77 1315.72 354.99 1133.73 165.58 1123.29 152.16 878.64 0 747.37"/></g>
                             <g id="Layer_2" data-name="Layer 2">
@@ -474,13 +599,13 @@ Enjoy the code <3
       <button class="btn">Edit Profile</button>
     </div>
     <div class=user-links>
-      <a><span>2.1k</span> Posts</a>
+      <!-- <a><span>2.1k</span> Posts</a>
       <a><span>421k</span> Followers</a>
-      <a>Following <span>388</span></a>
+      <a>Following <span>388</span></a> -->
     </div>
     <div class="user-bio">
       <p class="user-bio-name">Areal Alien</p>
-      <p>This is the user biography 😄<br/>It also has another line.</p>
+      <p class="" style="font-size: 20px;">Planting a tree is the ultimate act of faith in the future. 🌱🌳</p>
     </div>
   </div>
 </div>
@@ -489,41 +614,46 @@ Enjoy the code <3
 <div class="user-stories-inner">
   <div class="story-wrapper">
     <div class="story-inner">
-      <img class="story-img" src="https://images.unsplash.com/photo-1588110679566-158c6dea107c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1990&q=80" alt="">
-      <div class="gradient"></div>
-    </div>
-    <h2>Outfits ✌</h2>
-  </div>
-  <div class="story-wrapper">
-    <div class="story-inner">
-      <img class="story-img" src="https://images.unsplash.com/photo-1470472304068-4398a9daab00?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="">
-      <div class="gradient"></div>
-    </div>
-    <h2>Travel 🛫</h2>
-  </div>
-  <div class="story-wrapper">
-    <div class="story-inner">
-      <img class="story-img" src="https://images.unsplash.com/photo-1571997478779-2adcbbe9ab2f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80" alt="">
+      <img class="story-img" src="https://th.bing.com/th/id/OIP.4ZxU2G99Vh87UL9VhJmtZgHaHa?rs=1&pid=ImgDetMain" alt="">
       <div class="gradient-gray"></div>
     </div>
-    <h2>Food 🍕</h2>
+    <h2>Eco Champion 🌿</h2>
+  </div>
+    <div class="story-wrapper">
+      <div class="story-inner">
+        <img class="story-img" src="https://th.bing.com/th/id/OIP.G-akwqQmf8fDwEJduQad7wHaHM?rs=1&pid=ImgDetMain" alt="">
+        <div class="gradient-gray"></div>
+        </div>
+      <h2>Forest Friend 🌲</h2>
+      </div>
+
+      <div class="story-wrapper">
+        <div class="story-inner">
+          <img class="story-img" src="https://image.freepik.com/free-vector/christmas-tree-badge_1019-153.jpg" alt="">
+          <div class="gradient-gray"></div>
+          </div>
+        <h2>Grove Guardian 🌳🛡️</h2>
+        </div>
+
+  <div class="story-wrapper">
+    <div class="story-inner">
+      <img class="story-img" src="https://www.tolleybadges.co.uk/wp-content/uploads/2015/12/213-blank.png" alt="">
+      <div class="gradient-gray"></div>
+    </div>
+    <h2>Sapling Savior 🌱💫</h2>
   </div>
   <div class="story-wrapper">
     <div class="story-inner">
-      <img class="story-img" src="https://images.unsplash.com/photo-1586462175816-c0e709898f01?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjczMTc0fQ&auto=format&fit=crop&w=1950&q=80" alt="">
+      <img class="story-img" src="https://cdn.dribbble.com/users/413563/screenshots/2333402/triangetree.png" alt="">
       <div class="gradient-gray"></div>
     </div>
-    <h2>Windlife 🌲</h2>
-  </div>
-  <div class="story-wrapper">
-    <div class="story-inner">
-      <img class="story-img" src="https://images.unsplash.com/photo-1583314580204-efe0bcd18bc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="">
-      <div class="gradient-gray"></div>
-    </div>
-    <h2>Relax 📚</h2>
+    <h2>Nature Nurturer 🌿🌱</h2>
   </div>
 </div>
+
+
 </div>
+<hr style="width: 90%; background-color: rgb(219, 219, 219); height: 1px; border: none;" />
 <div class="user-page-wrapper">
 <div class="user-page-inner">
   <div id="imgblock1" class="image-block">
@@ -539,7 +669,8 @@ Enjoy the code <3
       </div>
       <div class="img-overlay"></div>
     </div>
-    <img class="image" src="https://images.unsplash.com/photo-1559056986-f834be7896e5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1955&q=80" alt="">
+    <img class="image"
+      src="https://th.bing.com/th/id/OIP.bHDbjyNHLjA3570e2CjrEAHaE8?w=285&h=190&c=7&r=0&o=5&dpr=1.2&pid=1.7" alt="">
   </div>
   <div id="img2" class="image-wrapper">
     <div id="iov2" class="img-overlay-wrapper">
@@ -548,7 +679,9 @@ Enjoy the code <3
       </div>
       <div class="img-overlay"></div>
     </div>
-    <img class="image" src="https://images.unsplash.com/photo-1582205524573-ac35c641d947?ixlib=rb-1.2.1&auto=format&fit=crop&w=2000&q=80" alt="">
+    <img class="image"
+      src="https://www.alfeenpublicschool.ac.in/wp-content/uploads/2020/06/68f2e91e-0d09-4a77-8e5e-47426eff0bf0News-02-600x440.jpg"
+      alt="">
   </div>
   <div id="img3" class="image-wrapper">
     <div id="iov3" class="img-overlay-wrapper">
@@ -557,7 +690,7 @@ Enjoy the code <3
       </div>
       <div class="img-overlay"></div>
     </div>
-    <img class="image" src="https://images.unsplash.com/photo-1588165231518-b4b22bfa0ddf?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80" alt="">
+    <img class="image" src="https://th.bing.com/th/id/OIP.nZfSP_KyYSxBPURgSgvf4wHaHa?rs=1&pid=ImgDetMain" alt="">
   </div>
   <div id="img4" class="image-wrapper">
     <div id="iov4" class="img-overlay-wrapper">
@@ -566,7 +699,9 @@ Enjoy the code <3
       </div>
       <div class="img-overlay"></div>
     </div>
-    <img class="image" src="https://images.unsplash.com/photo-1583314580204-efe0bcd18bc6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="">
+    <img class="image"
+      src="https://yellowslate.sgp1.cdn.digitaloceanspaces.com/gallery/15859198867367526025e87378eb6d391585919887.jpg"
+      alt="">
   </div>
   <div id="img5" class="image-wrapper">
     <div id="iov5" class="img-overlay-wrapper">
@@ -575,7 +710,9 @@ Enjoy the code <3
       </div>
       <div class="img-overlay"></div>
     </div>
-    <img class="image" src="https://images.unsplash.com/photo-1562103608-104fa5589661?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80" alt="">
+    <img class="image"
+      src="https://nirmawebsite.s3.ap-south-1.amazonaws.com/wp-content/uploads/2020/09/Plantation_Drive-1024x1024.jpg"
+      alt="">
   </div>
   <div id="img6" class="image-wrapper">
     <div id="iov6" class="img-overlay-wrapper">
@@ -584,44 +721,18 @@ Enjoy the code <3
       </div>
       <div class="img-overlay"></div>
     </div>
-    <img class="image" src="https://images.unsplash.com/photo-1578950094540-9e34b5d393ee?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2134&q=80" alt="">
+    <img class="image" src="https://th.bing.com/th/id/OIP.hdpk5dHisOlaqmFo8M45EAHaFj?rs=1&pid=ImgDetMain" alt="">
   </div>
-  <div id="img7" class="image-wrapper">
-    <div id="iov7" class="img-overlay-wrapper">
-      <div class="img-btns">
-        <p>482 <i class="uil uil-heart-alt"></i> &nbsp&nbsp 22 <i class="uil uil-comment"></i></p>
-      </div>
-      <div class="img-overlay"></div>
-    </div>
-    <img class="image" src="https://images.unsplash.com/photo-1457523826051-6f3e5aeb89b9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80" alt="">
-  </div>
-  <div id="img8" class="image-wrapper">
-    <div id="iov8" class="img-overlay-wrapper">
-      <div class="img-btns">
-        <p>1 021 <i class="uil uil-heart-alt"></i> &nbsp&nbsp 115 <i class="uil uil-comment"></i></p>
-      </div>
-      <div class="img-overlay"></div>
-    </div>
-    <img class="image" src="https://images.unsplash.com/photo-1584381137528-f8529c03b9af?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2082&q=80" alt="">
-  </div>
-  <div id="img9" class="image-wrapper">
-    <div id="iov9" class="img-overlay-wrapper">
-      <div class="img-btns">
-        <p>801 <i class="uil uil-heart-alt"></i> &nbsp&nbsp 50 <i class="uil uil-comment"></i></p>
-      </div>
-      <div class="img-overlay"></div>
-    </div>
-    <img class="image" src="https://images.unsplash.com/photo-1519709042477-8de6eaf1fdc5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=564&q=80" alt="">
-  </div>
+
 </div>
 </div>
-<div class="user-loader">
+<!-- <div class="user-loader">
   <div class="loader">
     <svg class="circular" viewBox="25 25 50 50">
       <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
     </svg>
   </div>
-</div>
+</div> -->
 <div class="space"></div>
 <script>
     $("#img1").on({

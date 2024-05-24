@@ -532,6 +532,7 @@
                     .section-right {
                         padding: 12px;
                         flex: 0 0 30%;
+                        margin-top: -190px;
                         /* margin-top: -390px; */
                         /* margin-top: -890px; */
                         /* margin-top: 10px; */
@@ -1539,7 +1540,43 @@
                                     </script>
 
                                 </div>
+<script>
 
+    const creators = [
+        { name: 'Hassnain Haider', id: '@hassnain' },
+        { name: 'John Doe', id: '@johndoe' },
+        { name: 'Jane Smith', id: '@janesmith' }
+        // Add more objects as needed
+    ];
+    const creatorContainer = document.querySelector('.follow-creator');
+
+    creators.forEach(creator => {
+        const creatorDiv = document.createElement('div');
+        creatorDiv.classList.add('follow-creator', 'flex');
+
+        const img = document.createElement('img');
+        img.src = 'https://raw.githubusercontent.com/programmercloud/nft-dashboard/main/img/user.png';
+        img.alt = 'User Image';
+        creatorDiv.appendChild(img);
+
+        const creatorDetails = document.createElement('div');
+        creatorDetails.classList.add('creator-details');
+
+        const nameDiv = document.createElement('div');
+        nameDiv.classList.add('section-tred1');
+        nameDiv.textContent = creator.name;
+        creatorDetails.appendChild(nameDiv);
+
+        const idDiv = document.createElement('div');
+        idDiv.textContent = creator.id;
+        creatorDetails.appendChild(idDiv);
+
+        creatorDiv.appendChild(creatorDetails);
+
+        creatorContainer.appendChild(creatorDiv);
+    });
+
+        </script>
                                 <div class="top-creators">
                                     <div class="heading flex flex-sb">
                                         <h2>Top Creators</h2>
@@ -1687,14 +1724,14 @@
                                 </li>
                             </ul>
                         </nav>
-                        <div class="copyright">
+                        <!-- <div class="copyright">
                             &copy;
                             <script>
                                 document.write(new Date().getFullYear())
                             </script>, Designed by
                             <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
                             <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-                        </div>
+                        </div> -->
                     </div>
                 </footer>
             </div>

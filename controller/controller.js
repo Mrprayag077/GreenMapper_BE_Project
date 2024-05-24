@@ -25,6 +25,7 @@ module.exports = {
 
       console.log(cardDataArray);
       res.render('home', { cardDataArray, currentPage: 'home' }); // Render EJS template with the data
+      // res.json({ cardDataArray, currentPage: 'home' }); // Render EJS template with the data
     } catch (error) {
       console.error(error);
       res.status(500).send('Server Error');
@@ -41,6 +42,7 @@ module.exports = {
       console.log(RegionDataArray);
 
       res.render("map", { RegionDataArray, currentPage: 'map' });
+      // res.json({ RegionDataArray, currentPage: 'map' });
     } catch (error) {
       console.error(error);
       res.status(500).send('Server Error');
@@ -49,6 +51,12 @@ module.exports = {
     console.log("MAP PAGE [END]");
   },
 
+
+
+
+  profile: async (req, res) => {
+    res.render("profile");
+  },
 
 
 
@@ -72,13 +80,13 @@ module.exports = {
 
       // Check if the document is found
       if (!post_details) {
-        return res.status(404).send('Not Found: No document found for the provided post_id.');
+        return res.status(404).send('<center>Not Found: No document found for the provided post_id.</center>');
       }
 
 
       console.log(post_details);
-
       res.render("post_individuals", { post_details });
+      // res.json({ post_details });
 
     } catch (error) {
       console.error(error);
@@ -251,15 +259,11 @@ module.exports = {
       console.log("poster_link: " + poster_link);
       console.log("description: " + description);
 
-
-
-
       const existingDrive = await Prayag.findOne({ Post_id: post_id });
 
       if (!existingDrive) {
         return res.status(404).json({ status: 'error', message: 'Drive not found' });
       }
-
 
       existingDrive.Drive_Name = drive_name;
       existingDrive.Location = location;

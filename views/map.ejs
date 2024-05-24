@@ -440,6 +440,15 @@
 
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 <script>
+
+    const mapdata = '<%- JSON.stringify(RegionDataArray) %>';
+
+    const finalMapData = JSON.parse(mapdata);
+
+    console.log('finalMapData = ', finalMapData);
+
+
+
     const apiKey = 'pk.eyJ1IjoiYWxmcmVkMjAxNiIsImEiOiJja2RoMHkyd2wwdnZjMnJ0MTJwbnVmeng5In0.E4QbAFjiWLY8k3AFhDtErA';
             let selectedRowIndex = 0;
         const mymap = L.map('map').setView([18.565102673608465, 73.91508154754621,], 17)
@@ -545,14 +554,16 @@
     const regions = [
         {
             region_id: 'R124',
-            reg_name: 'Viman Nagar',
+            reg_name: 'viman_nagar',
             reg_rank: '2',
             reg_lang: 18.565102673608465,
             reg_lat: 73.91508154754621,
             // color: '#e4100b',
             // fillColor: '#c40f0b',
+            image: "",
                 color: '#228b22',
             fillColor: '#3cb371',
+            tree_count: 100,
             popup_details_r: `<div class="popup-details">
                 <h2> Viman Nagar</h2>
                 <div class="details-content">
@@ -575,12 +586,14 @@
 
         {
             region_id: 'R124',
-            reg_name: 'Wadgoansheri',
+            reg_name: 'wadgoansheri',
             reg_rank: '2',
+            image: "",
             reg_lang: 18.555992416940583,
             reg_lat: 73.91955989532252,
             color: '#228b22',
             fillColor: '#3cb371',
+            tree_count: 100,
             popup_details_r: `<div class="popup-details">
                 <h2>Wadgoansheri</h2>
                 <div class="details-content">
@@ -603,8 +616,9 @@
 
         {
             region_id: 'R124',
-            reg_name: 'Anand Park',
+            reg_name: 'Nagar_Road',
             reg_rank: '4',
+            image: "",
             reg_lang: 18.558050641150217,
             reg_lat: 73.92554499029845,
           color: '#e4100b',
@@ -637,6 +651,7 @@
             reg_lat: 73.92239542047287,
             color: '#228b22',
             fillColor: '#3cb371',
+            image: "",
             popup_details_r: `<div class="popup-details">
                 <h2>Nagar Road</h2>
                 <div class="details-content">
@@ -665,6 +680,7 @@
               reg_lat: 73.91278374687391,
             color: '#e4100b',
             fillColor: '#c40f0b',
+            image: "",
              popup_details_r: `<div class="popup-details">
                 <h2>Ramwadi</h2>
                 <div class="details-content">
@@ -687,6 +703,36 @@
 
     ];
 
+
+                regions.forEach(region => {
+                    // Find the corresponding element in finalMapData based on region_name
+                    const matchingRegion = finalMapData.find(data => data.region_name === region.reg_name);
+                    // If a matching region is found, update the tree_count in regions
+                    if (matchingRegion) {
+                        region.tree_count = matchingRegion.tree_count;
+                        region.image = matchingRegion.image;
+
+                        if (region.tree_count >= 200) {
+
+                            console.log("220 MILA");
+                          
+
+                              region.color = '#228b22';
+                            region.fillColor = '#3cb371';
+
+                        } else {
+                            region.color = "#e4100b";
+                            region.fillColor = "#c40f0b";
+                        }
+                    }
+                });
+
+                // Now the regions array is updated with the tree_count from finalMapData
+                console.log("REGIONS = ", regions);
+
+
+
+            
 
     regions.forEach((region, index) => {
         const circle = L.circle([region.reg_lang, region.reg_lat], {

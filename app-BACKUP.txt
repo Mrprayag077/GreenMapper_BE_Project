@@ -1,3 +1,4 @@
+//15-04-2024
 const express = require("express");
 const puppeteer = require("puppeteer");
 const fs = require("fs");
@@ -11,6 +12,7 @@ const axios = require("axios");
 require("dotenv").config();
 const sharp = require("sharp");
 const schedule = require("node-schedule");
+
 const { initializeApp } = require("firebase/app");
 const {
   getStorage,
@@ -60,7 +62,7 @@ mongoose.set("strictQuery", false);
 
 
 
-let Docdata;
+
 
 // // bot logic =================================================================
 const firebaseConfig = {
@@ -75,9 +77,6 @@ const firebaseConfig = {
 
 const firebaseApp = initializeApp(firebaseConfig);
 const storage = getStorage(firebaseApp);
-
-
-
 
 
 
@@ -310,14 +309,6 @@ async function WebHarvest() {
         }
 
 
-        const Surveyform = document.querySelector(".sCWrap.LeftBottom.topBand");
-        if (Surveyform) {
-          Surveyform.remove();
-
-          console.log("Removed element Surveyform");
-        }
-
-
         // const elementToRemove_newfeature = document.querySelector(".cm-whats-new-popup.button.close");
         // if (elementToRemove_newfeature) {
         //   elementToRemove_newfeature.remove();
@@ -401,27 +392,6 @@ async function WebHarvest() {
   console.log("================================================");
   console.log("ALL REGIONS DATA UPDATION COMPLETED ");
   console.log("================================================");
-
-
-  // predict_Collab
-
-//   await page.goto("https://colab.research.google.com/drive/1UTvN4PmzaHuRvPorGy1kQp_PnqWxTNWl?usp=sharing");
-
-//  await page.waitForSelector('.goog-menuitem-content');
-
-//   // Get the element
-//   const element = await page.$('.goog-menuitem-content');
-
-//   // Extract text content
-//   const textContent = await page.evaluate(element => element.textContent, element);
-
-//   // Check if text content matches "Run all"
-//   if (textContent.trim() === 'Run all') {
-//     // Click the element
-//     await element.click();
-  //   }
-  
-  await browser.close();
 
 }
 
@@ -686,12 +656,12 @@ async function uploadImageToFirebase(filename, fileitem, id_p) {
     URL_IMAGE = publicURL;
 
     try {
-      // Create a new Prayag document
-      // const newPrayag = new Prayag({
-      //   lat: 2101,
-      //   long: 2101,
-      //   image: publicURL, // Assuming image is a URL or file path, modify this according to your use case
-      // });
+    // Create a new Prayag document
+    // const newPrayag = new Prayag({
+    //   lat: 2101,
+    //   long: 2101,
+    //   image: publicURL, // Assuming image is a URL or file path, modify this according to your use case
+    // });
 
       // await newPrayag.save();
 

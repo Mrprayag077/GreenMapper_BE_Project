@@ -13,6 +13,7 @@ router.get("/", controller.home_p);
 
 //MAP SECTION------------------------------------------------
 router.get("/map", controller.map_p); //localhost:800/p/
+router.get("/profile", controller.profile); //localhost:800/p/
 
 
 //NEW POST SECTION------------------------------------------------
