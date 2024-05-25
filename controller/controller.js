@@ -38,10 +38,13 @@ module.exports = {
 
     try {
       const RegionDataArray = await Prayag.find({ Docx_type: "region" });
+      const NGODataArray = await Prayag.find({ Docx_type: "NGO" });
+      const DRIVESDataArray = await Prayag.find({ Docx_type: "post" });
 
       console.log(RegionDataArray);
+      console.log(NGODataArray);
 
-      res.render("map", { RegionDataArray, currentPage: 'map' });
+      res.render("map", { RegionDataArray, currentPage: 'map', NGODataArray, DRIVESDataArray });
       // res.json({ RegionDataArray, currentPage: 'map' });
     } catch (error) {
       console.error(error);

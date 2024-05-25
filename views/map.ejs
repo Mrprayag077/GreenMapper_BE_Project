@@ -133,7 +133,7 @@
                                     </style>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#pablo">
+                                    <a class="nav-link" href="/api/profile">
                                         <i class="now-ui-icons users_single-02"></i>
                                         <p>
                                             <span class="d-lg-none d-md-block">Account</span>
@@ -215,7 +215,8 @@
                                                         3
                                                     </td>
                                                     <td>
-                                                        Anand Park
+                                                        Nagar Road
+
                                                     </td>
 
                                                 </tr>
@@ -226,20 +227,20 @@
                                                         4
                                                     </td>
                                                     <td>
-                                                        Nagar Road
-                                                        </td>
-                                                        
-                                                        </tr>
-                                                        
-                                                        
-                                                        <tr class="row_tb1" id="row_tb1_4" onclick=" ll1(4)">
-                                                            <td>
-                                                                5
-                                                            </td>
-                                                            <td>
-                                                                Ramwadi
+                                                        Anand Park
                                                     </td>
-                                                
+
+                                                </tr>
+
+
+                                                <tr class="row_tb1" id="row_tb1_4" onclick=" ll1(4)">
+                                                    <td>
+                                                        5
+                                                    </td>
+                                                    <td>
+                                                        Ramwadi
+                                                    </td>
+
                                                 </tr>
 
 
@@ -277,7 +278,7 @@
                         </script>
 
                         <div class="col-md-4">
-                            <div class="card">
+                            <!-- <div class="card">
                                 <div class="card-header">
                                     <h5 class="card-category">All NGOs</h5>
                                     <h4 class="card-title"> NGOs List</h4>
@@ -292,12 +293,7 @@
                                                 <th>
                                                     Drives
                                                 </th>
-                                                <!-- <th>
-                                                City
-                                            </th>
-                                            <th class="text-right">
-                                                Salary
-                                            </th> -->
+                                               
                                             </thead>
                                             <tbody>
                                                 <tr>
@@ -325,7 +321,66 @@
                                         </table>
                                     </div>
                                 </div>
+                            </div> -->
+
+
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-category">All NGOs</h5>
+                                    <h4 class="card-title"> NGOs List</h4>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table">
+                                            <thead class="text-primary">
+                                                <tr>
+                                                    <th>NGO</th>
+                                                    <th>Drives</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="ngoTableBody">
+                                                <tr id="select_reg">
+                                                    <td>Select Region</td>
+
+                                                </tr>
+                                                <!-- <tr id="row_tb1_1">
+                                                    <td>GreenHands India</td>
+                                                    <td>20</td>
+                                                </tr> -->
+                                            </tbody>
+                                        </table>
+
+                                        <style>
+                                            /* Blinking animation */
+                                            @keyframes blink {
+                                                0% {
+                                                    color: black;
+
+                                                    font-weight: 900;
+                                                    /* background-color: rgb(233, 233, 233); */
+                                                }
+
+                                                50% {
+                                                    color: red;
+                                                    font-weight: 900;
+
+                                                }
+
+                                                100% {
+                                                    color: rgb(204, 204, 11);
+                                                    font-weight: 900;
+
+                                                }
+                                            }
+
+                                            #select_reg {
+                                                animation: blink 2s infinite;
+                                            }
+                                        </style>
+                                    </div>
+                                </div>
                             </div>
+
                         </div>
                         <div class="col-md-4">
                             <div class="card">
@@ -350,29 +405,12 @@
                                                                     Salary
                                                                 </th> -->
                                             </thead>
-                                            <tbody>
+                                            <tbody id="drivesTableBody">
                                                 <tr>
-                                                    <td>
-                                                        Green India Initiative
+                                                    <td id="select_reg">
+                                                        Select Region
                                                     </td>
-                                                    <td>
-                                                        10+
-                                                    </td>
-
                                                 </tr>
-
-
-                                                <tr>
-                                                    <td>
-                                                        Green India Initiative
-
-                                                    </td>
-                                                    <td>
-                                                        20+
-                                                    </td>
-
-                                                </tr>
-
                                             </tbody>
                                         </table>
                                     </div>
@@ -385,37 +423,7 @@
 
 
 
-                <footer class="footer">
-                    <div class="container-fluid">
-                        <nav>
-                            <ul>
-                                <li>
-                                    <a href="https://www.creative-tim.com">
-                                        Creative Tim
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://presentation.creative-tim.com">
-                                        About Us
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="http://blog.creative-tim.com">
-                                        Blog
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                        <div class="copyright">
-                            &copy;
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>, Designed by
-                            <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
-                            <a href="https://www.creative-tim.com" target="_blank">Creative Tim</a>.
-                        </div>
-                    </div>
-                </footer>
+                <%- include('footer.ejs') %>
             </div>
     </div>
 
@@ -438,52 +446,58 @@
 
 
 
-<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-<script>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script>
 
-    const mapdata = '<%- JSON.stringify(RegionDataArray) %>';
+        const mapdata = '<%- JSON.stringify(RegionDataArray) %>';
+        const NGOdata = '<%- JSON.stringify(NGODataArray) %>';
+        const DRIVESdata = '<%- JSON.stringify(DRIVESDataArray) %>';
 
-    const finalMapData = JSON.parse(mapdata);
+        const finalMapData = JSON.parse(mapdata);
+        const ngoMapData = JSON.parse(NGOdata);
+        const drivesMapData = JSON.parse(DRIVESdata);
 
-    console.log('finalMapData = ', finalMapData);
+        console.log('finalMapData = ', finalMapData);
+        console.log('NGOMapData = ', ngoMapData);
+        console.log('drivesMapData = ', drivesMapData);
 
 
 
-    const apiKey = 'pk.eyJ1IjoiYWxmcmVkMjAxNiIsImEiOiJja2RoMHkyd2wwdnZjMnJ0MTJwbnVmeng5In0.E4QbAFjiWLY8k3AFhDtErA';
-            let selectedRowIndex = 0;
+        const apiKey = 'pk.eyJ1IjoiYWxmcmVkMjAxNiIsImEiOiJja2RoMHkyd2wwdnZjMnJ0MTJwbnVmeng5In0.E4QbAFjiWLY8k3AFhDtErA';
+        let selectedRowIndex = 0;
         const mymap = L.map('map').setView([18.565102673608465, 73.91508154754621,], 17)
         // [18.504055388697367, 73.80745747188948], 17);
-    // 13
+        // 13
 
-    L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-        maxZoom: 18,
-        id: 'mapbox/streets-v11',
-        tileSize: 512,
-        zoomOffset: -1,
-        accessToken: apiKey
-    }).addTo(mymap);
+        L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+            maxZoom: 18,
+            id: 'mapbox/streets-v11',
+            tileSize: 512,
+            zoomOffset: -1,
+            accessToken: apiKey
+        }).addTo(mymap);
 
-    // Adding Marker
+        // Adding Marker
 
         const marker = L.marker([18.565102673608465, 73.91508154754621]).addTo(mymap);
 
-    // Add popup message
-    let template = `
+        // Add popup message
+        let template = `
 
 <h3>Government offcies</h3>
 <h3>Phone number: 9078674536</h3>
 <h3>officer name: xyz</h3>
 
 `
-    marker.bindPopup(template);
+        marker.bindPopup(template);
 
 
 
 
-            const marker11 = L.marker([18.565792673608465, 73.91508154754621]).addTo(mymap);
+        const marker11 = L.marker([18.565792673608465, 73.91508154754621]).addTo(mymap);
 
-                // Add popup message
-                let template11 = `
+        // Add popup message
+        let template11 = `
 
 <div class="popup-details">
     <h2>Viman Nagar</h2>
@@ -500,7 +514,7 @@
 </div>
 
 `
-                marker11.bindPopup(template11);
+        marker11.bindPopup(template11);
 
 
 
@@ -519,53 +533,54 @@
 
 
 
-    // // Add circle 
+        // // Add circle 
 
-    // const circle = L.circle([18.504055388697367, 73.80745747188948], {
-    //     radius: 220,
-    //     color: '#e4100b',
-    //     fillColor: '#c40f0b',
-    //     fillOpacity: 0.2
-    // }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li><li>Visit NGO-PAGE: <a href="#">Link</a> </li> <li>Upcoming Drives: <a href="#">Link</a> </li></ul></div> ')
-
-
+        // const circle = L.circle([18.504055388697367, 73.80745747188948], {
+        //     radius: 220,
+        //     color: '#e4100b',
+        //     fillColor: '#c40f0b',
+        //     fillOpacity: 0.2
+        // }).addTo(mymap).bindPopup(' <div style="text-align:left;">    <ul> <li>Name: XXXXX</li> <li>Description: XXXXXXXXXXXXXXXX </li> <li>Contact: (555) 123-4567</li><li>Hours of operation: 24/7</li> <li>Address: 789 Maple Ave, Anytown, USA</li> <li>XXXXXXXXXXX XXXXXXXXXXXXXXX XXXXXXXXXXX</li> <li>XXXXXXXXXXXXXXXXXXX</l  <li>Rules and regulations: No pets allowed. Keep noise levels low during designated quiet hours.</li  <li>Safety tips: Stay hydrated and rest as needed. Be aware of your surroundings and report any concerns to the staff.</li> <li>Any additional resources: Medical personnel and mental health counselors are available on site.</li><li>Visit NGO-PAGE: <a href="#">Link</a> </li> <li>Upcoming Drives: <a href="#">Link</a> </li></ul></div> ')
 
 
 
 
-    function set_title(title) {
-        const title_head = document.getElementById('title_head');
-        title_head.innerHTML = title;
-
-        title_head.style.fontSize = '20px';
-        title_head.style.color = 'orange';
 
 
-        setTimeout(() => {
-            title_head.style.fontSize = '14px';
-            title_head.style.color = '#2C2C2C';
+        function set_title(title) {
+            const title_head = document.getElementById('title_head');
+            title_head.innerHTML = title;
+
+            title_head.style.fontSize = '20px';
+            title_head.style.color = 'orange';
 
 
-        }, 2000);
-    }
+            setTimeout(() => {
+                title_head.style.fontSize = '14px';
+                title_head.style.color = '#2C2C2C';
 
-    const circles = []; // Array to store circles
 
-    const regions = [
-        {
-            region_id: 'R124',
-            reg_name: 'viman_nagar',
-            reg_rank: '2',
-            reg_lang: 18.565102673608465,
-            reg_lat: 73.91508154754621,
-            // color: '#e4100b',
-            // fillColor: '#c40f0b',
-            image: "",
+            }, 2000);
+        }
+
+        const circles = []; // Array to store circles
+
+
+        const regions = [
+            {
+                region_id: 'R124',
+                reg_name: 'Viman_Nagar',
+                reg_rank: '2',
+                reg_lang: 18.565102673608465,
+                reg_lat: 73.91508154754621,
+                // color: '#e4100b',
+                // fillColor: '#c40f0b',
+                image: "",
                 color: '#228b22',
-            fillColor: '#3cb371',
-            tree_count: 100,
-            popup_details_r: `<div class="popup-details">
-                <h2> Viman Nagar</h2>
+                fillColor: '#3cb371',
+                tree_count: 400,
+                popup_details_r: `<div class="popup-details">
+                <h2>Viman Nagar</h2>
                 <div class="details-content">
          <ul style="font-size: 15px;">
             <li><strong>Greenery Count:</strong> 300+ Trees</li>
@@ -578,23 +593,23 @@
 
         </ul>
     </div>
-    <button class="show-image-button">Show Region Image</button>
+    <button onclick="openimage()" class="show-image-button">Show Region Image</button>
 </div >
 `,
-            allngo: ['N123', 'N124']
-        },
+                allngo: ['N123', 'N124']
+            },
 
-        {
-            region_id: 'R124',
-            reg_name: 'wadgoansheri',
-            reg_rank: '2',
-            image: "",
-            reg_lang: 18.555992416940583,
-            reg_lat: 73.91955989532252,
-            color: '#228b22',
-            fillColor: '#3cb371',
-            tree_count: 100,
-            popup_details_r: `<div class="popup-details">
+            {
+                region_id: 'R124',
+                reg_name: 'Wadgoansheri',
+                reg_rank: '2',
+                image: "",
+                reg_lang: 18.555992416940583,
+                reg_lat: 73.91955989532252,
+                color: '#228b22',
+                fillColor: '#3cb371',
+                tree_count: 500,
+                popup_details_r: `<div class="popup-details">
                 <h2>Wadgoansheri</h2>
                 <div class="details-content">
         <ul style="font-size: 15px;">
@@ -611,19 +626,20 @@
     <button class="show-image-button">Show Region Image</button>
 </div >
 `,
-            allngo: ['N123', 'N124']
-        },
+                allngo: ['N123', 'N124']
+            },
 
-        {
-            region_id: 'R124',
-            reg_name: 'Nagar_Road',
-            reg_rank: '4',
-            image: "",
-            reg_lang: 18.558050641150217,
-            reg_lat: 73.92554499029845,
-          color: '#e4100b',
-            fillColor: '#c40f0b',
-             popup_details_r: `<div class="popup-details">
+            {
+                region_id: 'R124',
+                reg_name: 'Nagar_Road',
+                reg_rank: '4',
+                image: "",
+                tree_count: 300,
+                reg_lang: 18.558050641150217,
+                reg_lat: 73.92554499029845,
+                color: '#e4100b',
+                fillColor: '#c40f0b',
+                popup_details_r: `<div class="popup-details">
                 <h2>Anand Park</h2>
                 <div class="details-content">
         <ul style="font-size: 15px;">
@@ -639,20 +655,21 @@
     </div>
     <button class="show-image-button">Show Region Image</button>
 </div >
-`,      
-            allngo: ['N123', 'N124']
-        },
+`,
+                allngo: ['N123', 'N124']
+            },
 
-        {
-            region_id: 'R124',
-            reg_name: 'Nagar Road',
-            reg_rank: '4',
-            reg_lang: 18.562808538138384,
-            reg_lat: 73.92239542047287,
-            color: '#228b22',
-            fillColor: '#3cb371',
-            image: "",
-            popup_details_r: `<div class="popup-details">
+            {
+                region_id: 'R124',
+                reg_name: 'Anand_Park',
+                reg_rank: '4',
+                tree_count: 300,
+                reg_lang: 18.562808538138384,
+                reg_lat: 73.92239542047287,
+                color: '#228b22',
+                fillColor: '#3cb371',
+                image: "",
+                popup_details_r: `<div class="popup-details">
                 <h2>Nagar Road</h2>
                 <div class="details-content">
         <ul style="font-size: 15px;">
@@ -668,20 +685,21 @@
     </div>
     <button class="show-image-button">Show Region Image</button>
 </div >
-`,    
- allngo: ['N123', 'N124']
-        },
+`,
+                allngo: ['N123', 'N124']
+            },
 
-        {
-            region_id: 'R124',
-            reg_name: 'Ramwadi',
-            reg_rank: '4',
-              reg_lang: 18.55944505150447,
-              reg_lat: 73.91278374687391,
-            color: '#e4100b',
-            fillColor: '#c40f0b',
-            image: "",
-             popup_details_r: `<div class="popup-details">
+            {
+                region_id: 'R124',
+                reg_name: 'Ramwadi',
+                tree_count: 300,
+                reg_rank: '4',
+                reg_lang: 18.55944505150447,
+                reg_lat: 73.91278374687391,
+                color: '#e4100b',
+                fillColor: '#c40f0b',
+                image: "",
+                popup_details_r: `<div class="popup-details">
                 <h2>Ramwadi</h2>
                 <div class="details-content">
         <ul style="font-size: 15px;">
@@ -697,181 +715,301 @@
     </div>
     <button class="show-image-button">Show Region Image</button>
 </div >
-`,          
-            allngo: ['N123', 'N124']
-        },
+`,
+                allngo: ['N123', 'N124']
+            },
 
-    ];
-
-
-                regions.forEach(region => {
-                    // Find the corresponding element in finalMapData based on region_name
-                    const matchingRegion = finalMapData.find(data => data.region_name === region.reg_name);
-                    // If a matching region is found, update the tree_count in regions
-                    if (matchingRegion) {
-                        region.tree_count = matchingRegion.tree_count;
-                        region.image = matchingRegion.image;
-
-                        if (region.tree_count >= 200) {
-
-                            console.log("220 MILA");
-                          
-
-                              region.color = '#228b22';
-                            region.fillColor = '#3cb371';
-
-                        } else {
-                            region.color = "#e4100b";
-                            region.fillColor = "#c40f0b";
-                        }
-                    }
-                });
-
-                // Now the regions array is updated with the tree_count from finalMapData
-                console.log("REGIONS = ", regions);
+        ];
 
 
-
+        regions.forEach(region => {
+            // Find the corresponding element in finalMapData based on region_name
+            const matchingRegion = finalMapData.find(data => data.region_name === region.reg_name);
+            // If a matching region is found, update the tree_count in regions
+            if (matchingRegion) {
+                region.tree_count = matchingRegion.tree_count;
+                region.image = matchingRegion.image;
+                region.popup_details_r = `<div class="popup-details">
+                <h2>${matchingRegion.region_name}</h2>
+                <div class="details-content">
+        <ul style="font-size: 15px;">
+            <li><strong>Greenery Count:</strong> ${matchingRegion.tree_count}+ Trees</li>
+            <li><strong>Coordinates of Regions</strong> <span style="opacity:0;">73.9150</span> </li>
+            <li><strong>Lat:</strong>  ${matchingRegion.lat}</li>
+            <li><strong>Long:</strong> ${matchingRegion.long}</li>
+            <li><strong>Number of Hands:</strong>  ${matchingRegion.hands}+</li>
+            <li><strong>Number of Drives:</strong> ${matchingRegion.drives}+</li>
+            <li><strong>Number of NGO's:</strong> ${matchingRegion.ngo}+</li>
             
-
-    regions.forEach((region, index) => {
-        const circle = L.circle([region.reg_lang, region.reg_lat], {
-            radius: 220,
-            color: region.color,
-            fillColor: region.fillColor,
-            fillOpacity: 0.2
-        }).addTo(mymap).bindPopup(region.popup_details_r);
-
-        circles.push(circle);
-
-        const row = document.getElementById(`row_tb1_${index}`);
-        console.log(row);
-        row.addEventListener('click', () => handleRowClick(index));
-
-    });
+        </ul>
+    </div>
+<button class="show-image-button" onclick="window.open('${matchingRegion.image}', '_blank')">Show Region Image</button>
+</div>
+</div>
+`;
 
 
+                console.log("PPPP = " + region.tree_count, region.tree_count);
+
+                if (region.tree_count >= 100) {
+
+                    console.log("220 MILA");
 
 
+                    region.color = '#228b22';
+                    region.fillColor = '#3cb371';
 
+                } else {
+                    region.color = "#e4100b";
+                    region.fillColor = "#c40f0b";
+                }
+            }
+        });
 
-    function handleRowClick(index) {
-        // Reset style for previously clicked row
-        if (selectedRowIndex !== null) {
-            const prevRow = document.getElementById(`row_tb1_${selectedRowIndex}`);
-            resetRowStyle(prevRow);
-        }
-
-        // Set style for the clicked row
-        const clickedRow = document.getElementById(`row_tb1_${index}`);
-        setRowStyle(clickedRow);
-
-        // Update the map and circle
-        const region = regions[index];
-        mymap.setView([region.reg_lang, region.reg_lat], 17);
-        const circle = circles[index];
-        circle.setLatLng([region.reg_lang, region.reg_lat]);
-        circle.setRadius(220);
-        circle.setStyle({ color: region.color, fillColor: region.fillColor });
-        circle.bindPopup(region.popup_details_r).openPopup();
-
-        // Update the selected row index
-        selectedRowIndex = index;
+        // Now the regions array is updated with the tree_count from finalMapData
+        console.log("REGIONS = ", regions);
 
 
 
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth' // You can also use 'auto' or 'instant'
+
+
+        regions.forEach((region, index) => {
+            const circle = L.circle([region.reg_lang, region.reg_lat], {
+                radius: 220,
+                color: region.color,
+                fillColor: region.fillColor,
+                fillOpacity: 0.2
+            }).addTo(mymap).bindPopup(region.popup_details_r);
+
+            circles.push(circle);
+
+            const row = document.getElementById(`row_tb1_${index}`);
+            console.log(row);
+            row.addEventListener('click', () => handleRowClick(index));
+
         });
 
 
-        // const element = document.getElementById('map');
 
-        // if (element) {
-        //     // Scroll to the top of the element
-        //     element.scrollIntoView({
-        //         behavior: 'smooth'
-        //     });
+
+
+
+        function handleRowClick(index) {
+            // Reset style for previously clicked row
+            if (selectedRowIndex !== null) {
+                const prevRow = document.getElementById(`row_tb1_${selectedRowIndex}`);
+                resetRowStyle(prevRow);
+            }
+
+            // Set style for the clicked row
+            const clickedRow = document.getElementById(`row_tb1_${index}`);
+            setRowStyle(clickedRow);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            // Update the map and circle
+            const region = regions[index];
+            mymap.setView([region.reg_lang, region.reg_lat], 17);
+            const circle = circles[index];
+            circle.setLatLng([region.reg_lang, region.reg_lat]);
+            circle.setRadius(220);
+            circle.setStyle({ color: region.color, fillColor: region.fillColor });
+            circle.bindPopup(region.popup_details_r).openPopup();
+
+            // Update the selected row index
+            selectedRowIndex = index;
+
+
+
+
+
+
+            // Find the current region
+            // const region1 = regions[index];
+            const currentRegion = region.reg_name;
+            console.log("currentRegion = ", currentRegion);
+
+            // Filter NGOs by the current region
+            const filteredNGOs = ngoMapData.filter(ngo => ngo.Reg_name === currentRegion);
+
+            // Update the NGO table with filtered NGOs
+            const ngoTableBody = document.getElementById("ngoTableBody");
+            if (ngoTableBody) {
+                ngoTableBody.innerHTML = ""; // Clear existing rows
+                filteredNGOs.forEach((ngo, i) => {
+                    const row = document.createElement("tr");
+                    row.id = `row_tb1_ngo_${i}`;
+
+                    const nameCell = document.createElement("td");
+                    nameCell.textContent = ngo.Ngo_Name;
+                    row.appendChild(nameCell);
+
+                    const drivesCell = document.createElement("td");
+                    drivesCell.textContent = ngo.Drives;
+                    row.appendChild(drivesCell);
+
+                    ngoTableBody.appendChild(row);
+                });
+            }
+
+
+
+
+
+            // DRIVE DATA TABLE DYNMAIC
+
+            // Find the current region
+            const currentRegionDRIVES = region.reg_name;
+
+            // Filter NGOs by the current region
+            const filteredDRIVES = drivesMapData.filter(drive => drive.Reg_name === currentRegionDRIVES);
+
+
+            if (filteredDRIVES.length > 0) {
+
+                // Update the table with filtered NGOs
+                const tbody1 = document.getElementById("drivesTableBody");
+                tbody1.innerHTML = ""; // Clear existing rows
+
+                filteredDRIVES.forEach((drive, i) => {
+                    const row = document.createElement("tr");
+                    row.id = `row_tb1_${i}`;
+
+                    const nameCell = document.createElement("td");
+                    nameCell.textContent = drive.Drive_Name;
+                    row.appendChild(nameCell);
+
+                    const drivesCell = document.createElement("td");
+                    drivesCell.textContent = drive.Hands;
+                    row.appendChild(drivesCell);
+
+                    tbody1.appendChild(row);
+                });
+
+            }
+            else {
+                const tbody1 = document.getElementById("drivesTableBody");
+                tbody1.innerHTML = ""; // Clear existing rows
+
+                
+                    const row = document.createElement("tr");
+                    row.id = `select_reg`;
+
+                    const nameCell = document.createElement("td");
+                    nameCell.textContent = "No Current Drive";
+                    row.appendChild(nameCell);
+
+                   
+
+                    tbody1.appendChild(row);
+
+            }
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // You can also use 'auto' or 'instant'
+            });
+
+
+            // const element = document.getElementById('map');
+
+            // if (element) {
+            //     // Scroll to the top of the element
+            //     element.scrollIntoView({
+            //         behavior: 'smooth'
+            //     });
+            // }
+        }
+
+        function setRowStyle(element) {
+            element.style.backgroundColor = 'gold';
+            element.style.fontWeight = 900;
+            element.style.fontSize = '15px';
+            element.style.color = 'black';
+            element.style.cursor = 'pointer';
+        }
+
+        function resetRowStyle(element) {
+            element.style.backgroundColor = '';
+            element.style.fontWeight = '';
+            element.style.fontSize = '';
+            element.style.color = '';
+            element.style.cursor = '';
+        }
+
+
+        // function ll1(index) {
+        //     console.log('index = ' + index + ';' + regions[index].reg_name);
+        //     const region = regions[index];
+        //     mymap.setView([region.reg_lang, region.reg_lat], 16);
+        //     circle.setLatLng([region.reg_lang, region.reg_lat]);
+        //     circle.setRadius(220); // Set radius to 220 for consistency
+        //     circle.setStyle({ color: region.color, fillColor: region.fillColor });
+        //     circle.bindPopup(region.popup_details_r).openPopup();
         // }
-    }
 
-    function setRowStyle(element) {
-        element.style.backgroundColor = 'gold';
-        element.style.fontWeight = 900;
-        element.style.fontSize = '15px';
-        element.style.color = 'black';
-        element.style.cursor = 'pointer';
-    }
+        // ll1(0);
 
-    function resetRowStyle(element) {
-        element.style.backgroundColor = '';
-        element.style.fontWeight = '';
-        element.style.fontSize = '';
-        element.style.color = '';
-        element.style.cursor = '';
-    }
+    </script>
 
+    <style>
+        .popup-details {
+            text-align: left;
+            max-width: 400px;
+            /* Adjust width as needed */
+            margin: 0 auto;
+            /* Center horizontally */
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
 
-    // function ll1(index) {
-    //     console.log('index = ' + index + ';' + regions[index].reg_name);
-    //     const region = regions[index];
-    //     mymap.setView([region.reg_lang, region.reg_lat], 16);
-    //     circle.setLatLng([region.reg_lang, region.reg_lat]);
-    //     circle.setRadius(220); // Set radius to 220 for consistency
-    //     circle.setStyle({ color: region.color, fillColor: region.fillColor });
-    //     circle.bindPopup(region.popup_details_r).openPopup();
-    // }
+        .popup-details h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
 
-    // ll1(0);
+        .details-content ul {
+            list-style-type: none;
+            padding: 0;
+        }
 
-</script>
+        .details-content ul li {
+            margin-bottom: 10px;
+        }
 
-<style>
-    .popup-details {
-    text-align: left;
-    max-width: 400px; /* Adjust width as needed */
-    margin: 0 auto; /* Center horizontally */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+        .show-image-button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
 
-.popup-details h2 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-.details-content ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.details-content ul li {
-    margin-bottom: 10px;
-}
-
-.show-image-button {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.show-image-button:hover {
-    background-color: #0056b3;
-}
-
-</style>
+        .show-image-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </body>
+
 </html>
 
 
