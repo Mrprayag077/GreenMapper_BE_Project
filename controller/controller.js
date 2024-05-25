@@ -193,6 +193,7 @@ module.exports = {
         Poster_Link: req.body.imageURL,
         Description: req.body.Description,
         Hands: 0,
+        Reg_name: req.body.reg_name,
       });
 
       console.log(newDrive);

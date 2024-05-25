@@ -1,168 +1,182 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
-    />
-    <title>New Planation Drive</title>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
 
-  <body class="bg-gray-200 p-8">
-   
-    <div class="toast">
-      <div class="toast-content">
-        <i class="fas fa-solid fa-check check"></i>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
-        <div class="message">
-          <span class="text text-1">Success</span>
-          <span class="text text-2" id="text2"
-            >Image Uploaded successfully!</span
-          >
-        </div>
+  <title>New Planation Drive</title>
+</head>
+
+<body class="bg-gray-200 p-8">
+
+
+  <div class="toast">
+    <div class="toast-content">
+      <i class="fas fa-solid fa-check check"></i>
+
+      <div class="message">
+        <span class="text text-1">Success</span>
+        <span class="text text-2" id="text2">Image Uploaded successfully!</span>
       </div>
-      <i class="fa-solid fa-xmark close"></i>
-
-      <div class="progress"></div>
     </div>
+    <i class="fa-solid fa-xmark close"></i>
 
-    <!-- <button>Show Toast</button> -->
-    <style>
-      .toast {
-        position: absolute;
-        top: 25px;
-        right: 30px;
-        border-radius: 12px;
-        background: #fff;
-        padding: 20px 35px 20px 25px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-        border-left: 6px solid #4070f4;
-        overflow: hidden;
-        transform: translateX(calc(100% + 30px));
-        transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+    <div class="progress"></div>
+  </div>
+
+  <!-- <button>Show Toast</button> -->
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      width: 100%;
+      background: #222431 !important;
+      padding: 40px 20px;
+    }
+
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+
+    .toast {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      border-radius: 12px;
+      background: #fff;
+      padding: 20px 35px 20px 25px;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+      border-left: 6px solid #4070f4;
+      overflow: hidden;
+      transform: translateX(calc(100% + 30px));
+      transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35);
+    }
+
+    .toast.active {
+      transform: translateX(0%);
+    }
+
+    .toast .toast-content {
+      display: flex;
+      align-items: center;
+    }
+
+    .toast-content .check {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 35px;
+      width: 35px;
+      background-color: #27bd72;
+      color: #fff;
+      font-size: 20px;
+      border-radius: 50%;
+    }
+
+    .toast-content .message {
+      display: flex;
+      flex-direction: column;
+      margin: 0 20px;
+    }
+
+    .message .text {
+      font-size: 20px;
+      font-weight: 400;
+      color: #666666;
+    }
+
+    .message .text.text-1 {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .toast .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      padding: 5px;
+      cursor: pointer;
+      opacity: 0.7;
+    }
+
+    .toast .close:hover {
+      opacity: 1;
+    }
+
+    .toast .progress {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      width: 100%;
+      background: #ddd;
+    }
+
+    .toast .progress:before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      height: 100%;
+      width: 100%;
+      background-color: #4070f4;
+    }
+
+    .progress.active:before {
+      animation: progress 5s linear forwards;
+    }
+
+    @keyframes progress {
+      100% {
+        right: 100%;
       }
+    }
 
-      .toast.active {
-        transform: translateX(0%);
-      }
+    button {
+      padding: 12px 20px;
+      font-size: 20px;
+      outline: none;
+      border: none;
+      background-color: #4070f4;
+      color: #fff;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
 
-      .toast .toast-content {
-        display: flex;
-        align-items: center;
-      }
+    button:hover {
+      background-color: #0e4bf1;
+    }
 
-      .toast-content .check {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 35px;
-        width: 35px;
-        background-color: #27bd72;
-        color: #fff;
-        font-size: 20px;
-        border-radius: 50%;
-      }
+    .toast.active~button {
+      pointer-events: none;
+    }
 
-      .toast-content .message {
-        display: flex;
-        flex-direction: column;
-        margin: 0 20px;
-      }
+    .max-w-md {
+      margin-top: 50px;
+    }
+  </style>
 
-      .message .text {
-        font-size: 20px;
-        font-weight: 400;
-        color: #666666;
-      }
+  <script>
+    const button = document.querySelector("button"),
+      toast = document.querySelector(".toast");
+    toast.style.display = "none";
 
-      .message .text.text-1 {
-        font-weight: 600;
-        color: #333;
-      }
+    (closeIcon = document.querySelector(".close")),
+      (progress = document.querySelector(".progress"));
 
-      .toast .close {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-        padding: 5px;
-        cursor: pointer;
-        opacity: 0.7;
-      }
-
-      .toast .close:hover {
-        opacity: 1;
-      }
-
-      .toast .progress {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        height: 3px;
-        width: 100%;
-        background: #ddd;
-      }
-
-      .toast .progress:before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        right: 0;
-        height: 100%;
-        width: 100%;
-        background-color: #4070f4;
-      }
-
-      .progress.active:before {
-        animation: progress 5s linear forwards;
-      }
-
-      @keyframes progress {
-        100% {
-          right: 100%;
-        }
-      }
-
-      button {
-        padding: 12px 20px;
-        font-size: 20px;
-        outline: none;
-        border: none;
-        background-color: #4070f4;
-        color: #fff;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: 0.3s;
-      }
-
-      button:hover {
-        background-color: #0e4bf1;
-      }
-
-      .toast.active ~ button {
-        pointer-events: none;
-      }
-
-      .max-w-md {
-        margin-top: 50px;
-      }
-    </style>
-
-    <script>
-      const button = document.querySelector("button"),
-        toast = document.querySelector(".toast");
-      toast.style.display = "none";
-
-      (closeIcon = document.querySelector(".close")),
-        (progress = document.querySelector(".progress"));
-
-      let timer1, timer2;
+    let timer1, timer2;
 
     //   button.addEventListener("click", () => {
     //     toast.style.display = "block";
@@ -181,231 +195,203 @@
     //     }, 5300);
     //   });
 
-      function toast1(valuee) {
-        toast.style.display = "block";
+    function toast1(valuee) {
+      toast.style.display = "block";
 
-        document.getElementById("text2").innerHTML = valuee;
-        toast.classList.add("active");
-        progress.classList.add("active");
+      document.getElementById("text2").innerHTML = valuee;
+      toast.classList.add("active");
+      progress.classList.add("active");
 
-        timer1 = setTimeout(() => {
-          toast.classList.remove("active");
-          toast.style.display = "none";
-        }, 5000); //1s = 1000 milliseconds
-
-        timer2 = setTimeout(() => {
-          progress.classList.remove("active");
-          toast.style.display = "none";
-        }, 5300);
-      }
-
-      closeIcon.addEventListener("click", () => {
+      timer1 = setTimeout(() => {
         toast.classList.remove("active");
         toast.style.display = "none";
+      }, 5000); //1s = 1000 milliseconds
 
-        setTimeout(() => {
-          progress.classList.remove("active");
-        }, 300);
+      timer2 = setTimeout(() => {
+        progress.classList.remove("active");
+        toast.style.display = "none";
+      }, 5300);
+    }
 
-        clearTimeout(timer1);
-        clearTimeout(timer2);
+    closeIcon.addEventListener("click", () => {
+      toast.classList.remove("active");
+      toast.style.display = "none";
+
+      setTimeout(() => {
+        progress.classList.remove("active");
+      }, 300);
+
+      clearTimeout(timer1);
+      clearTimeout(timer2);
+    });
+  </script>
+
+  <div id="particles-js" class="snow"></div>
+
+  <div class="max-w-md mx-auto bg-white p-8 rounded shadow">
+    <h1 class="text-2xl font-bold mb-6">
+      Drive-ID: <span id="drive-id"></span>
+    </h1>
+
+    <!-- Form -->
+
+    <form id="driveForm" action="/api/post-new" method="post">
+      <div class="mb-6">
+        <h2 class="text-lg font-bold mb-2">Information</h2>
+        <!-- Example fields -->
+        <div class="grid grid-cols-2 gap-4">
+          <div>
+            <label class="block mb-2" for="firstName">Drive Name:</label>
+            <input type="text" id="driveName" name="driveName" class="w-full p-1 border rounded" required />
+          </div>
+          <div>
+            <label class="block mb-2" for="lastName">Location:</label>
+            <input type="text" id="location" name="location" class="w-full p-1 border rounded" required />
+          </div>
+        </div>
+
+          <label class="block mb-2" for="email">Region Name:</label>
+          <input type="text" id="reg_name" name="reg_name" class="w-full p-1 border rounded" required />
+
+        <!-- More fields go here... -->
+      </div>
+
+      <!-- Contact Information Section -->
+      <div class="mb-6">
+        <h2 class="text-lg font-bold mb-2">Contact Information</h2>
+        <!-- Example fields -->
+        <label class="block mb-2" for="email">Phone:</label>
+        <input type="phone" id="phone" name="phone" class="w-full p-1 border rounded" required />
+
+        <!-- More fields go here... -->
+      </div>
+
+
+      <div class="mb-6">
+
+        <label class="block mb-2" for="email">Description:</label>
+        <input type="text" id="Description" name="Description" class="w-full p-1 border rounded" required />
+      </div>
+
+      <!-- More fields go here... -->
+
+
+      <!-- Resume Upload -->
+      <div class="mb-6">
+        <label class="block mb-2" for="resume">Upload Poster:</label>
+        <input type="file" id="resume" name="resume" class="p-1 border rounded" accept=".png, .jpg, .jpeg" required />
+
+        <!-- <input  id="resume" name="resume" type="file" class="inputFile" id="inputFile" accept="image/png"> -->
+        <!-- <button type="submit" id="submitButton" disabled>Upload Image</button> -->
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button type="submit" id="submit-btn" class="bg-blue-500 text-white py-2 px-4 rounded" style="font-weight: 600"
+          onclick="check()">
+          Post Drive ✅
+        </button>
+      </div>
+
+      <input type="hidden" id="imageURL" name="imageURL" value="" />
+      <style>
+        #submit-btn:hover {
+          background-color: #0342a8;
+        }
+      </style>
+    </form>
+
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-storage.js"></script>
+
+    <script>
+      // Firebase configuration and initialization code...
+      const firebaseConfig = {
+        apiKey: "AIzaSyDa7kvj9JGl9vO4CzwCtIvXf_sjyCgk41Q",
+        authDomain: "greenmapper-da4bf.firebaseapp.com",
+        projectId: "greenmapper-da4bf",
+        storageBucket: "greenmapper-da4bf.appspot.com",
+        messagingSenderId: "729535270764",
+        appId: "1:729535270764:web:cc9987a3d1b9e84be8ad49",
+        measurementId: "G-9ZHQP5SXLL",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+
+      let image_upload = "";
+      let imagupload = false;
+      let imgupload = 0;
+      const inputFile = document.getElementById("resume");
+      const submitButton = document.getElementById("submit-btn");
+      // submitButton.disabled = true;
+
+      const drivename1 = document.getElementById("driveName");
+      const phone1 = document.getElementById("phone");
+      const location1 = document.getElementById("location");
+
+      function check() {
+        if (
+          drivename1.innerHTML == "" &&
+          phone1.innerHTML == "" &&
+          location1.innerHTML == "" && imagupload != false
+        ) {
+          toast1("Please Fill out the Fieds!!");
+        } else if (imgupload === 0) {
+          // toast1("Please Upload Image");
+        alert("Please Upload Image");
+        }
+      }
+
+      inputFile.addEventListener("change", function (event) {
+        const file = event.target.files[0];
+        if (file) {
+          uploadimage(file);
+        }
       });
+
+      function uploadimage(file) {
+        let storageRef = firebase.storage().ref("images/" + file.name);
+        let uploadTask = storageRef.put(file);
+
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            // Handle state changes (progress, etc.)
+            console.log("Upload is " + snapshot.state);
+            console.log(
+              "Progress: " +
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100 +
+              "%"
+            );
+          },
+          (error) => {
+            // Handle errors
+            console.error("Error:", error);
+            // Reset the form and enable the submit button
+            uploadForm.reset();
+            submitButton.disabled = false;
+          },
+          () => {
+            // Handle successful upload
+            uploadTask.snapshot.ref.getDownloadURL().then((url) => {
+              console.log("File available at", url);
+              image_upload = url;
+              submitButton.disabled = false;
+              imgupload = 1;
+              document.getElementById("imageURL").value = image_upload;
+              imagupload = true;
+
+              toast1("File uploaded successfully!");
+
+              // Submit the form
+              // document.getElementById("driveForm").submit();
+            });
+          }
+        );
+      }
     </script>
 
-    <div class="max-w-md mx-auto bg-white p-8 rounded shadow">
-      <h1 class="text-2xl font-bold mb-6">
-        Drive-ID: <span id="drive-id"></span>
-      </h1>
-
-      <!-- Form -->
-
-      <form id="driveForm" action="/api/post-new" method="post">
-        <div class="mb-6">
-          <h2 class="text-lg font-bold mb-2">Information</h2>
-          <!-- Example fields -->
-          <div class="grid grid-cols-2 gap-4">
-            <div>
-              <label class="block mb-2" for="firstName">Drive Name:</label>
-              <input
-                type="text"
-                id="driveName"
-                name="driveName"
-                class="w-full p-2 border rounded"
-                required
-              />
-            </div>
-            <div>
-              <label class="block mb-2" for="lastName">Location:</label>
-              <input
-                type="text"
-                id="location"
-                name="location"
-                class="w-full p-2 border rounded"
-                required
-              />
-            </div>
-          </div>
-
-          <!-- More fields go here... -->
-        </div>
-
-        <!-- Contact Information Section -->
-        <div class="mb-6">
-          <h2 class="text-lg font-bold mb-2">Contact Information</h2>
-          <!-- Example fields -->
-          <label class="block mb-2" for="email">Phone:</label>
-          <input
-            type="phone"
-            id="phone"
-            name="phone"
-            class="w-full p-2 border rounded"
-            required
-          />
-
-          <!-- More fields go here... -->
-        </div>
-
-       
-         <div class="mb-6">
-
-             <label class="block mb-2" for="email">Description:</label>
-             <input
-             type="text"
-             id="Description"
-             name="Description"
-             class="w-full p-2 border rounded"
-             required
-             />
-            </div>  
-
-          <!-- More fields go here... -->
-        
-
-        <!-- Resume Upload -->
-        <div class="mb-6">
-          <label class="block mb-2" for="resume">Upload Poster:</label>
-          <input
-            type="file"
-            id="resume"
-            name="resume"
-            class="p-2 border rounded"
-            accept=".png, .jpg, .jpeg"
-            required
-          />
-
-          <!-- <input  id="resume" name="resume" type="file" class="inputFile" id="inputFile" accept="image/png"> -->
-          <!-- <button type="submit" id="submitButton" disabled>Upload Image</button> -->
-        </div>
-
-        <!-- Submit Button -->
-        <div>
-          <button
-            type="submit"
-            id="submit-btn"
-            class="bg-blue-500 text-white py-2 px-4 rounded"
-            style="font-weight: 600"
-            onclick="check()"
-          >
-            Post Drive ✅
-          </button>
-        </div>
-
-        <input type="hidden" id="imageURL" name="imageURL" value="" />
-        <style>
-          #submit-btn:hover {
-            background-color: #0342a8;
-          }
-        </style>
-      </form>
-
-      <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-app.js"></script>
-      <script src="https://www.gstatic.com/firebasejs/6.0.2/firebase-storage.js"></script>
-
-      <script>
-        // Firebase configuration and initialization code...
-        const firebaseConfig = {
-          apiKey: "AIzaSyDa7kvj9JGl9vO4CzwCtIvXf_sjyCgk41Q",
-          authDomain: "greenmapper-da4bf.firebaseapp.com",
-          projectId: "greenmapper-da4bf",
-          storageBucket: "greenmapper-da4bf.appspot.com",
-          messagingSenderId: "729535270764",
-          appId: "1:729535270764:web:cc9987a3d1b9e84be8ad49",
-          measurementId: "G-9ZHQP5SXLL",
-        };
-
-        firebase.initializeApp(firebaseConfig);
-
-        let image_upload = "";
-        let imgupload = 0;
-        const inputFile = document.getElementById("resume");
-        const submitButton = document.getElementById("submit-btn");
-        // submitButton.disabled = true;
-
-        const drivename1 = document.getElementById("driveName");
-        const phone1 = document.getElementById("phone");
-        const location1 = document.getElementById("location");
-
-        function check() {
-          if (
-            drivename1.innerHTML == "" &&
-            phone1.innerHTML == "" &&
-            location1.innerHTML == ""
-          ) {
-            toast1("Please Fill out the Fieds!!");
-          } else if (imgupload === 0) {
-            toast1("Please Upload Image");
-          }
-        }
-
-        inputFile.addEventListener("change", function (event) {
-          const file = event.target.files[0];
-          if (file) {
-            uploadimage(file);
-          }
-        });
-
-        function uploadimage(file) {
-          let storageRef = firebase.storage().ref("images/" + file.name);
-          let uploadTask = storageRef.put(file);
-
-          uploadTask.on(
-            "state_changed",
-            (snapshot) => {
-              // Handle state changes (progress, etc.)
-              console.log("Upload is " + snapshot.state);
-              console.log(
-                "Progress: " +
-                  (snapshot.bytesTransferred / snapshot.totalBytes) * 100 +
-                  "%"
-              );
-            },
-            (error) => {
-              // Handle errors
-              console.error("Error:", error);
-              // Reset the form and enable the submit button
-              uploadForm.reset();
-              submitButton.disabled = false;
-            },
-            () => {
-              // Handle successful upload
-              uploadTask.snapshot.ref.getDownloadURL().then((url) => {
-                console.log("File available at", url);
-                image_upload = url;
-                submitButton.disabled = false;
-                imgupload = 1;
-                document.getElementById("imageURL").value = image_upload;
-
-                toast1("File uploaded successfully!");
-
-                // Submit the form
-                // document.getElementById("driveForm").submit();
-              });
-            }
-          );
-        }
-      </script>
-
-      <!-- <script>
+    <!-- <script>
             document.getElementById('driveForm').addEventListener('submit', async function (event) {
                 // Prevent the form from submitting immediately
                 event.preventDefault();
@@ -442,6 +428,68 @@
 
 
         </script> -->
-    </div>
-  </body>
+  </div>
+  <script>
+    particlesJS("particles-js", {
+      particles: {
+        number: {
+          value: 300,
+          density: {
+            enable: true,
+            value_area: 800,
+          },
+        },
+        color: {
+          value: "#fff",
+        },
+        shape: {
+          type: "circle",
+          stroke: {
+            width: 0,
+            color: "#000000",
+          },
+          polygon: {
+            nb_sides: 5,
+          },
+        },
+        opacity: {
+          value: 1,
+          random: false,
+          anim: {
+            enable: false,
+            speed: 1,
+            opacity_min: 0.1,
+            sync: false,
+          },
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: {
+            enable: false,
+          },
+        },
+        line_linked: {
+          enable: false,
+        },
+        move: {
+          enable: true,
+          speed: 2,
+          direction: "bottom",
+          random: false,
+          straight: false,
+          out_mode: "out",
+          bounce: false,
+          attract: {
+            enable: false,
+            rotateX: 600,
+            rotateY: 1200,
+          },
+        },
+      },
+      retina_detect: true,
+    });
+  </script>
+</body>
+
 </html>
